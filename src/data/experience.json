@@ -1,0 +1,64 @@
+{
+  "en": [
+    {
+      "icon": "Drupal",
+      "title": "Drupal Developer",
+      "link": "https://davinci.tech/",
+      "company": "Davinci Technologies LATAM",
+      "date": "May 2024 - Present",
+      "description": "Resolved critical vulnerabilities such as Header Injection and Security Policy issues. Improved project architecture and structure by following Drupal.org best practices."
+    },
+    {
+      "icon": "WordPress",
+      "title": "Frontend Developer",
+      "company": "Freelance",
+      "date": "February 2024",
+      "description": "Enhanced and optimized a website using HTML, CSS, JavaScript, PHP, jQuery, and WordPress. Integrated plugins like Elementor and Yoast SEO, and managed server updates for smooth site operation."
+    },
+    {
+      "icon": "Drupal",
+      "title": "Frontend Developer",
+      "company": "Freelance",
+      "date": "January 2024",
+      "description": "Completed a partially developed project (60% finished) using HTML, CSS, JavaScript, PHP, and Drupal. Corrected design errors, implemented missing elements, and developed a functional shopping cart system."
+    },
+    {
+      "icon": "Drupal",
+      "title": "Frontend Developer",
+      "company": "Freelance",
+      "date": "October 2023 - January 2024",
+      "description": "Customized a Drupal theme to meet client requirements. Used SASS and Bootstrap for layout and implemented interactive functionalities using jQuery and plugins."
+    }
+  ],
+  "es": [
+    {
+      "icon": "Drupal",
+      "title": "Desarrollador Drupal",
+      "link": "https://davinci.tech/",
+      "company": "Davinci Technologies LATAM",
+      "date": "Mayo 2024 - Presente",
+      "description": "Solucioné vulnerabilidades críticas como inyecciones de encabezados y problemas de políticas de seguridad. Mejoré la arquitectura y estructura del proyecto siguiendo las mejores prácticas de Drupal.org."
+    },
+    {
+      "icon": "WordPress",
+      "title": "Desarrollador Frontend",
+      "company": "Freelance",
+      "date": "Febrero 2024",
+      "description": "Optimicé y personalicé un sitio web utilizando HTML, CSS, JavaScript, PHP, jQuery y WordPress. Integré plugins como Elementor y Yoast SEO, y gestioné actualizaciones del servidor para un funcionamiento fluido del sitio."
+    },
+    {
+      "icon": "Drupal",
+      "title": "Desarrollador Frontend",
+      "company": "Freelance",
+      "date": "Enero 2024",
+      "description": "Completé un proyecto que estaba al 60% de desarrollo usando HTML, CSS, JavaScript, PHP y Drupal. Corregí errores de diseño, implementé elementos faltantes y desarrollé un sistema funcional de carrito de compras."
+    },
+    {
+      "icon": "Drupal",
+      "title": "Desarrollador Frontend",
+      "company": "Freelance",
+      "date": "Octubre 2023 - Enero 2024",
+      "description": "Personalicé un tema en Drupal según las especificaciones del cliente. Utilicé SASS y Bootstrap para la maquetación e implementé funcionalidades interactivas con jQuery y plugins."
+    }
+  ]
+}

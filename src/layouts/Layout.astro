@@ -1,0 +1,106 @@
+---
+import { ViewTransitions } from "astro:transitions"
+
+import Footer from "@/components/Footer.astro"
+import Header from "@/components/Header.astro"
+import SEO from "@/components/seo/SEO.astro"
+import type { Preload } from "@/types/Preload"
+
+import "@fontsource-variable/onest"
+
+interface Props {
+	title: string
+	description: string
+	preload?: Array<Preload>
+	canonical?: string
+	image?: string
+}
+
+const { title, description, preload, canonical, image } = Astro.props
+const { currentLocale } = Astro
+---
+
+<!doctype html>
+<html lang={currentLocale}>
+	<head>
+		<SEO
+			canonical={canonical}
+			description={description}
+			image={image}
+			preload={preload}
+			title={title}
+		/>
+		<ViewTransitions />
+	</head>
+
+	<body class="relative bg-dark-50 text-black dark:bg-dark-950 dark:text-white">
+		<div
+			class="absolute top-0 z-[-2] h-screen w-full bg-dark-50 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(0,153,255,0.25),rgba(255,255,255,0))] dark:bg-dark-950"
+		>
+		</div>
+		<Header />
+		<slot />
+		<Footer />
+		<style is:global>
+			:root {
+				color-scheme: light dark;
+			}
+
+			html {
+				font-family: "Onest Variable", system-ui, sans-serif;
+				scroll-behavior: smooth;
+			}
+
+			body {
+				display: flex;
+				flex-direction: column;
+				min-height: 100vh;
+				overscroll-behavior: none;
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				html {
+					scroll-behavior: auto;
+				}
+			}
+
+			@media (prefers-color-scheme: dark) {
+				body {
+					color: rgba(255, 255, 255, 0.9);
+				}
+			}
+			@supports selector(::-webkit-scrollbar) {
+				@media (hover: hover) {
+			::-webkit-scrollbar {
+				width: 10px;
+				height: 10px;
+			}
+
+			::-webkit-scrollbar-track {
+				background: #232121;
+			}
+
+			::-webkit-scrollbar-thumb {
+				background: #008fd4;
+				border-radius: 10px;
+			}
+
+			::-webkit-scrollbar-thumb:hover {
+				background: #0890b294;
+			}
+		}
+	}
+	@supports not selector(::-webkit-scrollbar) {
+				* {
+					scrollbar-color: theme("colors.primary.400") transparent;
+					scrollbar-width: thin;
+				}
+			}
+
+			*::selection {
+				background-color: #008fd4;
+				color: white;
+			}
+		</style>
+	</body>
+</html>

@@ -1,0 +1,60 @@
+---
+import SectionContainer from "@/components/SectionContainer.astro"
+import Layout from "@/layouts/Layout.astro"
+
+import AboutMe from "@/components/about/AboutMe.astro"
+import Experience from "@/components/experiencies/Experience.astro"
+import Projects from "@/components/projects/Projects.astro"
+import Stack from "@/components/stack/stack.astro"
+
+import StackIcon from "@/icons/Code.astro"
+import ExperienceIcon from "@/icons/Portfolio.astro"
+import ProjectsIcon from "@/icons/ScreenStar.astro"
+
+import { getI18N } from "@/i18n"
+
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+
+const { title, description } = i18n.seo
+const sections = [
+	{
+		id: i18n.experience.id,
+		title: i18n.experience.title,
+		icon: ExperienceIcon,
+		component: Experience,
+	},
+	{
+		id: i18n.projects.id,
+		title: i18n.projects.title,
+		icon: ProjectsIcon,
+		component: Projects,
+	},
+	{
+		id: i18n.technologies.id,
+		title: i18n.technologies.title,
+		icon: StackIcon,
+		component: Stack,
+	},
+]
+---
+
+<Layout title={title} description={description}>
+	<main class="px-4">
+		<SectionContainer
+			id={i18n.about.id}
+			class="relative pt-44 lg:flex lg:h-screen lg:flex-col lg:justify-center lg:pt-0"
+		>
+			<AboutMe />
+		</SectionContainer>
+
+		{
+			sections.map(({ id, title, icon: Icon, component: Component }) => (
+				<SectionContainer id={id} title={title}>
+					<Icon class="size-7" slot="icon" />
+					<Component />
+				</SectionContainer>
+			))
+		}
+	</main>
+</Layout>

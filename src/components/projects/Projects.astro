@@ -1,0 +1,20 @@
+---
+import ProjectItem from "@/components/projects/ProjectItem.astro"
+import * as PROJECTS from "@/data/projects.json"
+
+const { currentLocale } = Astro
+---
+
+<div class="flex flex-col gap-y-16">
+	{
+		PROJECTS[currentLocale as "es" | "en"].map((Project) => (
+			<ProjectItem
+				title={Project.title}
+				description={Project.description}
+				link={Project.link}
+				image={Project.image}
+				tags={Project.tags}
+			/>
+		))
+	}
+</div>

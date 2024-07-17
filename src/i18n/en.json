@@ -1,0 +1,64 @@
+{
+  "seo": {
+    "title": "Daniel Velandia's Portfolio - Frontend Web Developer with 1 year of experience",
+    "description": "Daniel Velandia, web developer specialized in Frontend, WordPress, and Drupal. Student at Platzi and Systems Engineering."
+  },
+  "spanMenu": "Menu",
+  "spanTheme": "Choose the theme",
+  "menu": {
+    "about": "Home",
+    "experience": "Experience",
+    "projects": "Projects",
+    "technologies": "Technologies"
+  },
+  "copyright": "Daniel Velandia. Almost all rights reserved",
+  "about": {
+    "id": "about",
+    "altImage": "Profile picture of Daniel Velandia",
+    "role": "Frontend Developer",
+    "seeMore": "See More",
+    "greeting": {
+      "hello": "Hello,",
+      "name": "I'm Daniel"
+    },
+    "experience": {
+      "years": "1 year of experience.",
+      "title": "Systems Engineer and Web Developer.",
+      "specialization": "Specialized in custom CMS implementation.",
+      "platzi": "Continuous learning at Platzi."
+    }
+  },
+  "experience": {
+    "id": "experience",
+    "title": "Work Experience"
+  },
+  "projects": {
+    "id": "projects",
+    "title": "Projects"
+  },
+  "technologies": {
+    "id": "technologies",
+    "title": "Technologies",
+    "intro": {
+      "journey": "In my journey in the",
+      "webDevWorld": "web development world,",
+      "cultivated": "I have gained",
+      "skillsGained": "experience and skills",
+      "techVariety": "in various technologies.",
+      "stackIntro": "My tech stack includes:"
+    },
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "learning": "Learning",
+      "tools": "Tools"
+    }
+  },
+  "error": {
+    "id": "404",
+    "code": "ERROR 404",
+    "message": "Page not found",
+    "context": "Hello! We are sorry, but we couldn't find what you were looking for. Please check that the URL is correct.",
+    "back": "Return to homepage"
+  }
+}

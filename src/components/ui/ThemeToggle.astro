@@ -1,0 +1,103 @@
+---
+import { getI18N } from "@/i18n"
+import MoonIcon from "@/icons/Moon.astro"
+import SunIcon from "@/icons/Sun.astro"
+import SystemIcon from "@/icons/System.astro"
+
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+
+const THEMES = currentLocale === "es" ? ["Claro", "Oscuro", "Sistema"] : ["Light", "Dark", "System"]
+const spanTheme = i18n.spanTheme
+---
+
+<div class="relative">
+	<button
+		id="theme-toggle-btn"
+		class="flex rounded border-2 border-black/10 p-2 transition hover:border-black/20 hover:bg-black/5 dark:border-white/10 dark:hover:border-white/30 dark:hover:bg-white/5"
+	>
+		<span class="sr-only">{spanTheme}</span>
+		<SunIcon id="light" class="theme-toggle-icon size-5 transition-all" />
+		<MoonIcon id="dark" class="theme-toggle-icon absolute size-5 transition-all" />
+		<SystemIcon id="system" class="theme-toggle-icon absolute size-5 transition-all" />
+	</button>
+	<div
+		id="themes-menu"
+		class="scale-80 absolute right-0 top-10 hidden min-w-[8rem] rounded-md border border-gray-100 bg-white/90 p-1 text-sm shadow-[0_3px_10px_rgb(0,0,0,0.2)] backdrop-blur-md dark:border-gray-500/20 dark:bg-gray-900/90"
+	>
+		<ul>
+			{
+				THEMES.map((theme) => (
+					<li class="themes-menu-option cursor-default rounded-sm px-2 py-1.5 hover:bg-neutral-400/40 dark:hover:bg-gray-500/50">
+						{theme}
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</div>
+
+<style>
+	#themes-menu.open {
+		display: inline;
+		animation: scale-up-center 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+	}
+
+	@keyframes scale-up-center {
+		from {
+			transform: scale(0.8);
+			opacity: 0;
+		}
+
+		to {
+			transform: scale(1);
+			opacity: 1;
+		}
+	}
+</style>
+
+<script>
+	function setupThemeToggle() {
+		const matchMedia = window.matchMedia("(prefers-color-scheme: dark)")
+		const themesMenu = document.getElementById("themes-menu")
+		const themeToggleBtn = document.getElementById("theme-toggle-btn")
+
+		const updateTheme = () => {
+			const theme = localStorage.getItem("theme") ?? "system"
+			const isDark = theme === "dark" || (theme === "system" && matchMedia.matches)
+			document.documentElement.classList.toggle("dark", isDark)
+			document
+				.querySelectorAll(".theme-toggle-icon")
+				.forEach((el) => ((el as HTMLElement).style.scale = el.id === theme ? "1" : "0"))
+		}
+
+		const toggleMenu = (e?: Event) => {
+			e?.stopPropagation()
+			themesMenu?.classList.toggle("open")
+		}
+
+		themeToggleBtn?.addEventListener("click", toggleMenu)
+		document.addEventListener("click", () => themesMenu?.classList.remove("open"))
+		themesMenu?.addEventListener("click", (e) => {
+			if (e.target && (e.target as HTMLElement).classList.contains("themes-menu-option")) {
+				const targetElement = e.target as HTMLElement
+				const themeText = targetElement.innerText.toLowerCase().trim()
+				const theme = themeText === "claro" ? "light" : themeText === "oscuro" ? "dark" : themeText
+				localStorage.setItem("theme", theme)
+				updateTheme()
+				toggleMenu()
+			}
+		})
+		;[matchMedia, window].forEach((el) =>
+			el.addEventListener(
+				el === window ? "storage" : "change",
+				(e) => (!(e as StorageEvent).key || (e as StorageEvent).key === "theme") && updateTheme()
+			)
+		)
+
+		updateTheme()
+	}
+
+	setupThemeToggle()
+	document.addEventListener("astro:after-swap", setupThemeToggle)
+</script>

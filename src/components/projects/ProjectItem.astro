@@ -1,0 +1,83 @@
+---
+import Image from "astro/components/Image.astro"
+import Icon from "@/components/ui/Icon.astro"
+import Link from "@/icons/Link.astro"
+
+interface Props {
+	title: string
+	description: string
+	link: string
+	image: string
+	tags: { icon: string }[]
+}
+
+interface TagClasses {
+	[key: string]: string
+}
+
+const tagClasses: TagClasses = {
+	Drupal: "bg-[#004B7F]",
+	WordPress: "bg-[#154961]",
+	PHP: "bg-[#2D3A6D]",
+	Sass: "bg-[#8C3A66]",
+	Bootstrap: "bg-[#3E2B66]",
+	Tailwind: "bg-[#003159]",
+	JQuery: "bg-[#054477]",
+	JavaScript: "bg-[#8C7D0A]",
+}
+
+const { title, description, link, image, tags } = Astro.props
+---
+
+<a href={link} target="_blank" class="group block">
+	<article
+		class="flex flex-col space-x-0 space-y-8 rounded-xl p-4 transition duration-300 ease-in-out hover:bg-gray-200/30 dark:hover:bg-gray-800/50 lg:flex-row lg:space-x-8 lg:space-y-0"
+	>
+		<div class="w-full lg:w-1/2">
+			<div
+				class="relative col-span-6 row-span-5 flex transform flex-col items-center gap-8 overflow-clip rounded-xl shadow-xl transition duration-500 ease-in-out sm:rounded-xl lg:group-hover:-translate-y-1 lg:group-hover:shadow-2xl"
+			>
+				<Image
+					alt="Project"
+					class="h-56 w-full object-cover object-top transition duration-500 sm:h-full lg:scale-110 lg:group-hover:scale-105"
+					loading="lazy"
+					src={image}
+					width={200}
+					height={200}
+				/>
+			</div>
+		</div>
+
+		<div class="flex w-full flex-col justify-center lg:w-1/2 lg:max-w-lg">
+			<h3
+				class="flex items-center text-2xl font-bold text-gray-800 transition-colors duration-300 group-hover:text-primary-700 dark:text-gray-100 dark:group-hover:text-primary-400"
+			>
+				{title}
+				<Link
+					class="ml-1 inline-block h-4 w-4 shrink-0 translate-y-px transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:scale-125 motion-reduce:transition-none"
+				/>
+			</h3>
+			<div class="mt-2 flex flex-wrap">
+				<ul class="mb-2 flex flex-row gap-x-2">
+					{
+						tags.map((tag) => (
+							<li>
+								<span
+									class:list={[
+										"flex items-center gap-x-2 rounded-full px-2 py-1 text-xs text-white",
+										tagClasses[tag.icon] || "bg-gray-600",
+									]}
+								>
+									<Icon name={tag.icon} class="h-4 w-4 fill-current" />
+									{tag.icon}
+								</span>
+							</li>
+						))
+					}
+				</ul>
+
+				<div class="mt-2 text-gray-600 dark:text-gray-300">{description}</div>
+			</div>
+		</div>
+	</article>
+</a>

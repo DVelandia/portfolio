@@ -1,0 +1,118 @@
+---
+import Image from "astro/components/Image.astro"
+import imageProfile from "public/me.webp"
+import { getI18N } from "@/i18n/"
+import ArrowDown from "@/icons/ArrowDown.astro"
+import Download from "@/icons/Download.astro"
+import Email from "@/icons/Email.astro"
+import GitHub from "@/icons/GitHubOutlined.astro"
+import LinkedIn from "@/icons/LinkedIn.astro"
+
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+
+const { altImage, role, experience, greeting, seeMore } = i18n.about
+const { hello, name } = greeting
+const { years, title, specialization, platzi } = experience
+
+const socialLinks = [
+	{
+		href: "https://www.linkedin.com/in/dvelandia",
+		icon: LinkedIn,
+		label: "LinkedIn",
+	},
+	{
+		href: "https://github.com/dvelandia",
+		icon: GitHub,
+		label: "GitHub",
+	},
+	{
+		href: "mailto:dfvf03@gmail.com",
+		icon: Email,
+		label: "dfvf03@gmail.com",
+	},
+	{
+		href: "/CVelandia.pdf",
+		icon: Download,
+		label: "Curriculum",
+	},
+]
+---
+
+<div class="text-left md:gap-x-4 lg:flex lg:flex-row-reverse lg:items-center lg:justify-center">
+	<div class="Hero-image mb-6 flex w-16 justify-center lg:w-1/5">
+		<Image
+			src={imageProfile}
+			alt={altImage}
+			width={200}
+			height={200}
+			class="hover:dark:shadow-white/2 w-full rounded-full object-contain shadow-lg transition-shadow duration-300 hover:shadow-xl hover:shadow-primary-700/20 dark:shadow-dark-800"
+		/>
+	</div>
+
+	<header class="lg:w-4/5">
+		<h1 class="text-dark text-3xl font-bold dark:text-white lg:text-5xl">
+			{hello}
+			<span class="text-primary-600 dark:text-primary-400">
+				{name}
+			</span>
+		</h1>
+		<span
+			class="animated-text inline-flex bg-[linear-gradient(110deg,#64748b,45%,#0f172a,55%,#64748b)] bg-[length:250%_100%] bg-clip-text text-xl font-semibold text-transparent dark:bg-[linear-gradient(110deg,#b6eaff,45%,#065074,55%,#b6eaff)]"
+		>
+			{role}
+		</span>
+		<h2 class="mt-6 text-pretty text-gray-600 dark:text-gray-300 md:mt-10 lg:text-2xl">
+			{years}
+			<span class="text-crusta-800 dark:text-crusta-300">
+				{title}
+			</span>
+			<span class="text-daintree-700 dark:text-daintree-200">
+				{specialization}
+			</span>
+			{platzi}
+		</h2>
+	</header>
+</div>
+<ul class="mt-10 flex flex-wrap justify-start gap-4">
+	{
+		socialLinks.map(({ href, icon: Icon, label }) => (
+			<li>
+				<a
+					href={href}
+					class="flex items-center justify-center gap-x-2 rounded-full border border-dark-300 bg-gradient-to-r from-slate-50 to-slate-100 px-2 py-1 text-xs text-gray-600 transition-transform hover:scale-105 dark:border-dark-700 dark:from-slate-800 dark:to-slate-950 dark:text-gray-300 md:px-4 md:py-2 md:text-base"
+					target="view"
+					rel="noopener noreferrer"
+					download={href.endsWith(".pdf") ? "" : null}
+				>
+					<Icon class="size-4 md:size-6" />
+					{label}
+				</a>
+			</li>
+		))
+	}
+</ul>
+<div class="absolute bottom-4 hidden w-full justify-center lg:flex">
+	<a
+		href="#experience"
+		class="flex animate-bounce gap-2 font-bold text-primary-500 dark:text-primary-400"
+	>
+		{seeMore}
+		<ArrowDown class="h-5 w-5" />
+	</a>
+</div>
+
+<style>
+	@keyframes background-shine {
+		from {
+			background-position: 0 0;
+		}
+		to {
+			background-position: -200% 0;
+		}
+	}
+
+	.animated-text {
+		animation: background-shine 2s linear infinite;
+	}
+</style>

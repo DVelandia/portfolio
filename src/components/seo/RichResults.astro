@@ -1,0 +1,173 @@
+---
+/** https://developers.google.com/search/docs/appearance/structured-data/person */
+const personSchema = {
+	"@context": "https://schema.org",
+	"@type": "Person",
+	"name": "Daniel Velandia",
+	"givenName": "Daniel",
+	"familyName": "Velandia",
+	"additionalName": "DVelandia",
+	"url": "https://dvelandia.dev",
+	"image": "https://dvelandia.dev/og.jpg",
+	"sameAs": ["https://www.linkedin.com/in/dvelandia", "https://github.com/dvelandia"],
+	"jobTitle": "Desarrollador Web Frontend",
+	"description":
+		"Estudiante apasionado de Ingeniería de Sistemas y desarrollador web con experiencia en tecnologías front-end y CMS. Especializado en crear soluciones web innovadoras y eficientes.",
+	"birthDate": "2005-01-03",
+	"gender": "Masculino",
+	"nationality": "Colombiano",
+	"address": {
+		"@type": "PostalAddress",
+		"addressLocality": "Chiquinquirá",
+		"addressRegion": "Boyacá",
+		"addressCountry": "Colombia",
+	},
+	"email": "dfvf03@gmail.com",
+	"telephone": "+57 3028325223",
+	"alumniOf": [
+		{
+			"@type": "EducationalOrganization",
+			"name": "UNISANGIL",
+			"description": "Universidad donde curso actualmente Ingeniería de Sistemas",
+		},
+		{
+			"@type": "EducationalOrganization",
+			"name": "Platzi",
+			"description":
+				"Plataforma de educación en línea donde me mantengo actualizado en tecnologías web",
+		},
+		{
+			"@type": "EducationalOrganization",
+			"name": "Escuela Normal Superior de Chiquinquirá",
+			"description": "Colegio en el cual curse y me gradue de la educación secundaria",
+		},
+	],
+	"knowsLanguage": ["Español nativo", "Inglés basico"],
+	"worksFor": {
+		"@type": "Organization",
+		"name": "Davinci Technologies",
+		"description":
+			"Empresa líder en LATAM que impulsa la transformación digital y la innovación tecnológica en la nube.",
+	},
+	"hasOccupation": {
+		"@type": "Occupation",
+		"name": "Desarrollador Drupal",
+		"description":
+			"Experto en desarrollo, optimización y mantenimiento de sitios web robustos basados en Drupal",
+	},
+	"memberOf": [
+		{
+			"@type": "Organization",
+			"name": "Platzi",
+		},
+		{
+			"@type": "Organization",
+			"name": "UNISANGIL",
+		},
+		{
+			"@type": "Organization",
+			"name": "Davinci Technologies",
+		},
+	],
+	"skills": [
+		"Desarrollo Front-end",
+		"CMS (Drupal, WordPress)",
+		"HTML5",
+		"CSS3",
+		"SASS",
+		"JavaScript (ES6+)",
+		"JQuery",
+		"TypeScript",
+		"Angular",
+		"Node.js",
+		"PHP",
+		"MySQL",
+		"Docker",
+		"Git",
+		"CI/CD",
+		"UI/UX Design",
+		"Responsive Web Design",
+	],
+	"award": [
+		{
+			"@type": "Award",
+			"name": "Ganador Grammar Contest",
+			"description": "Primer lugar en el concurso de gramática inglesa - UNISANGIL 2023",
+		},
+		{
+			"@type": "Award",
+			"name": "Mejor Proyecto Integrador",
+			"description":
+				"Reconocimiento al proyecto más innovador, escalable y con mejor arquitectura - UNISANGIL 2024",
+		},
+		{
+			"@type": "Award",
+			"name": "Reconocimiento por Excelencia Académica",
+			"description":
+				"Mejor promedio obtenido al salir de secundaria - Escuela Normal Superior de Chiquinquirá",
+		},
+	],
+	"potentialAction": [
+		{
+			"@type": "ContactAction",
+			"name": "Solicitar una consulta gratuita",
+			"target": "https://dvelandia.dev/consulta-gratuita",
+		},
+		{
+			"@type": "ViewAction",
+			"name": "Explorar proyectos destacados",
+			"target": "https://dvelandia.dev/proyectos",
+		},
+		{
+			"@type": "DownloadAction",
+			"name": "Descargar Curriculum Vitae Completo",
+			"target": "https://dvelandia.dev/portafolio.pdf",
+		},
+	],
+}
+
+const FAQs = [
+	{
+		question: "¿Qué servicios ofreces como desarrollador web?",
+		answer:
+			"Ofrezco una gama completa de servicios de desarrollo web, incluyendo diseño y desarrollo de sitios web responsivos, implementación y personalización de CMS (especialmente Drupal y WordPress), optimización de rendimiento, integración de APIs, y consultoría tecnológica para ayudarte a elegir las mejores soluciones para tu proyecto.",
+	},
+	{
+		question: "¿Cuál es tu experiencia en desarrollo web?",
+		answer:
+			"Tengo más de un año de experiencia práctica en desarrollo web, con un enfoque especial en CMS como Drupal y WordPress. He trabajado en proyectos que van desde sitios web personales hasta plataformas empresariales complejas, siempre buscando implementar las mejores prácticas y tecnologías más actuales.",
+	},
+	{
+		question: "¿Qué me hace único como desarrollador?",
+		answer:
+			"Como estudiante activo de Ingeniería de Sistemas y aprendiz constante en Platzi, combino conocimientos técnicos de vanguardia con una perspectiva fresca e innovadora. Mi pasión por la tecnología y mi compromiso con el aprendizaje continuo me permiten ofrecer soluciones web no solo funcionales, sino también innovadoras y preparadas para el futuro.",
+	},
+	{
+		question: "¿Cómo aseguras la calidad en tus proyectos?",
+		answer:
+			"Implemento un enfoque riguroso de control de calidad que incluye pruebas exhaustivas, revisión de código, y seguimiento de las mejores prácticas de la industria. Además, utilizo herramientas de integración continua y despliegue continuo (CI/CD) para garantizar que cada entrega cumpla con los más altos estándares de calidad y rendimiento.",
+	},
+	{
+		question: "¿Ofreces soporte post-lanzamiento?",
+		answer:
+			"Absolutamente. Ofrezco servicios completos de mantenimiento y soporte post-lanzamiento para asegurar que tu sitio web siga funcionando de manera óptima. Esto incluye actualizaciones de seguridad, optimizaciones de rendimiento, y asistencia técnica continua.",
+	},
+]
+
+/** https://developers.google.com/search/docs/appearance/structured-data/faqpage */
+const FAQSchema = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	"mainEntity": FAQs.map(({ question, answer }) => ({
+		"@type": "Question",
+		"name": question,
+		"acceptedAnswer": {
+			"@type": "Answer",
+			"text": answer,
+		},
+	})),
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(personSchema)} is:inline />
+<script type="application/ld+json" set:html={JSON.stringify(FAQSchema)} is:inline />

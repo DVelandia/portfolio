@@ -1,0 +1,25 @@
+---
+import ExperienceItem from "@/components/experiencies/ExperienceItem.astro"
+import * as EXPERIENCES from "@/data/experience.json"
+
+const { currentLocale } = Astro
+---
+
+<article class="container mt-10 px-3.5">
+	<ol class="relative border-l border-dark-400 dark:border-dark-700">
+		{
+			EXPERIENCES[currentLocale as "es" | "en"].map((Experiencie) => (
+				<li class="mb-8 ml-6 md:mb-6">
+					<ExperienceItem
+						icon={Experiencie.icon}
+						title={Experiencie.title}
+						link={Experiencie.link || ""}
+						company={Experiencie.company}
+						date={Experiencie.date}
+						description={Experiencie.description}
+					/>
+				</li>
+			))
+		}
+	</ol>
+</article>

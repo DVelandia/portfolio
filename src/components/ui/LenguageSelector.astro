@@ -1,0 +1,69 @@
+---
+import ColombiaFlag from "@/icons/flags/ColombiaFlag.astro"
+import UniteStatesFlag from "@/icons/flags/UniteStatesFlag.astro"
+
+import ChevronIcon from "@/icons/ChevronIcon.astro"
+
+export const DEFAULT_LENGUAGE = "es"
+type Locale = Record<
+	string,
+	{ code: string; name: string; href: string; flag: typeof ColombiaFlag }
+>
+
+export const LOCALES: Locale = {
+	en: {
+		code: "en",
+		href: "/en",
+		name: "English",
+		flag: UniteStatesFlag,
+	},
+	es: {
+		code: "es",
+		href: "",
+		name: "Español",
+		flag: ColombiaFlag,
+	},
+}
+
+const { currentLocale = DEFAULT_LENGUAGE, url } = Astro
+
+const currentLocaleData = LOCALES[currentLocale]
+const otherLocales = Object.values(LOCALES).filter(
+	(locale) => (locale as (typeof LOCALES)[number]).code !== currentLocale
+)
+const currentPath = url.pathname.replace(currentLocaleData.href, "")
+---
+
+<div class="relative">
+	<div
+		class="group rounded border-2 border-black/10 text-sm font-semibold transition-all hover:border-black/20 hover:bg-black/5 dark:border-white/10 dark:hover:border-white/30 dark:hover:bg-white/5"
+	>
+		<button
+			type="button"
+			class="inline-flex w-full items-center justify-start gap-x-2 px-3 py-2"
+			aria-expanded="true"
+			aria-haspopup="true"
+		>
+			<currentLocaleData.flag class="size-4" />
+			{currentLocaleData.name}
+			<ChevronIcon class="-mr-1 size-4" />
+		</button>
+		<ul
+			class="group-hover:animate-fade-down group-hover:animate-duration-200 absolute hidden w-full group-hover:block"
+		>
+			{
+				otherLocales.map((locale: (typeof LOCALES)[number]) => (
+					<li class="">
+						<a
+							class="whitespace-no-wrap -mx-0.5 inline-flex w-full items-center justify-start gap-x-2 rounded border-2 border-black/10 px-3 py-2 hover:border-black/20 hover:bg-black/5 dark:border-white/10 dark:hover:border-white/30 dark:hover:bg-white/5"
+							href={`${locale.href}${currentPath}`}
+						>
+							<locale.flag class="size-4" />
+							{locale.name}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</div>

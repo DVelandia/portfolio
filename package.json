@@ -1,0 +1,41 @@
+{
+  "name": "portfolio-dvelandia",
+  "type": "module",
+  "version": "1.0",
+  "private": "true",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev  --remote",
+    "build": "astro build --remote",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check && tsc --noEmit",
+    "lint": "eslint --ext .astro,.ts,.js,.tsx .",
+    "lint:fix": "eslint --ext .astro,.ts,.js,.tsx . --fix",
+    "format": "prettier --write src",
+    "format:check": "prettier --check src"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.1.6",
+    "@astrojs/tailwind": "5.1.0",
+    "@astrojs/vercel": "7.7.2",
+    "@fontsource-variable/onest": "^5.0.4",
+    "astro": "^4.11.6",
+    "astro-compress": "^2.2.28",
+    "tailwindcss": "3.4.6"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "0.43.1",
+    "@astrojs/check": "0.8.1",
+    "@typescript-eslint/parser": "7.16.0",
+    "astro-eslint-parser": "^1.0.2",
+    "eslint": "8.57.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-astro": "1.2.3",
+    "prettier": "3.3.2",
+    "prettier-plugin-astro": "0.14.0",
+    "prettier-plugin-tailwindcss": "0.6.5",
+    "typescript": "5.5.3"
+  },
+  "packageManager": "pnpm@9.2.0+sha256.94fab213df221c55b6956b14a2264c21c6203cca9f0b3b95ff2fe9b84b120390"
+}

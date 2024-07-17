@@ -1,0 +1,64 @@
+{
+  "seo": {
+    "title": "Portfolio de Daniel Velandia - Desarrollador Web Frontend con 1 año de experiencia",
+    "description": "Daniel Velandia, desarrollador web especializado en Frontend, WordPress y Drupal. Estudiante de Platzi e Ingeniería de Sistemas."
+  },
+  "spanMenu": "Menú",
+  "spanTheme": "Elige el tema",
+  "menu": {
+    "about": "Inicio",
+    "experience": "Experiencia",
+    "projects": "Proyectos",
+    "technologies": "Tecnologías"
+  },
+  "copyright": "Daniel Velandia. Casi todos los derechos reservados",
+  "about": {
+    "id": "about",
+    "altImage": "Foto de perfil de Daniel Velandia",
+    "role": "Desarrollador Frontend",
+    "seeMore": "Ver más",
+    "greeting": {
+      "hello": "Hola,",
+      "name": "soy Daniel"
+    },
+    "experience": {
+      "years": "1 año de experiencia.",
+      "title": "Ingeniero de Sistemas y Desarrollador Web.",
+      "specialization": "Especializado en implementación de CMS personalizados.",
+      "platzi": "Formación continua en Platzi."
+    }
+  },
+  "experience": {
+    "id": "experience",
+    "title": "Experiencia laboral"
+  },
+  "projects": {
+    "id": "projects",
+    "title": "Proyectos"
+  },
+  "technologies": {
+    "id": "technologies",
+    "title": "Tecnologias",
+    "intro": {
+      "journey": "En mi trayectoria en el",
+      "webDevWorld": "mundo del desarrollo web,",
+      "cultivated": "he adquirido",
+      "skillsGained": "experiencia y habilidades",
+      "techVariety": "en diversas tecnologías.",
+      "stackIntro": "Mi stack tecnológico incluye:"
+    },
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "learning": "Aprendiendo",
+      "tools": "Herramientas"
+    }
+  },
+  "error": {
+    "id": "404",
+    "code": "ERROR 404",
+    "message": "Página no encontrada",
+    "context": "¡Hola! Lo sentimos, pero no pudimos encontrar lo que buscabas. Verifica que la dirección URL sea correcta.",
+    "back": "Volver al inicio"
+  }
+}

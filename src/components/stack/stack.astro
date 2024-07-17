@@ -1,0 +1,47 @@
+---
+import SectionItem from "@/components/stack/SectionItem.astro"
+import * as STACK from "@/data/stack.json"
+import { getI18N } from "@/i18n/"
+
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+
+const { journey, webDevWorld, cultivated, skillsGained, techVariety, stackIntro } =
+	i18n.technologies.intro
+---
+
+<p class="my-8 max-w-[740px] text-pretty text-gray-600 dark:text-dark-300 md:text-lg">
+	{journey}
+	<span class="text-daintree-700 dark:text-daintree-300">
+		{webDevWorld}
+	</span>
+	{cultivated}
+	<span class="text-crusta-700 dark:text-crusta-300">
+		{skillsGained}
+	</span>
+	{techVariety}
+	<span class="font-semibold text-daintree-700 dark:text-daintree-300">
+		{stackIntro}
+	</span>
+</p>
+
+<section class="grid gap-12 lg:grid-cols-2 lg:place-content-center">
+	{
+		Object.keys(STACK).map((category) => {
+			const categoryData = STACK[category as keyof typeof STACK]
+			if (categoryData && categoryData.gradient) {
+				return (
+					<SectionItem
+						key={category}
+						gradient={categoryData.gradient}
+						title={
+							i18n.technologies.categories[category as keyof typeof i18n.technologies.categories]
+						}
+						icons={categoryData.icons}
+					/>
+				)
+			}
+			return null
+		})
+	}
+</section>

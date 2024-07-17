@@ -1,0 +1,24 @@
+---
+import StackItem from "@/components/stack/StackItem.astro"
+
+const { gradient, title, icons } = Astro.props
+---
+
+<article
+	class="relative overflow-hidden rounded-2xl bg-gradient-to-r p-6 shadow-2xl dark:border dark:border-dark-900 dark:from-dark-950 dark:to-black"
+>
+	<h3
+		class="mb-8 bg-gradient-to-t from-[var(--from-color)] to-[var(--to-color)] bg-clip-text text-center text-xl font-bold text-transparent dark:from-[var(--from-color-dark)] dark:to-[var(--to-color-dark)] lg:break-words lg:text-4xl"
+		style={{
+			"--from-color": gradient.light[0],
+			"--to-color": gradient.light[1],
+			"--from-color-dark": gradient.dark[0],
+			"--to-color-dark": gradient.dark[1],
+		}}
+	>
+		{title}
+	</h3>
+	<ul class="grid grid-cols-3 gap-4">
+		{icons.map((icon: string) => <StackItem key={icon} title={icon} icon={icon} />)}
+	</ul>
+</article>

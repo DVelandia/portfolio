@@ -1,0 +1,30 @@
+{
+  "frontend": {
+    "icons": ["JavaScript", "JQuery", "TypeScript", "Bootstrap", "Sass", "Tailwind"],
+    "gradient": {
+      "light": ["#54fbff", "#00a4c9"],
+      "dark": ["#c9fffe", "#00cfef"]
+    }
+  },
+  "backend": {
+    "icons": ["Drupal", "WordPress", "PHP", "NodeJS", "MySQL", "SQLite"],
+    "gradient": {
+      "light": ["#94a3b8", "#1e293b"],
+      "dark": ["#f1f5f9", "#64748b"]
+    }
+  },
+  "learning": {
+    "icons": ["Astro", "Angular", "Express", "AWS", "GCP", "Jest"],
+    "gradient": {
+      "light": ["#ffb272", "#ee4a08"],
+      "dark": ["#ffebd4", "#fd6412"]
+    }
+  },
+  "tools": {
+    "icons": ["Docker", "Git", "DDEV", "Figma", "Pantheon", "Pnpm"],
+    "gradient": {
+      "light": ["#75dbff", "#0072ab"],
+      "dark": ["#def3ff", "#00a8e8"]
+    }
+  }
+}

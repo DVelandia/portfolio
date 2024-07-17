@@ -1,0 +1,7 @@
+---
+const { name, class: className } = Astro.props
+
+const IconComponent = await import(`../../icons/${name}.astro`).catch(() => null)
+---
+
+{IconComponent && <IconComponent.default class:list={className} />}
