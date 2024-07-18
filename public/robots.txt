@@ -1,8 +1,14 @@
 User-agent: *
 Allow: /
+Disallow: /*.pdf$
 
 # Host
 Host: https://portfolio-psi-fawn-19.vercel.app
 
 # Sitemaps
 Sitemap: https://portfolio-psi-fawn-19.vercel.app/sitemap-index.xml
+
+# Additional comments
+# Single page portfolio site built with Astro.build
+# Features theme switching and language changes
+# Last updated: 2024-07-18
