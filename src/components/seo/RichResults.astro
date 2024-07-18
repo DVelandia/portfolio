@@ -60,7 +60,10 @@ const personSchema = {
 				"@type": "PostalAddress",
 				"addressLocality": "Chiquinquirá",
 				"addressRegion": "Boyacá",
-				"addressCountry": "Colombia",
+				"addressCountry": {
+					"@type": "Country",
+					"name": "Colombia",
+				},
 			},
 		},
 		"estimatedSalary": {
@@ -75,6 +78,7 @@ const personSchema = {
 		"mainEntityOfPage": {
 			"@type": "WebPage",
 			"@id": "https://portfolio-psi-fawn-19.vercel.app/",
+			"lastReviewed": "2024-07-17",
 		},
 	},
 	"memberOf": [
