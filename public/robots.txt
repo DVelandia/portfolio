@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://dvelandia.dev
+Host: https://portfolio-psi-fawn-19.vercel.app
 
 # Sitemaps
-Sitemap: https://dvelandia.dev/sitemap-index.xml
+Sitemap: https://portfolio-psi-fawn-19.vercel.app/sitemap-index.xml
