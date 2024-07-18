@@ -25,6 +25,7 @@ const pages = ["about", "experience", "projects", "technologies"].map((key) => (
 		<nav
 			id="mobile-menu"
 			class="fixed left-0 right-0 top-0 z-10 hidden h-dvh w-full flex-col items-center gap-2 bg-gray-200 text-center text-2xl transition-transform dark:bg-gray-900"
+			aria-label="Mobile Navigation"
 		>
 			<aside class="flex min-h-16 w-full items-center justify-between pt-4">
 				<span class="text-primary text-xl font-semibold uppercase">{spanMenu}</span>
@@ -68,7 +69,10 @@ const pages = ["about", "experience", "projects", "technologies"].map((key) => (
 				</div>
 			</div>
 		</nav>
-		<nav class="hidden w-full items-center justify-between py-4 pr-4 sm:flex">
+		<nav
+			class="hidden w-full items-center justify-between py-4 pr-4 sm:flex"
+			aria-label="Desktop Navigation"
+		>
 			{
 				pages.map((link) => (
 					<a

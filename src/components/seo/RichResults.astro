@@ -53,7 +53,29 @@ const personSchema = {
 		"@type": "Occupation",
 		"name": "Desarrollador Drupal",
 		"description":
-			"Experto en desarrollo, optimización y mantenimiento de sitios web robustos basados en Drupal",
+			"Especializado en desarrollo, optimización y mantenimiento de sitios web robustos basados en Drupal",
+		"occupationLocation": {
+			"@type": "Place",
+			"address": {
+				"@type": "PostalAddress",
+				"addressLocality": "Chiquinquirá",
+				"addressRegion": "Boyacá",
+				"addressCountry": "Colombia",
+			},
+		},
+		"estimatedSalary": {
+			"@type": "MonetaryAmount",
+			"currency": "USD",
+			"value": {
+				"@type": "QuantitativeValue",
+				"value": 1300,
+				"unitText": "MONTH",
+			},
+		},
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://portfolio-psi-fawn-19.vercel.app/",
+		},
 	},
 	"memberOf": [
 		{

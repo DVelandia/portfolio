@@ -18,7 +18,10 @@ const pages = ["about", "experience", "projects", "technologies"].map((key) => (
 		<span class="flex text-center text-sm text-zinc-800/90 dark:text-zinc-200/90"
 			>©️ {currentYear} {i18n.copyright}
 		</span>
-		<nav class="mt-3 flex flex-wrap items-center text-sm font-medium dark:text-white/90 sm:mt-0">
+		<nav
+			class="mt-3 flex flex-wrap items-center text-sm font-medium dark:text-white/90 sm:mt-0"
+			aria-label="Footer Navigation"
+		>
 			{
 				pages.map(({ title, url }) => (
 					<a class="ml-3 hover:underline" href={url}>
