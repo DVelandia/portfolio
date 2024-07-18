@@ -4,7 +4,6 @@
     "description": "Daniel Velandia, desarrollador web especializado en Frontend, WordPress y Drupal. Estudiante de Platzi e Ingeniería de Sistemas."
   },
   "spanMenu": "Menú",
-  "spanTheme": "Elige el tema",
   "menu": {
     "about": "Inicio",
     "experience": "Experiencia",
@@ -60,5 +59,11 @@
     "message": "Página no encontrada",
     "context": "¡Hola! Lo sentimos, pero no pudimos encontrar lo que buscabas. Verifica que la dirección URL sea correcta.",
     "back": "Volver al inicio"
+  },
+  "theme": {
+    "spanTheme": "Cambiar tema",
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema"
   }
 }

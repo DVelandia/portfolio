@@ -7,8 +7,8 @@ import SystemIcon from "@/icons/System.astro"
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
 
-const THEMES = currentLocale === "es" ? ["Claro", "Oscuro", "Sistema"] : ["Light", "Dark", "System"]
-const spanTheme = i18n.spanTheme
+const THEMES = ["light", "dark", "system"]
+const spanTheme = i18n.theme.spanTheme
 ---
 
 <div class="relative">
@@ -28,8 +28,11 @@ const spanTheme = i18n.spanTheme
 		<ul>
 			{
 				THEMES.map((theme) => (
-					<li class="themes-menu-option cursor-default rounded-sm px-2 py-1.5 hover:bg-neutral-400/40 dark:hover:bg-gray-500/50">
-						{theme}
+					<li
+						class="themes-menu-option cursor-default rounded-sm px-2 py-1.5 hover:bg-neutral-400/40 dark:hover:bg-gray-500/50"
+						data-theme={theme}
+					>
+						{i18n.theme[theme as keyof typeof i18n.theme]}
 					</li>
 				))
 			}
@@ -81,11 +84,12 @@ const spanTheme = i18n.spanTheme
 		themesMenu?.addEventListener("click", (e) => {
 			if (e.target && (e.target as HTMLElement).classList.contains("themes-menu-option")) {
 				const targetElement = e.target as HTMLElement
-				const themeText = targetElement.innerText.toLowerCase().trim()
-				const theme = themeText === "claro" ? "light" : themeText === "oscuro" ? "dark" : themeText
-				localStorage.setItem("theme", theme)
-				updateTheme()
-				toggleMenu()
+				const theme = targetElement.dataset.theme
+				if (theme) {
+					localStorage.setItem("theme", theme)
+					updateTheme()
+					toggleMenu()
+				}
 			}
 		})
 		;[matchMedia, window].forEach((el) =>

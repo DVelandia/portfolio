@@ -71,26 +71,26 @@ const { currentLocale } = Astro
 			}
 			@supports selector(::-webkit-scrollbar) {
 				@media (hover: hover) {
-			::-webkit-scrollbar {
-				width: 10px;
-				height: 10px;
-			}
+					::-webkit-scrollbar {
+						width: 10px;
+						height: 10px;
+					}
 
-			::-webkit-scrollbar-track {
-				background: #232121;
-			}
+					::-webkit-scrollbar-track {
+						background: #232121;
+					}
 
-			::-webkit-scrollbar-thumb {
-				background: #008fd4;
-				border-radius: 10px;
-			}
+					::-webkit-scrollbar-thumb {
+						background: #008fd4;
+						border-radius: 10px;
+					}
 
-			::-webkit-scrollbar-thumb:hover {
-				background: #0890b294;
+					::-webkit-scrollbar-thumb:hover {
+						background: #0890b294;
+					}
+				}
 			}
-		}
-	}
-	@supports not selector(::-webkit-scrollbar) {
+			@supports not selector(::-webkit-scrollbar) {
 				* {
 					scrollbar-color: theme("colors.primary.400") transparent;
 					scrollbar-width: thin;
