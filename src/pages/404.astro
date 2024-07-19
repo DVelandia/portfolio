@@ -1,9 +1,9 @@
 ---
+import Image from "astro/components/Image.astro"
+import logo from "public/logo.webp"
 import SectionContainer from "@/components/SectionContainer.astro"
 import { getI18N } from "@/i18n/"
 import Layout from "@/layouts/Layout.astro"
-import Image from "astro/components/Image.astro"
-import logo from "public/logo.webp"
 
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
