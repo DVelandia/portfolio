@@ -13,7 +13,7 @@
   "copyright": "Daniel Velandia. Almost all rights reserved",
   "about": {
     "id": "about",
-    "altImage": "Profile picture of Daniel Velandia",
+    "descriptionImage": "Profile picture of Daniel Velandia",
     "role": "Frontend Developer",
     "seeMore": "See More",
     "greeting": {
@@ -23,8 +23,7 @@
     "experience": {
       "years": "1 year of experience.",
       "title": "Systems Engineer and Web Developer.",
-      "specialization": "Specialized in custom CMS implementation.",
-      "platzi": "Continuous learning at Platzi."
+      "specialization": "Specialized in custom CMS implementation."
     }
   },
   "experience": {

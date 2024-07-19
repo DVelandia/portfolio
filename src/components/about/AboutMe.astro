@@ -1,19 +1,19 @@
 ---
-import Image from "astro/components/Image.astro"
-import imageProfile from "public/me.webp"
 import { getI18N } from "@/i18n/"
 import ArrowDown from "@/icons/ArrowDown.astro"
 import Download from "@/icons/Download.astro"
 import Email from "@/icons/Email.astro"
 import GitHub from "@/icons/GitHubOutlined.astro"
 import LinkedIn from "@/icons/LinkedIn.astro"
+import Image from "astro/components/Image.astro"
+import imageProfile from "public/me.webp"
 
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
 
-const { altImage, role, experience, greeting, seeMore } = i18n.about
+const { descriptionImage, role, experience, greeting, seeMore } = i18n.about
 const { hello, name } = greeting
-const { years, title, specialization, platzi } = experience
+const { years, title, specialization } = experience
 
 const socialLinks = [
 	{
@@ -43,7 +43,8 @@ const socialLinks = [
 	<div class="Hero-image mb-6 flex w-16 justify-center lg:w-1/5">
 		<Image
 			src={imageProfile}
-			alt={altImage}
+			alt={descriptionImage}
+			title={descriptionImage}
 			width={1500}
 			height={1500}
 			class="hover:dark:shadow-white/2 w-full rounded-full object-contain shadow-lg transition-shadow duration-300 hover:shadow-xl hover:shadow-primary-700/20 dark:shadow-dark-800"
@@ -70,7 +71,6 @@ const socialLinks = [
 			<span class="text-daintree-700 dark:text-daintree-200">
 				{specialization}
 			</span>
-			{platzi}
 		</h2>
 	</header>
 </div>

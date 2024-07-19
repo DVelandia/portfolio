@@ -4,7 +4,7 @@
       "title": "Film Mia",
       "description": "Film production company specializing in commercials, music videos, and feature films, with 20 years of experience. Website developed using the WordPress CMS.",
       "link": "https://www.filmmia.com/",
-      "altImage": "Proyecto de Film Mia",
+      "descriptionImage": "Project of Film Mia",
       "image": "/img/projects/filmmia.webp",
       "tags": [{ "icon": "WordPress" }, { "icon": "Tailwind" }, { "icon": "JavaScript" }]
     },
@@ -12,7 +12,7 @@
       "title": "Brinsa",
       "description": "Leading company in the salt industry in Colombia, specializing in the extraction and refining of Refisal salt. Website developed from scratch using the Drupal CMS.",
       "link": "https://brinsa.com.co/",
-      "altImage": "Proyecto de Brinsa",
+      "descriptionImage": "Project of Brinsa",
       "image": "/img/projects/brinsa.webp",
       "tags": [{ "icon": "Drupal" }, { "icon": "Bootstrap" }, { "icon": "JQuery" }]
     }
@@ -22,7 +22,7 @@
       "title": "Film Mia",
       "description": "Productora de cine especializada en comerciales, videos musicales y largometrajes, con 20 años de experiencia. Sitio web desarrollado en el CMS WordPress.",
       "link": "https://www.filmmia.com/",
-      "altImage": "Project of Film Mia",
+      "descriptionImage": "Proyecto de Film Mia",
       "image": "/img/projects/filmmia.webp",
       "tags": [{ "icon": "WordPress" }, { "icon": "Tailwind" }, { "icon": "JavaScript" }]
     },
@@ -30,7 +30,7 @@
       "title": "Brinsa",
       "description": "Empresa líder en la industria de la sal en Colombia, especializada en la extracción y refinamiento de la sal Refisal. Sitio web desarrollado desde cero en el CMS Drupal.",
       "link": "https://brinsa.com.co/",
-      "altImage": "Project of Brinsa",
+      "descriptionImage": "Proyecto de Brinsa",
       "image": "/img/projects/brinsa.webp",
       "tags": [{ "icon": "Drupal" }, { "icon": "Bootstrap" }, { "icon": "JQuery" }]
     }
