@@ -3,10 +3,10 @@ Allow: /
 Disallow: /*.pdf$
 
 # Host
-Host: https://portfolio-psi-fawn-19.vercel.app
+Host: https://daniel.velandia.dev/
 
 # Sitemaps
-Sitemap: https://portfolio-psi-fawn-19.vercel.app/sitemap-index.xml
+Sitemap: https://daniel.velandia.dev//sitemap-index.xml
 
 # Additional comments
 # Single page portfolio site built with Astro.build
