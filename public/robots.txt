@@ -3,10 +3,10 @@ Allow: /
 Disallow: /*.pdf$
 
 # Host
-Host: https://daniel.velandia.dev/
+Host: https://daniel.velandia.dev
 
 # Sitemaps
-Sitemap: https://daniel.velandia.dev//sitemap-index.xml
+Sitemap: https://daniel.velandia.dev/sitemap-index.xml
 
 # Additional comments
 # Single page portfolio site built with Astro.build

@@ -69,9 +69,12 @@ const spanTheme = i18n.theme.spanTheme
 			const theme = localStorage.getItem("theme") ?? "system"
 			const isDark = theme === "dark" || (theme === "system" && matchMedia.matches)
 			document.documentElement.classList.toggle("dark", isDark)
-			document
-				.querySelectorAll(".theme-toggle-icon")
-				.forEach((el) => ((el as HTMLElement).style.scale = el.id === theme ? "1" : "0"))
+                        document
+                                .querySelectorAll(".theme-toggle-icon")
+                                .forEach((el) => {
+                                        const element = el as HTMLElement
+                                        element.style.transform = `scale(${el.id === theme ? 1 : 0})`
+                                })
 		}
 
 		const toggleMenu = (e?: Event) => {
