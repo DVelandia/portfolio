@@ -1,5 +1,5 @@
 ---
-import Image from "astro/components/Image.astro"
+import { Image } from "astro:assets"
 import Icon from "@/components/ui/Icon.astro"
 import Link from "@/icons/Link.astro"
 
@@ -8,7 +8,7 @@ interface Props {
 	description: string
 	link: string
 	descriptionImage: string
-	image: string
+	image: ImageMetadata
 	tags: { icon: string }[]
 }
 
@@ -30,9 +30,9 @@ const tagClasses: TagClasses = {
 const { title, description, link, descriptionImage, image, tags } = Astro.props
 ---
 
-<a href={link} target="_blank" class="group block">
+<a href={link} target="_blank" rel="noreferrer" class="group block">
 	<article
-		class="flex flex-col space-x-0 space-y-8 rounded-xl transition duration-300 ease-in-out hover:bg-gray-200/30 dark:hover:bg-gray-800/50 lg:flex-row lg:space-x-8 lg:space-y-0"
+		class="flex flex-col space-y-8 space-x-0 rounded-xl transition duration-300 ease-in-out hover:bg-gray-200/30 lg:flex-row lg:space-y-0 lg:space-x-8 dark:hover:bg-gray-800/50"
 	>
 		<div class="w-full lg:w-1/2">
 			<div
@@ -52,11 +52,11 @@ const { title, description, link, descriptionImage, image, tags } = Astro.props
 
 		<div class="flex w-full flex-col justify-center lg:w-1/2 lg:max-w-lg">
 			<h3
-				class="flex items-center text-2xl font-bold text-gray-800 transition-colors duration-300 group-hover:text-primary-700 dark:text-gray-100 dark:group-hover:text-primary-400"
+				class="group-hover:text-primary-700 dark:group-hover:text-primary-400 flex items-center text-2xl font-bold text-gray-800 transition-colors duration-300 dark:text-gray-100"
 			>
 				{title}
 				<Link
-					class="ml-1 inline-block h-4 w-4 shrink-0 translate-y-px transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:scale-125 motion-reduce:transition-none"
+					class="ml-1 inline-block h-4 w-4 shrink-0 translate-y-px transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:scale-125 motion-reduce:transition-none"
 				/>
 			</h3>
 			<div class="mt-2 flex flex-wrap">

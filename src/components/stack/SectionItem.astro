@@ -5,10 +5,10 @@ const { gradient, title, icons } = Astro.props
 ---
 
 <article
-	class="relative overflow-hidden rounded-2xl bg-gradient-to-r p-6 shadow-2xl dark:border dark:border-dark-900 dark:from-dark-950 dark:to-black"
+	class="dark:border-dark-900 dark:from-dark-950 relative overflow-hidden rounded-2xl bg-gradient-to-r p-6 shadow-2xl dark:border dark:to-black"
 >
 	<h3
-		class="mb-8 bg-gradient-to-t from-[var(--from-color)] to-[var(--to-color)] bg-clip-text text-center text-xl font-bold text-transparent dark:from-[var(--from-color-dark)] dark:to-[var(--to-color-dark)] lg:break-words lg:text-4xl"
+		class="mb-8 bg-gradient-to-t from-[var(--from-color)] to-[var(--to-color)] bg-clip-text text-center text-xl font-bold text-transparent lg:text-4xl lg:break-words dark:from-[var(--from-color-dark)] dark:to-[var(--to-color-dark)]"
 		style={{
 			"--from-color": gradient.light[0],
 			"--to-color": gradient.light[1],

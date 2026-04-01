@@ -1,12 +1,12 @@
 {
   "en": [
     {
-      "icon": "Drupal",
-      "title": "Drupal Developer",
+      "icon": "GCP",
+      "title": "Software Engineer",
       "link": "https://davinci.tech/",
       "company": "Davinci Technologies LATAM",
       "date": "May 2024 - Present",
-      "description": "Resolved critical vulnerabilities such as Header Injection and Security Policy issues. Improved project architecture and structure by following Drupal.org best practices."
+      "description": "Develop end-to-end web solutions for enterprise environments using JavaScript/TypeScript, Angular, Node.js (NestJS/Express), and CMS platforms such as Drupal and WordPress. Design and operate solutions on Google Cloud Platform (GCP), build integrations with DocuSign, Firebase, SharePoint, Apigee/proxies, and Azure components, and contribute to performance, technical SEO, security hardening, CI/CD, and Docker-based delivery."
     },
     {
       "icon": "WordPress",
@@ -32,12 +32,12 @@
   ],
   "es": [
     {
-      "icon": "Drupal",
-      "title": "Desarrollador Drupal",
+      "icon": "GCP",
+      "title": "Ingeniero de Software",
       "link": "https://davinci.tech/",
       "company": "Davinci Technologies LATAM",
       "date": "Mayo 2024 - Presente",
-      "description": "Solucioné vulnerabilidades críticas como inyecciones de encabezados y problemas de políticas de seguridad. Mejoré la arquitectura y estructura del proyecto siguiendo las mejores prácticas de Drupal.org."
+      "description": "Desarrollo soluciones web end-to-end para entornos enterprise usando JavaScript/TypeScript, Angular, Node.js (NestJS/Express) y plataformas CMS como Drupal y WordPress. Diseño y opero soluciones sobre Google Cloud Platform (GCP), construyo integraciones con DocuSign, Firebase, SharePoint, Apigee/proxies y componentes en Azure, y aporto en performance, SEO técnico, hardening de seguridad, CI/CD y entregas con Docker."
     },
     {
       "icon": "WordPress",

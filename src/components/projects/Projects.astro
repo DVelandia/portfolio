@@ -1,20 +1,41 @@
 ---
+import { getCollection } from "astro:content"
 import ProjectItem from "@/components/projects/ProjectItem.astro"
-import * as PROJECTS from "@/data/projects.json"
 
 const { currentLocale } = Astro
+const locale = currentLocale === "en" ? "en" : "es"
+
+const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/projects/*", {
+	eager: true,
+})
+
+const projectEntries = (await getCollection("projects"))
+	.filter((entry) => entry.data.locale === locale)
+	.sort((left, right) => left.data.order - right.data.order)
+
+const projects = projectEntries.map(({ data: project }) => {
+	const image = images[`/src/assets/projects/${project.image}`]?.default
+	if (!image) {
+		throw new Error(`Project image not found: ${project.image}`)
+	}
+
+	return {
+		...project,
+		image,
+	}
+})
 ---
 
 <div class="flex flex-col gap-y-16">
 	{
-		PROJECTS[currentLocale as "es" | "en"].map((Project) => (
+		projects.map((project) => (
 			<ProjectItem
-				title={Project.title}
-				description={Project.description}
-				link={Project.link}
-				descriptionImage={Project.descriptionImage}
-				image={Project.image}
-				tags={Project.tags}
+				title={project.title}
+				description={project.description}
+				link={project.link}
+				descriptionImage={project.descriptionImage}
+				image={project.image}
+				tags={project.tags}
 			/>
 		))
 	}

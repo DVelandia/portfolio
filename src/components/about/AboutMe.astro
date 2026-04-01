@@ -1,6 +1,6 @@
 ---
-import Image from "astro/components/Image.astro"
-import imageProfile from "public/me.webp"
+import { Image } from "astro:assets"
+import imageProfile from "@/assets/me.webp"
 import { getI18N } from "@/i18n/"
 import ArrowDown from "@/icons/ArrowDown.astro"
 import Download from "@/icons/Download.astro"
@@ -20,21 +20,27 @@ const socialLinks = [
 		href: "https://www.linkedin.com/in/dvelandia",
 		icon: LinkedIn,
 		label: "LinkedIn",
+		rel: "noreferrer",
+		target: "_blank",
 	},
 	{
 		href: "https://github.com/dvelandia",
 		icon: GitHub,
 		label: "GitHub",
+		rel: "noreferrer",
+		target: "_blank",
 	},
 	{
 		href: "mailto:dfvf03@gmail.com",
 		icon: Email,
 		label: "dfvf03@gmail.com",
+		target: "_self",
 	},
 	{
 		href: "/CVelandia.pdf",
 		icon: Download,
 		label: "Curriculum",
+		target: "_self",
 	},
 ]
 ---
@@ -48,12 +54,12 @@ const socialLinks = [
 			width={1500}
 			height={1500}
 			loading="eager"
-			class="hover:dark:shadow-white/2 w-full rounded-full object-contain shadow-lg transition-shadow duration-300 hover:shadow-xl hover:shadow-primary-700/20 dark:shadow-dark-800"
+			class="hover:shadow-primary-700/20 dark:shadow-dark-800 w-full rounded-full object-contain shadow-lg transition-shadow duration-300 hover:shadow-xl hover:dark:shadow-white/2"
 		/>
 	</div>
 
 	<header class="lg:w-4/5">
-		<h1 class="text-dark text-3xl font-bold dark:text-white lg:text-5xl">
+		<h1 class="text-dark-900 text-3xl font-bold lg:text-5xl dark:text-white">
 			{hello}
 			<span class="text-primary-600 dark:text-primary-400">
 				{name}
@@ -64,7 +70,7 @@ const socialLinks = [
 		>
 			{role}
 		</span>
-		<h2 class="mt-6 text-pretty text-gray-600 dark:text-gray-300 md:mt-10 lg:text-2xl">
+		<h2 class="mt-6 text-pretty text-gray-600 md:mt-10 lg:text-2xl dark:text-gray-300">
 			{years}
 			<span class="text-crusta-800 dark:text-crusta-300">
 				{title}
@@ -77,13 +83,13 @@ const socialLinks = [
 </div>
 <ul class="mt-10 flex flex-wrap justify-start gap-4">
 	{
-		socialLinks.map(({ href, icon: Icon, label }) => (
+		socialLinks.map(({ href, icon: Icon, label, rel, target }) => (
 			<li>
 				<a
 					href={href}
-					class="flex items-center justify-center gap-x-2 rounded-full border border-dark-300 bg-gradient-to-r from-slate-50 to-slate-100 px-2 py-1 text-xs text-gray-600 transition-transform hover:scale-105 dark:border-dark-700 dark:from-slate-800 dark:to-slate-950 dark:text-gray-300 md:px-4 md:py-2 md:text-base"
-					target="view"
-					rel="noopener noreferrer"
+					class="border-dark-300 dark:border-dark-700 flex items-center justify-center gap-x-2 rounded-full border bg-gradient-to-r from-slate-50 to-slate-100 px-2 py-1 text-xs text-gray-600 transition-transform hover:scale-105 md:px-4 md:py-2 md:text-base dark:from-slate-800 dark:to-slate-950 dark:text-gray-300"
+					target={target}
+					rel={rel}
 					download={href.endsWith(".pdf") ? "" : null}
 				>
 					<Icon class="size-4 md:size-6" />
@@ -96,7 +102,7 @@ const socialLinks = [
 <div class="absolute bottom-4 hidden w-full justify-center lg:flex">
 	<a
 		href="#experience"
-		class="flex animate-bounce gap-2 font-bold text-primary-500 dark:text-primary-400"
+		class="text-primary-500 dark:text-primary-400 flex animate-bounce gap-2 font-bold"
 	>
 		{seeMore}
 		<ArrowDown class="h-5 w-5" />
