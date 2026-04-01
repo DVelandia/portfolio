@@ -1,7 +1,10 @@
 {
   "seo": {
-    "title": "Daniel Velandia's Portfolio - Frontend Web Developer",
-    "description": "Web developer specialized in Frontend, WordPress, and Drupal. Student at Platzi and Systems Engineering."
+    "title": "Daniel Velandia's Portfolio - Software Engineer",
+    "description": "Software Engineer with experience in Angular, Node.js, Drupal, WordPress, GCP, and CI/CD.",
+    "keywords": "web developer, front-end, Drupal, WordPress, JavaScript, Astro, Node.js, Daniel Velandia, portfolio",
+    "og_site_name": "Daniel Velandia's Portfolio",
+    "og_locale": "en_US"
   },
   "spanMenu": "Menu",
   "menu": {
@@ -14,16 +17,16 @@
   "about": {
     "id": "about",
     "descriptionImage": "Profile picture of Daniel Velandia",
-    "role": "Frontend Developer",
+    "role": "Software Engineer",
     "seeMore": "See More",
     "greeting": {
       "hello": "Hello,",
       "name": "I'm Daniel"
     },
     "experience": {
-      "years": "+2 years of experience.",
+      "years": "+4 years of experience.",
       "title": "Systems Engineer and Web Developer.",
-      "specialization": "Specialized in custom CMS implementation."
+      "specialization": "Focused on CMS, Node.js, and GCP."
     }
   },
   "experience": {
@@ -57,12 +60,86 @@
     "code": "ERROR 404",
     "message": "Page not found",
     "context": "Hello! We are sorry, but we couldn't find what you were looking for. Please check that the URL is correct.",
-    "back": "Return to homepage"
+    "back": "Return to homepage",
+    "seo": {
+      "title": "404 | Page not found | Daniel Velandia",
+      "description": "Error 404: the page you are looking for does not exist, was moved, or the URL is incorrect."
+    }
   },
   "theme": {
     "spanTheme": "Toggle theme",
     "light": "Light",
     "dark": "Dark",
     "system": "System"
+  },
+  "richResults": {
+    "personSchema": {
+      "jobTitle": "Frontend Web Developer",
+      "description": "Passionate Systems Engineering student and web developer with experience in front-end technologies and CMS. Specialized in creating innovative and efficient web solutions.",
+      "gender": "Male",
+      "nationality": "Colombian",
+      "alumniOf": [
+        {
+          "description": "University where I am currently studying Systems Engineering"
+        },
+        {
+          "description": "Online education platform where I keep up to date with web technologies"
+        },
+        {
+          "description": "School where I attended and graduated from high school"
+        }
+      ],
+      "knowsLanguage": ["Native Spanish", "Basic English"],
+      "worksFor": {
+        "description": "Leading company in LATAM that promotes digital transformation and technological innovation in the cloud."
+      },
+      "award": [
+        {
+          "name": "Grammar Contest Winner",
+          "description": "First place in the English grammar contest - UNISANGIL 2023"
+        },
+        {
+          "name": "Best Integration Project",
+          "description": "Recognition for the most innovative, scalable project with the best architecture - UNISANGIL 2024"
+        },
+        {
+          "name": "Recognition for Academic Excellence",
+          "description": "Best average grade obtained upon graduating from high school - Escuela Normal Superior de Chiquinquirá"
+        }
+      ],
+      "potentialAction": [
+        {
+          "name": "Request a free consultation"
+        },
+        {
+          "name": "Explore featured projects"
+        },
+        {
+          "name": "Download Full Curriculum Vitae"
+        }
+      ]
+    },
+    "faqs": [
+      {
+        "question": "What services do you offer as a web developer?",
+        "answer": "I offer a full range of web development services, including responsive website design and development, CMS implementation and customization (especially Drupal and WordPress), performance optimization, API integration, and technology consulting to help you choose the best solutions for your project."
+      },
+      {
+        "question": "What is your experience in web development?",
+        "answer": "I have over a year of hands-on experience in web development, with a special focus on CMS like Drupal and WordPress. I have worked on projects ranging from personal websites to complex enterprise platforms, always seeking to implement best practices and the latest technologies."
+      },
+      {
+        "question": "What makes you unique as a developer?",
+        "answer": "As an active Systems Engineering student and a constant learner at Platzi, I combine cutting-edge technical knowledge with a fresh, innovative perspective. My passion for technology and my commitment to continuous learning allow me to offer web solutions that are not only functional but also innovative and future-proof."
+      },
+      {
+        "question": "How do you ensure quality in your projects?",
+        "answer": "I implement a rigorous quality control approach that includes comprehensive testing, code review, and adherence to industry best practices. Additionally, I use continuous integration and continuous deployment (CI/CD) tools to ensure that every delivery meets the highest standards of quality and performance."
+      },
+      {
+        "question": "Do you offer post-launch support?",
+        "answer": "Absolutely. I offer complete post-launch maintenance and support services to ensure your website continues to function optimally. This includes security updates, performance optimizations, and ongoing technical assistance."
+      }
+    ]
   }
 }

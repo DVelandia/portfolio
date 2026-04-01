@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from "astro:transitions"
+import { ClientRouter } from "astro:transitions"
 
 import Footer from "@/components/Footer.astro"
 import Header from "@/components/Header.astro"
@@ -7,6 +7,7 @@ import SEO from "@/components/seo/SEO.astro"
 import type { Preload } from "@/types/Preload"
 
 import "@fontsource-variable/onest"
+import "../styles/global.css"
 
 interface Props {
 	title: string
@@ -14,28 +15,79 @@ interface Props {
 	preload?: Array<Preload>
 	canonical?: string
 	image?: string
+	robots?: string
+	googlebot?: string
+	includeRichResults?: boolean
+	showAlternateLinks?: boolean
 }
 
-const { title, description, preload, canonical, image } = Astro.props
-const { currentLocale } = Astro
+const {
+	title,
+	description,
+	preload,
+	canonical,
+	image,
+	robots,
+	googlebot,
+	includeRichResults,
+	showAlternateLinks = true,
+} = Astro.props
+const { currentLocale, url } = Astro
+
+const normalizedPath =
+	currentLocale === "en" ? url.pathname.replace(/^\/en/, "") || "/" : url.pathname || "/"
+const alternateLinks = [
+	{ href: normalizedPath, hreflang: "es" },
+	{ href: normalizedPath === "/" ? "/en/" : `/en${normalizedPath}`, hreflang: "en" },
+	{ href: normalizedPath, hreflang: "x-default" },
+]
 ---
 
 <!doctype html>
 <html lang={currentLocale}>
 	<head>
+		<script is:inline>
+			;(() => {
+				const applyTheme = () => {
+					const theme = localStorage.getItem("theme") ?? "system"
+					const isDark =
+						theme === "dark" ||
+						(theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches)
+
+					document.documentElement.classList.toggle("dark", isDark)
+					document.documentElement.dataset.theme = theme
+				}
+
+				applyTheme()
+
+				if (!window.__portfolioThemeSyncInitialized) {
+					document.addEventListener("astro:after-swap", applyTheme)
+					window.__portfolioThemeSyncInitialized = true
+				}
+			})()
+		</script>
 		<SEO
 			canonical={canonical}
 			description={description}
+			googlebot={googlebot}
 			image={image}
+			includeRichResults={includeRichResults}
 			preload={preload}
+			robots={robots}
 			title={title}
 		/>
-		<ViewTransitions />
+		{
+			showAlternateLinks &&
+				alternateLinks.map(({ href, hreflang }) => (
+					<link rel="alternate" hreflang={hreflang} href={new URL(href, Astro.site)} />
+				))
+		}
+		<ClientRouter />
 	</head>
 
-	<body class="relative bg-dark-50 text-black dark:bg-dark-950 dark:text-white">
+	<body class="bg-dark-50 dark:bg-dark-950 relative text-black dark:text-white">
 		<div
-			class="absolute top-0 z-[-2] h-screen w-full bg-dark-50 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(0,153,255,0.25),rgba(255,255,255,0))] dark:bg-dark-950"
+			class="bg-dark-50 dark:bg-dark-950 absolute top-0 z-[-2] h-screen w-full bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(0,153,255,0.25),rgba(255,255,255,0))]"
 		>
 		</div>
 		<Header />
@@ -43,7 +95,11 @@ const { currentLocale } = Astro
 		<Footer />
 		<style is:global>
 			:root {
-				color-scheme: light dark;
+				color-scheme: light;
+			}
+
+			html.dark {
+				color-scheme: dark;
 			}
 
 			html {
@@ -64,11 +120,6 @@ const { currentLocale } = Astro
 				}
 			}
 
-			@media (prefers-color-scheme: dark) {
-				body {
-					color: rgba(255, 255, 255, 0.9);
-				}
-			}
 			@supports selector(::-webkit-scrollbar) {
 				@media (hover: hover) {
 					::-webkit-scrollbar {
@@ -90,9 +141,10 @@ const { currentLocale } = Astro
 					}
 				}
 			}
+
 			@supports not selector(::-webkit-scrollbar) {
 				* {
-					scrollbar-color: theme("colors.primary.400") transparent;
+					scrollbar-color: var(--color-primary-400) transparent;
 					scrollbar-width: thin;
 				}
 			}

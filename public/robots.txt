@@ -1,14 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /*.pdf$
 
-# Host
-Host: https://daniel.velandia.dev/
-
-# Sitemaps
-Sitemap: https://daniel.velandia.dev//sitemap-index.xml
-
-# Additional comments
-# Single page portfolio site built with Astro.build
-# Features theme switching and language changes
-# Last updated: 2024-07-18
+Sitemap: https://daniel.velandia.dev/sitemap-index.xml

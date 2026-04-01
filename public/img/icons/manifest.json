@@ -1,8 +1,13 @@
 {
-	"name": "Portfolio de Daniel Velandia - Desarrollador Web Frontend con 1 año de experiencia",
-	"description": "Daniel Velandia, desarrollador web especializado en Frontend, WordPress y Drupal. Estudiante de Platzi e Ingeniería de Sistemas.",
-	"short_name": "Portfolio DVelandia",
-	"icons": [
+  "name": "Portfolio de Daniel Velandia - Ingeniero de Software",
+  "description": "Ingeniero de Software con experiencia en Angular, Node.js, Drupal, WordPress, GCP y CI/CD.",
+  "short_name": "DVelandia",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#2CC9FF",
+  "lang": "es-CO",
+  "icons": [
     {
       "src": "/img/icons/favicon-192x192.png",
       "sizes": "192x192",

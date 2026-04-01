@@ -1,13 +1,19 @@
 import english from "@/i18n/en.json"
 import spanish from "@/i18n/es.json"
 
-const LANGUAGES = {
-	ENGLISH: "en",
-	SPANISH: "es",
-}
+const DEFAULT_LOCALE = "es"
 
-export const getI18N = ({ currentLocale = "es" }: { currentLocale: string | undefined }) => {
-	if (currentLocale === LANGUAGES.ENGLISH) return english
-	if (currentLocale === LANGUAGES.SPANISH) return spanish
-	return spanish
-}
+const translations = {
+	en: english,
+	es: spanish,
+} satisfies Record<string, typeof spanish>
+
+type Locale = keyof typeof translations
+
+export type I18NDictionary = (typeof translations)[typeof DEFAULT_LOCALE]
+
+export const getI18N = ({
+	currentLocale = DEFAULT_LOCALE,
+}: {
+	currentLocale?: string
+}): I18NDictionary => translations[currentLocale as Locale] ?? translations[DEFAULT_LOCALE]

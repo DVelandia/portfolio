@@ -1,4 +1,5 @@
 ---
+import { getI18N } from "@/i18n"
 import RichResults from "@/components/seo/RichResults.astro"
 import type { Preload } from "@/types/Preload"
 
@@ -8,6 +9,9 @@ interface Props {
 	preload?: Array<Preload>
 	canonical?: string
 	image?: string
+	robots?: string
+	googlebot?: string
+	includeRichResults?: boolean
 }
 
 const {
@@ -15,15 +19,18 @@ const {
 	description,
 	preload,
 	canonical,
-	image = "https://daniel.velandia.dev//og.png",
+	image = "https://daniel.velandia.dev/og.png",
+	robots = "index, follow",
+	googlebot = robots,
+	includeRichResults = true,
 } = Astro.props as Props
 
-const determineCanonicalURL = () => {
-	if (Astro.url.host.includes("localhost")) return "http://localhost:4321"
-	return canonical || Astro.url.pathname
-}
+const { currentLocale } = Astro
+const t = getI18N({ currentLocale })
 
-const canonicalURL = new URL(determineCanonicalURL(), Astro.site)
+const siteURL = Astro.site ?? Astro.url
+const canonicalURL = new URL(canonical ?? Astro.url.pathname, siteURL)
+const imageURL = new URL(image, siteURL)
 ---
 
 <title>{title}</title>
@@ -38,34 +45,33 @@ const canonicalURL = new URL(determineCanonicalURL(), Astro.site)
 }
 
 <link rel="canonical" href={canonicalURL} />
-<meta name="viewport" content="width=device-width" />
+<link rel="manifest" href="/img/icons/manifest.json" />
+<meta name="generator" content={Astro.generator} />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#2CC9FF" />
 
-<meta
-	name="keywords"
-	content="desarrollo web, front-end, Drupal, WordPress, JavaScript, Astro, Node.js, Daniel Velandia"
-/>
+<meta name="keywords" content={t.seo.keywords} />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:site" content="@dvelandia" />
 <meta name="twitter:creator" content="@dvelandia" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={new URL(image, Astro.url)} />
+<meta name="twitter:image" content={imageURL} />
 
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:image" content={imageURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:url" content={Astro.url} />
-<meta property="og:site_name" content="Portfolio de Daniel Velandia" />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:site_name" content={t.seo.og_site_name} />
 <meta property="og:type" content="website" />
-<meta property="og:locale" content="es_CO" />
+<meta property="og:locale" content={t.seo.og_locale} />
 
-<meta name="robots" content="index, follow" />
-<meta name="googlebot" content="index, follow" />
+<meta name="robots" content={robots} />
+<meta name="googlebot" content={googlebot} />
 
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png" />
 <meta name="msapplication-config" content="/browserconfig.xml" />
 
-<RichResults />
+{includeRichResults && <RichResults />}

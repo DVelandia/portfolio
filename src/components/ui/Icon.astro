@@ -1,7 +1,12 @@
 ---
-const { name, class: className } = Astro.props
+const { name, class: className, ...attrs } = Astro.props
 
-const IconComponent = await import(`../../icons/${name}.astro`).catch(() => null)
+const iconModules = import.meta.glob("../../icons/*.astro", {
+	eager: true,
+}) as Record<string, { default: any }>
+
+const iconPath = `../../icons/${name}.astro`
+const IconComponent = iconModules[iconPath]?.default
 ---
 
-{IconComponent && <IconComponent.default class:list={className} />}
+{IconComponent && <IconComponent class:list={className} {...attrs} />}

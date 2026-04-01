@@ -5,6 +5,7 @@ import UniteStatesFlag from "@/icons/flags/UniteStatesFlag.astro"
 import ChevronIcon from "@/icons/ChevronIcon.astro"
 
 export const DEFAULT_LENGUAGE = "es"
+const LOCALIZED_PATHS = new Set(["/"])
 type Locale = Record<
 	string,
 	{ code: string; name: string; href: string; flag: typeof ColombiaFlag }
@@ -31,39 +32,62 @@ const currentLocaleData = LOCALES[currentLocale]
 const otherLocales = Object.values(LOCALES).filter(
 	(locale) => (locale as (typeof LOCALES)[number]).code !== currentLocale
 )
-const currentPath = url.pathname.replace(currentLocaleData.href, "")
+const currentPath = url.pathname.replace(currentLocaleData.href, "") || "/"
+const localizedPath = LOCALIZED_PATHS.has(currentPath) ? currentPath : "/"
 ---
 
-<div class="relative">
-	<div
-		class="group rounded border-2 border-black/10 text-sm font-semibold transition-all hover:border-black/20 hover:bg-black/5 dark:border-white/10 dark:hover:border-white/30 dark:hover:bg-white/5"
+<details class="language-selector relative">
+	<summary
+		class="inline-flex list-none items-center justify-start gap-x-2 rounded border-2 border-black/10 px-3 py-2 text-sm font-semibold transition-all hover:border-black/20 hover:bg-black/5 dark:border-white/10 dark:hover:border-white/30 dark:hover:bg-white/5"
 	>
-		<button
-			type="button"
-			class="inline-flex w-full items-center justify-start gap-x-2 px-3 py-2"
-			aria-expanded="true"
-			aria-haspopup="true"
-		>
-			<currentLocaleData.flag class="size-4" />
-			{currentLocaleData.name}
-			<ChevronIcon class="-mr-1 size-4" />
-		</button>
-		<ul
-			class="group-hover:animate-fade-down group-hover:animate-duration-200 absolute hidden w-full group-hover:block"
-		>
-			{
-				otherLocales.map((locale: (typeof LOCALES)[number]) => (
-					<li class="">
-						<a
-							class="whitespace-no-wrap -mx-0.5 inline-flex w-full items-center justify-start gap-x-2 rounded border-2 border-black/10 px-3 py-2 hover:border-black/20 hover:bg-black/5 dark:border-white/10 dark:hover:border-white/30 dark:hover:bg-white/5"
-							href={`${locale.href}${currentPath}`}
-						>
-							<locale.flag class="size-4" />
-							{locale.name}
-						</a>
-					</li>
-				))
-			}
-		</ul>
-	</div>
-</div>
+		<currentLocaleData.flag class="size-4" />
+		{currentLocaleData.name}
+		<ChevronIcon class="-mr-1 size-4" />
+	</summary>
+	<ul
+		class="language-menu absolute top-[calc(100%+0.5rem)] right-0 z-20 min-w-full rounded-md border border-black/10 bg-white/95 p-1 shadow-lg backdrop-blur-md dark:border-white/10 dark:bg-gray-900/95"
+	>
+		{
+			otherLocales.map((locale: (typeof LOCALES)[number]) => (
+				<li>
+					<a
+						class="inline-flex w-full items-center justify-start gap-x-2 rounded px-3 py-2 text-sm font-medium transition hover:bg-black/5 dark:hover:bg-white/5"
+						href={`${locale.href}${localizedPath}`.replace("//", "/")}
+						lang={locale.code}
+						hreflang={locale.code}
+					>
+						<locale.flag class="size-4" />
+						{locale.name}
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</details>
+
+<style>
+	.language-selector > summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.language-selector[open] .language-menu {
+		display: block;
+		animation: fade-down 0.2s ease both;
+	}
+
+	.language-menu {
+		display: none;
+	}
+
+	@keyframes fade-down {
+		from {
+			transform: translateY(-0.25rem);
+			opacity: 0;
+		}
+
+		to {
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
+</style>
