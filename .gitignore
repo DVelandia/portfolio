@@ -1,8 +1,9 @@
 # build output
 dist/
 
-# generated types
+# generated types and temp files
 .astro/
+.codex-temp/
 
 # dependencies
 node_modules/
@@ -15,27 +16,22 @@ pnpm-debug.log*
 
 # environment variables
 .env
+.env.local
 .env.production
 
 # macOS-specific files
 .DS_Store
 
-# packages
-pnpm-lock.yaml
+# package managers
 package-lock.json
 yarn.lock
 
-# .vs folder
+# IDEs
 .vs/
-.idea
+.idea/
 
-# generated vercel output
+# generated Vercel output
 .vercel/
 
-.env
-.env.local
-
-.config/*
-
+# local assets
 local-images/*
-src/middleware.tsall
