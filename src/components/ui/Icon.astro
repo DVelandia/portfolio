@@ -7,6 +7,26 @@ const iconModules = import.meta.glob("../../icons/*.astro", {
 
 const iconPath = `../../icons/${name}.astro`
 const IconComponent = iconModules[iconPath]?.default
+const fallbackLabel =
+	String(name)
+		.replace(/[^a-z0-9]/gi, "")
+		.slice(0, 2)
+		.toUpperCase() || "?"
 ---
 
-{IconComponent && <IconComponent class:list={className} {...attrs} />}
+{
+	IconComponent ? (
+		<IconComponent class:list={className} {...attrs} />
+	) : (
+		<span
+			class:list={[
+				"inline-flex items-center justify-center rounded bg-slate-200 text-[0.625rem] font-semibold text-slate-700 dark:bg-slate-700 dark:text-slate-100",
+				className,
+			]}
+			title={`Missing icon: ${name}`}
+			{...attrs}
+		>
+			{fallbackLabel}
+		</span>
+	)
+}

@@ -1,9 +1,9 @@
 ---
 import { ClientRouter } from "astro:transitions"
-
 import Footer from "@/components/Footer.astro"
 import Header from "@/components/Header.astro"
 import SEO from "@/components/seo/SEO.astro"
+import themeInitScript from "@/scripts/theme-init.js?raw"
 import type { Preload } from "@/types/Preload"
 
 import "@fontsource-variable/onest"
@@ -46,26 +46,8 @@ const alternateLinks = [
 <!doctype html>
 <html lang={currentLocale}>
 	<head>
-		<script is:inline>
-			;(() => {
-				const applyTheme = () => {
-					const theme = localStorage.getItem("theme") ?? "system"
-					const isDark =
-						theme === "dark" ||
-						(theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches)
-
-					document.documentElement.classList.toggle("dark", isDark)
-					document.documentElement.dataset.theme = theme
-				}
-
-				applyTheme()
-
-				if (!window.__portfolioThemeSyncInitialized) {
-					document.addEventListener("astro:after-swap", applyTheme)
-					window.__portfolioThemeSyncInitialized = true
-				}
-			})()
-		</script>
+		<script is:inline set:html={themeInitScript} />
+		<ClientRouter fallback="animate" />
 		<SEO
 			canonical={canonical}
 			description={description}
@@ -82,7 +64,6 @@ const alternateLinks = [
 					<link rel="alternate" hreflang={hreflang} href={new URL(href, Astro.site)} />
 				))
 		}
-		<ClientRouter />
 	</head>
 
 	<body class="bg-dark-50 dark:bg-dark-950 relative text-black dark:text-white">
@@ -112,6 +93,22 @@ const alternateLinks = [
 				flex-direction: column;
 				min-height: 100vh;
 				overscroll-behavior: none;
+			}
+
+			@media (prefers-reduced-motion: no-preference) {
+				html[data-theme-transition="running"]::view-transition-group(root) {
+					animation-duration: 450ms;
+				}
+
+				html[data-theme-transition="running"]::view-transition-old(root) {
+					animation: none;
+					mix-blend-mode: normal;
+				}
+
+				html[data-theme-transition="running"]::view-transition-new(root) {
+					animation: none;
+					mix-blend-mode: normal;
+				}
 			}
 
 			@media (prefers-reduced-motion: reduce) {

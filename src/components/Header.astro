@@ -1,8 +1,10 @@
 ---
-import LenguageSelector from "@/components/ui/LenguageSelector.astro"
+import { publicProfile } from "@/data/publicProfile"
+import LanguageSelector from "@/components/ui/LanguageSelector.astro"
 import ThemeToggle from "@/components/ui/ThemeToggle.astro"
 import { getI18N } from "@/i18n"
 import HamburgerButton from "@/icons/HamburgerButton.astro"
+import headerScriptUrl from "@/scripts/header.js?url"
 
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
@@ -32,8 +34,8 @@ const pages = ["about", "experience", "projects", "technologies"].map((key) => (
 				<a href={currentLocale === "en" ? "/en/" : "/"} class="inline-flex items-center">
 					<img
 						src="/logo.webp"
-						title="dvelandia logo"
-						alt="dvelandia logo"
+						title={`${publicProfile.fullName} logo`}
+						alt={`${publicProfile.fullName} logo`}
 						class="accent-drop-shadow max-w-24 drop-shadow-lg"
 						width={495}
 						height={339}
@@ -41,7 +43,10 @@ const pages = ["about", "experience", "projects", "technologies"].map((key) => (
 						decoding="async"
 					/>
 				</a>
-				<span id="mobile-menu-title" class="text-primary-600 text-xl font-semibold uppercase">
+				<span
+					id="mobile-menu-title"
+					class="text-primary-600 dark:text-primary-400 text-xl font-semibold uppercase"
+				>
 					{spanMenu}
 				</span>
 			</div>
@@ -55,7 +60,7 @@ const pages = ["about", "experience", "projects", "technologies"].map((key) => (
 							<li class="w-full">
 								<a
 									href={link.url}
-									class="menu-item hover:text-primary-600 hover:dark:text-primary-400 block rounded px-3 py-2 text-xl transition"
+									class="menu-item text-dark-800 dark:text-dark-100 hover:text-primary-600 hover:dark:text-primary-400 block rounded px-3 py-2 text-xl transition"
 									data-nav-target={link.id}
 								>
 									{link.label}
@@ -67,7 +72,7 @@ const pages = ["about", "experience", "projects", "technologies"].map((key) => (
 				</ul>
 				<span class="text-dark-900 dark:text-dark-200 text-center text-xl">
 					©️ {currentYear}
-					{i18n.copyright}
+					{publicProfile.fullName}. {i18n.rightsReserved}
 				</span>
 			</div>
 		</nav>
@@ -80,7 +85,7 @@ const pages = ["about", "experience", "projects", "technologies"].map((key) => (
 					pages.map((link) => (
 						<li>
 							<a
-								class="nav-link text-dark-900 dark:text-dark-200 relative z-10 overflow-hidden p-2 transition-all duration-300"
+								class="nav-link text-dark-800 dark:text-dark-200 hover:text-primary-700 dark:hover:text-primary-400 relative z-10 overflow-hidden p-2 transition-all duration-300"
 								href={link.url}
 								data-nav-target={link.id}
 							>
@@ -91,7 +96,7 @@ const pages = ["about", "experience", "projects", "technologies"].map((key) => (
 				}
 			</ul>
 		</nav>
-		<LenguageSelector />
+		<LanguageSelector />
 		<ThemeToggle />
 		<HamburgerButton />
 	</div>
@@ -170,148 +175,5 @@ const pages = ["about", "experience", "projects", "technologies"].map((key) => (
 		}
 	</style>
 
-	<script>
-		document.addEventListener("astro:page-load", () => {
-			const menuToggle = document.getElementById("menu-toggle")
-			const mobileMenu = document.getElementById("mobile-menu")
-			const menuItems = Array.from(document.querySelectorAll<HTMLElement>(".menu-item"))
-			const navItems = Array.from(document.querySelectorAll<HTMLElement>("[data-nav-target]"))
-			const sections = Array.from(document.querySelectorAll<HTMLElement>("main > section"))
-
-			if (!(menuToggle instanceof HTMLButtonElement) || !(mobileMenu instanceof HTMLElement)) {
-				return
-			}
-
-			if (menuToggle.dataset.initialized === "true") {
-				return
-			}
-
-			menuToggle.dataset.initialized = "true"
-			const focusableSelector =
-				'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])'
-			let hideMenuTimeout = 0
-
-			const getFocusableMenuElements = () =>
-				Array.from(mobileMenu.querySelectorAll<HTMLElement>(focusableSelector)).filter(
-					(element) => !element.hasAttribute("disabled") && !element.getAttribute("aria-hidden")
-				)
-
-			const focusPrimaryMenuElement = () => {
-				const firstMenuItem = menuItems[0]
-				const firstFocusable = getFocusableMenuElements()[0]
-				;(firstMenuItem || firstFocusable)?.focus()
-			}
-
-			const setMenuState = (isOpen: boolean) => {
-				window.clearTimeout(hideMenuTimeout)
-				document.body.classList.toggle("overflow-hidden", isOpen)
-				menuToggle.classList.toggle("open", isOpen)
-				menuToggle.setAttribute("aria-expanded", String(isOpen))
-				menuToggle.setAttribute(
-					"aria-label",
-					isOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"
-				)
-
-				if (isOpen) {
-					mobileMenu.setAttribute("aria-hidden", "false")
-					mobileMenu.classList.remove("hidden", "menu-close")
-					mobileMenu.classList.add("menu-open")
-					window.requestAnimationFrame(focusPrimaryMenuElement)
-					return
-				}
-
-				mobileMenu.setAttribute("aria-hidden", "true")
-				mobileMenu.classList.remove("menu-open")
-				mobileMenu.classList.add("menu-close")
-				hideMenuTimeout = window.setTimeout(() => {
-					mobileMenu.classList.add("hidden")
-				}, 200)
-			}
-
-			const closeMenu = (restoreFocus = false) => {
-				setMenuState(false)
-				if (restoreFocus) {
-					menuToggle.focus()
-				}
-			}
-
-			menuToggle.addEventListener("click", () => {
-				const isOpen = menuToggle.classList.contains("open")
-				setMenuState(!isOpen)
-			})
-
-			mobileMenu.addEventListener("keydown", (event) => {
-				if (event.key === "Escape") {
-					event.preventDefault()
-					closeMenu(true)
-					return
-				}
-
-				if (event.key !== "Tab" || menuToggle.getAttribute("aria-expanded") !== "true") {
-					return
-				}
-
-				const focusableElements = getFocusableMenuElements()
-				if (focusableElements.length === 0) {
-					event.preventDefault()
-					return
-				}
-
-				const firstElement = focusableElements[0]
-				const lastElement = focusableElements.at(-1)
-				const activeElement = document.activeElement
-
-				if (event.shiftKey && activeElement === firstElement) {
-					event.preventDefault()
-					lastElement?.focus()
-					return
-				}
-
-				if (!event.shiftKey && activeElement === lastElement) {
-					event.preventDefault()
-					firstElement.focus()
-				}
-			})
-
-			menuItems.forEach((item) => {
-				item.addEventListener("click", () => closeMenu())
-			})
-
-			if (!window.matchMedia("(min-width: 1024px)").matches || sections.length === 0) {
-				return
-			}
-
-			const setCurrentSection = (currentSectionId: string) => {
-				navItems.forEach((item) => {
-					const isCurrent = item.dataset.navTarget === currentSectionId
-					item.classList.toggle("text-primary-600", isCurrent)
-					item.classList.toggle("dark:text-primary-400", isCurrent)
-					if (isCurrent) {
-						item.setAttribute("aria-current", "location")
-						return
-					}
-
-					item.removeAttribute("aria-current")
-				})
-			}
-
-			const observer = new IntersectionObserver(
-				(entries) => {
-					const activeSection = entries.find((entry) => entry.isIntersecting)
-					if (!activeSection) {
-						return
-					}
-
-					setCurrentSection(activeSection.target.id)
-				},
-				{
-					threshold: 0.6,
-				}
-			)
-
-			sections.forEach((section) => {
-				observer.observe(section)
-			})
-		})
-	</script>
+	<script is:inline src={headerScriptUrl}></script>
 </header>

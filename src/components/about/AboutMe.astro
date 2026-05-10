@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets"
 import imageProfile from "@/assets/me.webp"
+import { publicProfile } from "@/data/publicProfile"
 import { getI18N } from "@/i18n/"
 import ArrowDown from "@/icons/ArrowDown.astro"
 import Download from "@/icons/Download.astro"
@@ -17,42 +18,52 @@ const { years, title, specialization } = experience
 
 const socialLinks = [
 	{
-		href: "https://www.linkedin.com/in/dvelandia",
+		href: publicProfile.social.linkedin,
 		icon: LinkedIn,
 		label: "LinkedIn",
-		rel: "noreferrer",
+		rel: "noopener noreferrer",
 		target: "_blank",
+		variant: "primary",
 	},
 	{
-		href: "https://github.com/dvelandia",
+		href: publicProfile.social.github,
 		icon: GitHub,
 		label: "GitHub",
-		rel: "noreferrer",
+		rel: "noopener noreferrer",
 		target: "_blank",
+		variant: "secondary",
 	},
 	{
-		href: "mailto:dfvf03@gmail.com",
+		href: `mailto:${publicProfile.contact.email}`,
 		icon: Email,
-		label: "dfvf03@gmail.com",
+		label: publicProfile.contact.email,
 		target: "_self",
+		variant: "secondary",
 	},
 	{
-		href: "/CVelandia.pdf",
+		href: publicProfile.contact.resumePath,
 		icon: Download,
 		label: "Curriculum",
 		target: "_self",
+		variant: "secondary",
 	},
 ]
 ---
 
-<div class="text-left md:gap-x-4 lg:flex lg:flex-row-reverse lg:items-center lg:justify-center">
-	<div class="Hero-image mb-6 flex w-16 justify-center lg:w-1/5">
+<div
+	class="flex flex-col gap-y-8 text-left md:gap-x-4 lg:flex-row-reverse lg:items-center lg:justify-center lg:gap-y-0"
+>
+	<div
+		class="Hero-image flex w-24 justify-center self-start sm:w-28 lg:mb-0 lg:w-1/5 lg:self-center"
+	>
 		<Image
 			src={imageProfile}
 			alt={descriptionImage}
 			title={descriptionImage}
 			width={1500}
 			height={1500}
+			layout="constrained"
+			sizes="(min-width: 1024px) 148px, (min-width: 640px) 112px, 96px"
 			loading="eager"
 			class="hover:shadow-primary-700/20 dark:shadow-dark-800 w-full rounded-full object-contain shadow-lg transition-shadow duration-300 hover:shadow-xl hover:dark:shadow-white/2"
 		/>
@@ -66,11 +77,11 @@ const socialLinks = [
 			</span>
 		</h1>
 		<span
-			class="animated-text inline-flex bg-[linear-gradient(110deg,#64748b,45%,#0f172a,55%,#64748b)] bg-[length:250%_100%] bg-clip-text text-xl font-semibold text-transparent dark:bg-[linear-gradient(110deg,#b6eaff,45%,#065074,55%,#b6eaff)]"
+			class="animated-text inline-flex bg-[linear-gradient(110deg,#5f7286,45%,#0f2233,55%,#5f7286)] bg-[length:250%_100%] bg-clip-text text-xl font-semibold text-transparent dark:bg-[linear-gradient(110deg,#d8f1f6,45%,#4aa3d1,55%,#d8f1f6)]"
 		>
 			{role}
 		</span>
-		<h2 class="mt-6 text-pretty text-gray-600 md:mt-10 lg:text-2xl dark:text-gray-300">
+		<h2 class="text-dark-700 dark:text-dark-300 mt-6 text-pretty md:mt-10 lg:text-2xl">
 			{years}
 			<span class="text-crusta-800 dark:text-crusta-300">
 				{title}
@@ -83,18 +94,33 @@ const socialLinks = [
 </div>
 <ul class="mt-10 flex flex-wrap justify-start gap-4">
 	{
-		socialLinks.map(({ href, icon: Icon, label, rel, target }) => (
+		socialLinks.map(({ href, icon: Icon, label, rel, target, variant }) => (
 			<li>
-				<a
-					href={href}
-					class="border-dark-300 dark:border-dark-700 flex items-center justify-center gap-x-2 rounded-full border bg-gradient-to-r from-slate-50 to-slate-100 px-2 py-1 text-xs text-gray-600 transition-transform hover:scale-105 md:px-4 md:py-2 md:text-base dark:from-slate-800 dark:to-slate-950 dark:text-gray-300"
-					target={target}
-					rel={rel}
-					download={href.endsWith(".pdf") ? "" : null}
-				>
-					<Icon class="size-4 md:size-6" />
-					{label}
-				</a>
+				{variant === "primary" ? (
+					<a
+						href={href}
+						class="linkedin-cta inline-flex overflow-hidden rounded-full p-px text-xs transition-transform hover:scale-105 md:text-base"
+						target={target}
+						rel={rel}
+						download={href.endsWith(".pdf") ? "" : null}
+					>
+						<span class="linkedin-cta__content text-dark-700 dark:text-dark-200 flex items-center justify-center gap-x-2 rounded-full bg-gradient-to-r from-slate-50 to-slate-100 px-2 py-1 md:px-4 md:py-2 dark:from-slate-800 dark:to-slate-950">
+							<Icon class="size-4 md:size-6" />
+							{label}
+						</span>
+					</a>
+				) : (
+					<a
+						href={href}
+						class="border-dark-300 dark:border-dark-700 text-dark-700 dark:text-dark-200 flex items-center justify-center gap-x-2 rounded-full border bg-gradient-to-r from-slate-50 to-slate-100 px-2 py-1 text-xs transition-transform hover:scale-105 md:px-4 md:py-2 md:text-base dark:from-slate-800 dark:to-slate-950"
+						target={target}
+						rel={rel}
+						download={href.endsWith(".pdf") ? "" : null}
+					>
+						<Icon class="size-4 md:size-6" />
+						{label}
+					</a>
+				)}
 			</li>
 		))
 	}
@@ -121,5 +147,41 @@ const socialLinks = [
 
 	.animated-text {
 		animation: background-shine 2s linear infinite;
+	}
+
+	@keyframes linkedin-border-spin {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	.linkedin-cta {
+		isolation: isolate;
+		position: relative;
+	}
+
+	.linkedin-cta::before {
+		content: "";
+		position: absolute;
+		inset: -160%;
+		background: conic-gradient(
+			from 90deg at 50% 50%,
+			rgba(74, 163, 209, 0) 0deg,
+			rgba(74, 163, 209, 0) 318deg,
+			rgba(74, 163, 209, 0.95) 332deg,
+			rgba(74, 163, 209, 0.35) 344deg,
+			rgba(74, 163, 209, 0) 360deg
+		);
+		animation: linkedin-border-spin 2.6s linear infinite;
+		pointer-events: none;
+	}
+
+	.linkedin-cta__content {
+		position: relative;
+		z-index: 1;
+		box-shadow: inset 0 0 0 1px rgb(74 163 209 / 0.12);
 	}
 </style>

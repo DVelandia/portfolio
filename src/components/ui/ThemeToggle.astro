@@ -3,6 +3,7 @@ import { getI18N } from "@/i18n"
 import MoonIcon from "@/icons/Moon.astro"
 import SunIcon from "@/icons/Sun.astro"
 import SystemIcon from "@/icons/System.astro"
+import themeToggleScriptUrl from "@/scripts/theme-toggle.js?url"
 
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
@@ -33,7 +34,7 @@ const spanTheme = i18n.theme.spanTheme
 	</button>
 	<div
 		id="themes-menu"
-		class="absolute top-10 right-0 min-w-[8rem] rounded-md border border-gray-100 bg-white/90 p-1 text-sm shadow-[0_3px_10px_rgb(0,0,0,0.2)] backdrop-blur-md dark:border-gray-500/20 dark:bg-gray-900/90"
+		class="text-dark-700 dark:text-dark-100 absolute top-10 right-0 min-w-[8rem] rounded-md border border-gray-100 bg-white/90 p-1 text-sm shadow-[0_3px_10px_rgb(0,0,0,0.2)] backdrop-blur-md dark:border-gray-500/20 dark:bg-gray-900/90"
 		hidden
 	>
 		<fieldset class="flex flex-col gap-1">
@@ -57,179 +58,4 @@ const spanTheme = i18n.theme.spanTheme
 	</div>
 </div>
 
-<script>
-	/**
-	 * Theme controls are rendered on every page, while this script can survive client-side
-	 * navigations. Register global listeners only once and rebind DOM listeners per page.
-	 */
-	type Theme = "light" | "dark" | "system"
-	type ThemeToggleWindow = Window & {
-		__portfolioThemeListenersInitialized?: boolean
-	}
-
-	const THEME_STORAGE_KEY = "theme"
-	const themeMatchMedia = window.matchMedia("(prefers-color-scheme: dark)")
-	const availableThemes = new Set<Theme>(["light", "dark", "system"])
-
-	function getStoredTheme(): Theme {
-		const storedTheme = localStorage.getItem(THEME_STORAGE_KEY)
-		if (storedTheme && availableThemes.has(storedTheme as Theme)) {
-			return storedTheme as Theme
-		}
-
-		return "system"
-	}
-
-	function getThemeElements() {
-		return {
-			menu: document.getElementById("themes-menu"),
-			options: Array.from(document.querySelectorAll<HTMLInputElement>(".theme-toggle-option")),
-			toggle: document.getElementById("theme-toggle-btn"),
-		}
-	}
-
-	function openThemeMenu() {
-		const { menu, toggle } = getThemeElements()
-		if (!(menu instanceof HTMLElement) || !(toggle instanceof HTMLButtonElement)) {
-			return
-		}
-
-		menu.hidden = false
-		toggle.setAttribute("aria-expanded", "true")
-		const selectedOption = getThemeElements().options.find((option) => option.checked)
-		window.requestAnimationFrame(() => {
-			selectedOption?.focus()
-		})
-	}
-
-	function closeThemeMenu({ restoreFocus = false } = {}) {
-		const { menu, toggle } = getThemeElements()
-		if (menu instanceof HTMLElement) {
-			menu.hidden = true
-		}
-		if (toggle instanceof HTMLButtonElement) {
-			toggle.setAttribute("aria-expanded", "false")
-			if (restoreFocus) {
-				toggle.focus()
-			}
-		}
-	}
-
-	function applyTheme(theme = getStoredTheme()) {
-		const isDark = theme === "dark" || (theme === "system" && themeMatchMedia.matches)
-		document.documentElement.classList.toggle("dark", isDark)
-		document.documentElement.dataset.theme = theme
-
-		document.querySelectorAll<HTMLElement>(".theme-toggle-icon").forEach((icon) => {
-			const isActiveIcon = icon.id === theme
-			icon.classList.toggle("scale-100", isActiveIcon)
-			icon.classList.toggle("opacity-100", isActiveIcon)
-			icon.classList.toggle("scale-0", !isActiveIcon)
-			icon.classList.toggle("opacity-0", !isActiveIcon)
-			icon.setAttribute("aria-hidden", String(!isActiveIcon))
-		})
-
-		getThemeElements().options.forEach((option) => {
-			option.checked = option.value === theme
-		})
-	}
-
-	function setupThemeToggle() {
-		const { menu, options, toggle } = getThemeElements()
-		if (!(toggle instanceof HTMLButtonElement) || !(menu instanceof HTMLElement)) {
-			return
-		}
-
-		if (toggle.dataset.initialized === "true") {
-			applyTheme()
-			return
-		}
-
-		toggle.dataset.initialized = "true"
-		toggle.addEventListener("click", (event) => {
-			event.stopPropagation()
-			const isExpanded = toggle.getAttribute("aria-expanded") === "true"
-			if (isExpanded) {
-				closeThemeMenu()
-				return
-			}
-
-			openThemeMenu()
-		})
-
-		toggle.addEventListener("keydown", (event) => {
-			if (event.key === "ArrowDown" || event.key === "ArrowUp") {
-				event.preventDefault()
-				openThemeMenu()
-			}
-		})
-
-		options.forEach((option) => {
-			option.addEventListener("change", () => {
-				if (!availableThemes.has(option.value as Theme)) {
-					return
-				}
-
-				localStorage.setItem(THEME_STORAGE_KEY, option.value)
-				applyTheme(option.value as Theme)
-				closeThemeMenu({ restoreFocus: true })
-			})
-
-			option.addEventListener("keydown", (event) => {
-				if (event.key === "Escape") {
-					event.preventDefault()
-					closeThemeMenu({ restoreFocus: true })
-				}
-			})
-		})
-
-		menu.hidden = true
-		applyTheme()
-	}
-
-	const themeWindow = window as ThemeToggleWindow
-
-	if (!themeWindow.__portfolioThemeListenersInitialized) {
-		document.addEventListener("click", (event) => {
-			const { menu, toggle } = getThemeElements()
-			if (!menu || !toggle) {
-				return
-			}
-
-			const target = event.target
-			if (!(target instanceof Node)) {
-				return
-			}
-
-			if (menu.contains(target) || toggle.contains(target)) {
-				return
-			}
-
-			closeThemeMenu()
-		})
-
-		document.addEventListener("keydown", (event) => {
-			if (event.key === "Escape") {
-				const { menu } = getThemeElements()
-				closeThemeMenu({
-					restoreFocus: Boolean(menu?.contains(document.activeElement)),
-				})
-			}
-		})
-
-		themeMatchMedia.addEventListener("change", () => {
-			applyTheme()
-		})
-
-		window.addEventListener("storage", (event) => {
-			if (!event.key || event.key === THEME_STORAGE_KEY) {
-				applyTheme()
-			}
-		})
-
-		themeWindow.__portfolioThemeListenersInitialized = true
-	}
-
-	document.addEventListener("astro:page-load", setupThemeToggle)
-	applyTheme()
-</script>
+<script is:inline src={themeToggleScriptUrl}></script>
