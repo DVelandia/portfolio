@@ -5,10 +5,17 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
+    "clean:dev-cache": "node scripts/clean-dev-cache.mjs",
+    "dev:clean": "pnpm clean:dev-cache && astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "csp:update": "node scripts/csp-hashes.mjs",
+    "csp:check": "node scripts/csp-hashes.mjs --check",
+    "test": "pnpm build && pnpm csp:check && pnpm test:smoke",
+    "test:e2e": "playwright test",
+    "test:smoke": "node --test tests/smoke/navigation.test.mjs",
     "check": "astro check && tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -18,23 +25,24 @@
   "dependencies": {
     "@astrojs/sitemap": "3.7.2",
     "@fontsource-variable/onest": "^5.2.11",
-    "astro": "^6.1.2",
+    "astro": "^6.3.1",
     "sharp": "^0.34.5"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "8.0.0",
-    "@astrojs/check": "0.9.8",
-    "@tailwindcss/vite": "4.2.2",
-    "@typescript-eslint/parser": "8.58.0",
+    "@antfu/eslint-config": "8.2.0",
+    "@astrojs/check": "0.9.9",
+    "@playwright/test": "^1.59.1",
+    "@tailwindcss/vite": "4.3.0",
+    "@typescript-eslint/parser": "8.59.2",
     "astro-eslint-parser": "^1.4.0",
-    "eslint": "10.1.0",
+    "eslint": "10.3.0",
     "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-astro": "1.6.0",
-    "prettier": "3.8.1",
+    "eslint-plugin-astro": "1.7.0",
+    "prettier": "3.8.3",
     "prettier-plugin-astro": "0.14.1",
-    "prettier-plugin-tailwindcss": "0.7.2",
-    "tailwindcss": "4.2.2",
-    "typescript": "5.9.3"
+    "prettier-plugin-tailwindcss": "0.8.0",
+    "tailwindcss": "4.3.0",
+    "typescript": "6.0.3"
   },
   "engines": {
     "node": ">=22.12.0"
