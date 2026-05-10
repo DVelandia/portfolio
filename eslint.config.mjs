@@ -4,7 +4,19 @@ import eslintConfigPrettier from "eslint-config-prettier/flat"
 export default antfu(
 	{
 		astro: true,
-		ignores: ["dist", ".astro", ".vercel", "public", "src/data/**/*.json"],
+		ignores: [
+			"dist",
+			".agents",
+			".astro",
+			".vercel",
+			"playwright-report",
+			"public/**/*.ico",
+			"public/**/*.pdf",
+			"public/**/*.png",
+			"public/**/*.webp",
+			"src/data/**/*.json",
+			"test-results",
+		],
 		jsonc: false,
 		lessOpinionated: true,
 		stylistic: false,

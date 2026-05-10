@@ -4,6 +4,9 @@ dist/
 # generated types and temp files
 .astro/
 .codex-temp/
+.playwright-mcp/
+playwright-report/
+test-results/
 
 # dependencies
 node_modules/

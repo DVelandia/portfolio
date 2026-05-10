@@ -1,5 +1,9 @@
 .astro
+.agents
 .codex-temp
+.playwright-mcp
+playwright-report
+test-results
 dist
 node_modules
 pnpm-lock.yaml
