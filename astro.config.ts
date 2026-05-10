@@ -1,13 +1,17 @@
 import sitemap from "@astrojs/sitemap"
 import tailwindcss from "@tailwindcss/vite"
 import { defineConfig } from "astro/config"
-import { seoConfig } from "./src/utils/seoConfig"
+import { publicProfile } from "./src/data/publicProfile"
 
 // https://astro.build/config
 export default defineConfig({
 	integrations: [sitemap()],
 	output: "static",
-	site: seoConfig.baseURL,
+	site: publicProfile.siteUrl,
+	image: {
+		layout: "constrained",
+		responsiveStyles: true,
+	},
 	vite: {
 		plugins: [tailwindcss()],
 	},

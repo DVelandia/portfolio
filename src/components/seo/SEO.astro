@@ -1,4 +1,5 @@
 ---
+import { publicProfile } from "@/data/publicProfile"
 import { getI18N } from "@/i18n"
 import RichResults from "@/components/seo/RichResults.astro"
 import type { Preload } from "@/types/Preload"
@@ -19,14 +20,18 @@ const {
 	description,
 	preload,
 	canonical,
-	image = "https://daniel.velandia.dev/og.png",
+	image = publicProfile.defaultImageUrl,
 	robots = "index, follow",
 	googlebot = robots,
 	includeRichResults = true,
 } = Astro.props as Props
 
-const { currentLocale } = Astro
+const currentLocale = Astro.currentLocale === "en" ? "en" : "es"
 const t = getI18N({ currentLocale })
+const alternateOgLocales = {
+	en: "es_CO",
+	es: "en_US",
+} as const
 
 const siteURL = Astro.site ?? Astro.url
 const canonicalURL = new URL(canonical ?? Astro.url.pathname, siteURL)
@@ -45,7 +50,6 @@ const imageURL = new URL(image, siteURL)
 }
 
 <link rel="canonical" href={canonicalURL} />
-<link rel="manifest" href="/img/icons/manifest.json" />
 <meta name="generator" content={Astro.generator} />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#2CC9FF" />
@@ -53,8 +57,8 @@ const imageURL = new URL(image, siteURL)
 <meta name="keywords" content={t.seo.keywords} />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:site" content="@dvelandia" />
-<meta name="twitter:creator" content="@dvelandia" />
+<meta name="twitter:site" content={publicProfile.twitterHandle} />
+<meta name="twitter:creator" content={publicProfile.twitterHandle} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={imageURL} />
@@ -66,12 +70,12 @@ const imageURL = new URL(image, siteURL)
 <meta property="og:site_name" content={t.seo.og_site_name} />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content={t.seo.og_locale} />
+<meta property="og:locale:alternate" content={alternateOgLocales[currentLocale]} />
 
 <meta name="robots" content={robots} />
 <meta name="googlebot" content={googlebot} />
 
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png" />
-<meta name="msapplication-config" content="/browserconfig.xml" />
 
 {includeRichResults && <RichResults />}
