@@ -5,10 +5,13 @@ import Link from "@/icons/Link.astro"
 
 interface Props {
 	title: string
+	visibility: "public" | "private"
+	role?: string
 	description: string
-	link: string
+	impact: string
+	link?: string
 	descriptionImage: string
-	image: ImageMetadata
+	image?: ImageMetadata
 	tags: { icon: string }[]
 }
 
@@ -17,52 +20,143 @@ interface TagClasses {
 }
 
 const tagClasses: TagClasses = {
-	Drupal: "bg-[#004B7F]",
-	WordPress: "bg-[#154961]",
-	PHP: "bg-[#2D3A6D]",
-	Sass: "bg-[#8C3A66]",
-	Bootstrap: "bg-[#3E2B66]",
-	Tailwind: "bg-[#003159]",
-	JQuery: "bg-[#054477]",
-	JavaScript: "bg-[#564D06]",
+	Angular: "bg-[#6D143F]",
+	Drupal: "bg-[#003A61]",
+	WordPress: "bg-[#123B4D]",
+	PHP: "bg-[#29325C]",
+	Sass: "bg-[#6F2B53]",
+	Bootstrap: "bg-[#2F1F59]",
+	Tailwind: "bg-[#0B3B55]",
+	Express: "bg-[#374151]",
+	Figma: "bg-[#5B2499]",
+	GCP: "bg-[#174EA6]",
+	JQuery: "bg-[#08365C]",
+	JavaScript: "bg-[#4B4300]",
 }
 
-const { title, description, link, descriptionImage, image, tags } = Astro.props
+const roleBadgeClasses: TagClasses = {
+	FullStack:
+		"border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:border-emerald-400/40 dark:bg-emerald-400/10 dark:text-emerald-300",
+	FrontEnd:
+		"border-sky-500/40 bg-sky-500/10 text-sky-700 dark:border-sky-400/40 dark:bg-sky-400/10 dark:text-sky-300",
+}
+
+const { title, visibility, role, description, impact, link, descriptionImage, image, tags } =
+	Astro.props
+const isPublicProject = visibility === "public" && Boolean(link)
 ---
 
-<a href={link} target="_blank" rel="noreferrer" class="group block">
-	<article
-		class="flex flex-col space-y-8 space-x-0 rounded-xl transition duration-300 ease-in-out hover:bg-gray-200/30 lg:flex-row lg:space-y-0 lg:space-x-8 dark:hover:bg-gray-800/50"
-	>
-		<div class="w-full lg:w-1/2">
-			<div
-				class="relative col-span-6 row-span-5 flex transform flex-col items-center gap-8 overflow-clip rounded-xl shadow-xl transition duration-500 ease-in-out sm:rounded-xl lg:group-hover:-translate-y-1 lg:group-hover:shadow-2xl"
-			>
-				<Image
-					src={image}
-					alt={descriptionImage}
-					title={descriptionImage}
-					class="h-56 w-full object-cover object-top transition duration-500 sm:h-full lg:scale-110 lg:group-hover:scale-105"
-					loading="lazy"
-					width={1920}
-					height={1080}
-				/>
-			</div>
-		</div>
+{
+	isPublicProject ? (
+		<a href={link} target="_blank" rel="noreferrer" class="group block">
+			<article class="flex flex-col space-y-8 space-x-0 rounded-xl lg:flex-row lg:space-y-0 lg:space-x-8">
+				<div class="w-full lg:w-1/2">
+					<div class="relative col-span-6 row-span-5 flex transform flex-col items-center gap-8 overflow-clip rounded-xl shadow-xl transition duration-500 ease-in-out sm:rounded-xl lg:group-hover:-translate-y-1 lg:group-hover:shadow-2xl">
+						{image ? (
+							<Image
+								src={image}
+								alt={descriptionImage}
+								title={descriptionImage}
+								layout="constrained"
+								sizes="(min-width: 1024px) 50vw, 100vw"
+								widths={[640, 960, 1280]}
+								class="h-56 w-full object-cover object-top transition duration-500 sm:h-full lg:scale-110 lg:group-hover:scale-105"
+								loading="lazy"
+								width={1920}
+								height={1080}
+							/>
+						) : (
+							<div class="from-primary-950 via-primary-900 to-dark-950 flex h-56 w-full items-end bg-gradient-to-br p-6 sm:h-full">
+								<strong class="text-3xl font-semibold text-white">{title}</strong>
+							</div>
+						)}
+					</div>
+				</div>
 
-		<div class="flex w-full flex-col justify-center lg:w-1/2 lg:max-w-lg">
-			<h3
-				class="group-hover:text-primary-700 dark:group-hover:text-primary-400 flex items-center text-2xl font-bold text-gray-800 transition-colors duration-300 dark:text-gray-100"
-			>
-				{title}
-				<Link
-					class="ml-1 inline-block h-4 w-4 shrink-0 translate-y-px transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:scale-125 motion-reduce:transition-none"
-				/>
-			</h3>
-			<div class="mt-2 flex flex-wrap">
-				<ul class="mb-2 flex flex-row gap-x-2">
-					{
-						tags.map((tag) => (
+				<div class="flex w-full flex-col justify-center lg:w-1/2 lg:max-w-lg">
+					<div class="flex items-start justify-between gap-4">
+						<h3 class="group-hover:text-primary-700 dark:group-hover:text-primary-400 text-dark-900 dark:text-primary-50 flex items-center gap-2 text-2xl font-bold transition-colors duration-300">
+							<span>{title}</span>
+							<Link class="inline-block h-4 w-4 shrink-0 translate-y-px transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:scale-125 motion-reduce:transition-none" />
+						</h3>
+						{role ? (
+							<span
+								class:list={[
+									"mt-1 rounded-full border px-2 py-0.5 text-[10px] font-medium tracking-[0.18em] uppercase",
+									roleBadgeClasses[role] ||
+										"border-slate-700/60 text-slate-500 dark:text-slate-300",
+								]}
+							>
+								{role}
+							</span>
+						) : null}
+					</div>
+					<div class="mt-2 flex flex-wrap">
+						<ul class="mb-2 flex flex-row flex-wrap gap-2">
+							{tags.map((tag) => (
+								<li>
+									<span
+										class:list={[
+											"flex items-center gap-x-2 rounded-full px-2 py-1 text-xs text-white",
+											tagClasses[tag.icon] || "bg-gray-600",
+										]}
+									>
+										<Icon name={tag.icon} class="h-4 w-4 fill-current" />
+										{tag.icon}
+									</span>
+								</li>
+							))}
+						</ul>
+
+						<p class="text-dark-700 dark:text-dark-300 mt-3 text-sm leading-6">
+							{description} {impact}
+						</p>
+					</div>
+				</div>
+			</article>
+		</a>
+	) : (
+		<article class="group flex flex-col space-y-8 space-x-0 rounded-xl transition duration-300 ease-in-out lg:flex-row lg:space-y-0 lg:space-x-8">
+			<div class="w-full lg:w-1/2">
+				<div class="relative col-span-6 row-span-5 flex transform overflow-clip rounded-xl shadow-xl transition duration-500 ease-in-out sm:rounded-xl lg:group-hover:-translate-y-1 lg:group-hover:shadow-2xl">
+					{image ? (
+						<Image
+							src={image}
+							alt={descriptionImage}
+							title={descriptionImage}
+							layout="constrained"
+							sizes="(min-width: 1024px) 50vw, 100vw"
+							widths={[640, 960, 1280]}
+							class="h-56 w-full object-cover object-top transition duration-500 sm:h-full lg:scale-110 lg:group-hover:scale-105"
+							loading="lazy"
+							width={1920}
+							height={1080}
+						/>
+					) : (
+						<div class="from-primary-950 via-primary-900 to-dark-950 flex h-56 w-full items-end bg-gradient-to-br p-6 sm:h-full">
+							<strong class="text-3xl font-semibold text-white">{title}</strong>
+						</div>
+					)}
+				</div>
+			</div>
+
+			<div class="flex w-full flex-col justify-center lg:w-1/2 lg:max-w-lg">
+				<div class="flex items-start justify-between gap-4">
+					<h3 class="text-dark-900 dark:text-primary-50 text-2xl font-bold">{title}</h3>
+					{role ? (
+						<span
+							class:list={[
+								"mt-1 rounded-full border px-2 py-0.5 text-[10px] font-medium tracking-[0.18em] uppercase",
+								roleBadgeClasses[role] || "border-slate-700/60 text-slate-500 dark:text-slate-300",
+							]}
+						>
+							{role}
+						</span>
+					) : null}
+				</div>
+				<div class="mt-2 flex flex-wrap">
+					<ul class="mb-2 flex flex-row flex-wrap gap-2">
+						{tags.map((tag) => (
 							<li>
 								<span
 									class:list={[
@@ -74,12 +168,14 @@ const { title, description, link, descriptionImage, image, tags } = Astro.props
 									{tag.icon}
 								</span>
 							</li>
-						))
-					}
-				</ul>
+						))}
+					</ul>
 
-				<div class="mt-2 text-gray-600 dark:text-gray-300">{description}</div>
+					<p class="text-dark-700 dark:text-dark-300 mt-3 text-sm leading-6">
+						{description} {impact}
+					</p>
+				</div>
 			</div>
-		</div>
-	</article>
-</a>
+		</article>
+	)
+}

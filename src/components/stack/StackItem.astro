@@ -2,13 +2,31 @@
 import Icon from "@/components/ui/Icon.astro"
 
 const { icon, title } = Astro.props
+const iconModules = import.meta.glob("../../icons/*.astro", {
+	eager: true,
+}) as Record<string, { default: any }>
+const iconPath = `../../icons/${icon}.astro`
+const hasIcon = Boolean(iconModules[iconPath]?.default)
+const fallbackLabel =
+	title
+		.replace(/[^a-z0-9]/gi, "")
+		.slice(0, 2)
+		.toUpperCase() || "?"
 ---
 
 <li
 	class="flex flex-col items-center justify-center rounded-2xl transition duration-300 ease-in-out hover:scale-105 hover:bg-gray-200/60 dark:hover:bg-gray-800/70"
 >
-	<div class="mb-2 size-12">
-		<Icon name={icon} class="h-full w-full" />
-	</div>
+	{
+		hasIcon ? (
+			<div class="mb-2 size-12">
+				<Icon name={icon} class="h-full w-full text-slate-900 dark:text-white" />
+			</div>
+		) : (
+			<div class="mb-2 flex size-12 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-200 to-slate-300 text-sm font-semibold text-slate-700 dark:from-slate-700 dark:to-slate-800 dark:text-slate-200">
+				{fallbackLabel}
+			</div>
+		)
+	}
 	<span class="text-dark-900 w-full text-center text-sm dark:text-white">{title}</span>
 </li>

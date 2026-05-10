@@ -1,13 +1,59 @@
 import { defineCollection } from "astro:content"
 import { z } from "astro/zod"
-import experiencesSource from "./data/experience.json"
-import projectsSource from "./data/projects.json"
-import stackSource from "./data/stack.json"
+import experiencesSource from "./content/experience.json"
+import projectsSource from "./content/projects.json"
+import stackSource from "./content/stack.json"
 
 const locales = ["es", "en"] as const
+const projectRoles = ["FullStack", "FrontEnd"] as const
+const projectImages = ["brinsa.webp", "colserauto.webp", "credicorp.webp", "filmmia.webp"] as const
+const iconNames = [
+	"Angular",
+	"Anthropic",
+	"Astro",
+	"AWS",
+	"Azure",
+	"Bootstrap",
+	"Code",
+	"Cypress",
+	"Dart",
+	"DDEV",
+	"Docker",
+	"Drupal",
+	"Express",
+	"Figma",
+	"Flutter",
+	"GCP",
+	"Gemini",
+	"Git",
+	"JavaScript",
+	"JQuery",
+	"Jest",
+	"MCP",
+	"MongoDB",
+	"MySQL",
+	"NestJS",
+	"NodeJS",
+	"OpenAI",
+	"Pantheon",
+	"PHP",
+	"Playwright",
+	"Pnpm",
+	"PostgreSQL",
+	"Sass",
+	"SQLite",
+	"Tailwind",
+	"TensorFlow",
+	"TypeScript",
+	"Vite",
+	"Vitest",
+	"Vue",
+	"WordPress",
+] as const
 const combiningMarksRegex = /[\u0300-\u036F]/g
 const nonAlphaNumericRegex = /[^a-z0-9]+/g
 const trimmedDashesRegex = /(^-|-$)/g
+const hexColorRegex = /^#[\da-f]{6}$/i
 
 type Locale = (typeof locales)[number]
 
@@ -32,20 +78,44 @@ const projects = defineCollection({
 				...project,
 			}))
 		),
-	schema: z.object({
-		locale: z.enum(locales),
-		order: z.number().int().nonnegative(),
-		title: z.string(),
-		description: z.string(),
-		link: z.url(),
-		descriptionImage: z.string(),
-		image: z.string(),
-		tags: z.array(
-			z.object({
-				icon: z.string(),
-			})
-		),
-	}),
+	schema: z
+		.object({
+			locale: z.enum(locales),
+			order: z.number().int().nonnegative(),
+			title: z.string(),
+			description: z.string(),
+			impact: z.string(),
+			visibility: z.enum(["public", "private"]).default("public"),
+			role: z.enum(projectRoles).optional(),
+			link: z.string().optional(),
+			descriptionImage: z.string(),
+			image: z.enum(projectImages),
+			tags: z.array(
+				z.object({
+					icon: z.enum(iconNames),
+				})
+			),
+		})
+		.superRefine(({ visibility, link }, ctx) => {
+			if (visibility === "public" && !link) {
+				ctx.addIssue({
+					code: "custom",
+					message: "Public projects must include a valid link.",
+					path: ["link"],
+				})
+			}
+
+			if (link) {
+				const result = z.url().safeParse(link)
+				if (!result.success) {
+					ctx.addIssue({
+						code: "custom",
+						message: "Project link must be a valid URL when provided.",
+						path: ["link"],
+					})
+				}
+			}
+		}),
 })
 
 const experience = defineCollection({
@@ -61,7 +131,7 @@ const experience = defineCollection({
 	schema: z.object({
 		locale: z.enum(locales),
 		order: z.number().int().nonnegative(),
-		icon: z.string(),
+		icon: z.enum(iconNames),
 		title: z.string(),
 		link: z.url().optional(),
 		company: z.string(),
@@ -79,10 +149,10 @@ const stack = defineCollection({
 		})),
 	schema: z.object({
 		order: z.number().int().nonnegative(),
-		icons: z.array(z.string()),
+		icons: z.array(z.enum(iconNames)),
 		gradient: z.object({
-			light: z.tuple([z.string(), z.string()]),
-			dark: z.tuple([z.string(), z.string()]),
+			light: z.tuple([z.string().regex(hexColorRegex), z.string().regex(hexColorRegex)]),
+			dark: z.tuple([z.string().regex(hexColorRegex), z.string().regex(hexColorRegex)]),
 		}),
 	}),
 })

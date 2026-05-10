@@ -31,19 +31,19 @@ const { icon, title, link, company, date, description } = Astro.props
 				href={link}
 				target="_blank"
 				rel="noopener noreferrer"
-				class="text-crusta-800 dark:text-crusta-300/90 text-sm"
+				class="text-crusta-700 dark:text-crusta-300 text-sm"
 			>
 				{company}
 				<Link class="inline-block h-4 w-4 shrink-0 translate-y-px transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:scale-125 motion-reduce:transition-none" />
 			</a>
 		) : (
-			<span class="text-crusta-800 dark:text-crusta-300/90 text-sm">{company}</span>
+			<span class="text-crusta-700 dark:text-crusta-300 text-sm">{company}</span>
 		)
 	}
 </h3>
 <span class="text-primary-950 dark:text-primary-200/90 mb-2 block text-sm leading-none font-normal">
 	{date}
 </span>
-<p class="mb-4 text-base font-normal text-pretty text-gray-600 dark:text-gray-300">
+<p class="text-dark-700 dark:text-dark-300 mb-4 text-base font-normal text-pretty">
 	{description}
 </p>

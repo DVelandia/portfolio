@@ -1,8 +1,8 @@
 {
   "seo": {
     "title": "Portfolio de Daniel Velandia - Ingeniero de Software",
-    "description": "Ingeniero de Software con experiencia en Angular, Node.js, Drupal, WordPress, GCP y CI/CD.",
-    "keywords": "desarrollador web, front-end, Drupal, WordPress, JavaScript, Astro, Node.js, Daniel Velandia, portfolio",
+    "description": "Ingeniero de Software enfocado en plataformas web enterprise sobre GCP, integraciones y automatización con IA aplicada.",
+    "keywords": "ingeniero de software, gcp, integraciones enterprise, angular, node.js, drupal, wordpress, ia aplicada, daniel velandia, portfolio",
     "og_site_name": "Portfolio de Daniel Velandia",
     "og_locale": "es_CO"
   },
@@ -13,7 +13,7 @@
     "projects": "Proyectos",
     "technologies": "Tecnologías"
   },
-  "copyright": "Daniel Velandia. Casi todos los derechos reservados",
+  "rightsReserved": "Todos los derechos reservados.",
   "about": {
     "id": "about",
     "descriptionImage": "Foto de perfil de Daniel Velandia",
@@ -25,8 +25,8 @@
     },
     "experience": {
       "years": "+4 años de experiencia.",
-      "title": "Ingeniero de Sistemas y Desarrollador Web.",
-      "specialization": "Especializado en CMS, Node.js, Angular y GCP."
+      "title": "Construyo plataformas web para entornos enterprise.",
+      "specialization": "Integraciones, GCP e IA aplicada."
     }
   },
   "experience": {
@@ -74,24 +74,24 @@
   },
   "richResults": {
     "personSchema": {
-      "jobTitle": "Desarrollador Web Frontend",
-      "description": "Estudiante apasionado de Ingeniería de Sistemas y desarrollador web con experiencia en tecnologías front-end y CMS. Especializado en crear soluciones web innovadoras y eficientes.",
+      "jobTitle": "Ingeniero de Software",
+      "description": "Ingeniero de Software enfocado en construir y operar plataformas web enterprise sobre GCP, integraciones y automatización con IA aplicada.",
       "gender": "Masculino",
       "nationality": "Colombiano",
       "alumniOf": [
         {
-          "description": "Universidad donde curso actualmente Ingeniería de Sistemas"
+          "description": "Universidad donde curso Ingeniería de Sistemas"
         },
         {
-          "description": "Plataforma de educación en línea donde me mantengo actualizado en tecnologías web"
+          "description": "Plataforma de formación continua en software y desarrollo web"
         },
         {
-          "description": "Colegio en el cual curse y me gradue de la educación secundaria"
+          "description": "Plataforma de aprendizaje continuo en Google Cloud"
         }
       ],
-      "knowsLanguage": ["Español nativo", "Inglés basico"],
+      "knowsLanguage": ["Español nativo", "Inglés técnico"],
       "worksFor": {
-        "description": "Empresa líder en LATAM que impulsa la transformación digital y la innovación tecnológica en la nube."
+        "description": "Compañía LATAM enfocada en transformación digital, cloud e integraciones enterprise."
       },
       "award": [
         {
@@ -101,45 +101,19 @@
         {
           "name": "Mejor Proyecto Integrador",
           "description": "Reconocimiento al proyecto más innovador, escalable y con mejor arquitectura - UNISANGIL 2024"
-        },
-        {
-          "name": "Reconocimiento por Excelencia Académica",
-          "description": "Mejor promedio obtenido al salir de secundaria - Escuela Normal Superior de Chiquinquirá"
         }
       ],
       "potentialAction": [
         {
-          "name": "Solicitar una consulta gratuita"
+          "name": "Contactar por LinkedIn"
         },
         {
           "name": "Explorar proyectos destacados"
         },
         {
-          "name": "Descargar Curriculum Vitae Completo"
+          "name": "Descargar Curriculum Vitae"
         }
       ]
-    },
-    "faqs": [
-      {
-        "question": "¿Qué servicios ofreces como desarrollador web?",
-        "answer": "Ofrezco una gama completa de servicios de desarrollo web, incluyendo diseño y desarrollo de sitios web responsivos, implementación y personalización de CMS (especialmente Drupal y WordPress), optimización de rendimiento, integración de APIs, y consultoría tecnológica para ayudarte a elegir las mejores soluciones para tu proyecto."
-      },
-      {
-        "question": "¿Cuál es tu experiencia en desarrollo web?",
-        "answer": "Tengo más de un año de experiencia práctica en desarrollo web, con un enfoque especial en CMS como Drupal y WordPress. He trabajado en proyectos que van desde sitios web personales hasta plataformas empresariales complejas, siempre buscando implementar las mejores prácticas y tecnologías más actuales."
-      },
-      {
-        "question": "¿Qué me hace único como desarrollador?",
-        "answer": "Como estudiante activo de Ingeniería de Sistemas y aprendiz constante en Platzi, combino conocimientos técnicos de vanguardia con una perspectiva fresca e innovadora. Mi pasión por la tecnología y mi compromiso con el aprendizaje continuo me permiten ofrecer soluciones web no solo funcionales, sino también innovadoras y preparadas para el futuro."
-      },
-      {
-        "question": "¿Cómo aseguras la calidad en tus proyectos?",
-        "answer": "Implemento un enfoque riguroso de control de calidad que incluye pruebas exhaustivas, revisión de código, y seguimiento de las mejores prácticas de la industria. Además, utilizo herramientas de integración continua y despliegue continuo (CI/CD) para garantizar que cada entrega cumpla con los más altos estándares de calidad y rendimiento."
-      },
-      {
-        "question": "¿Ofreces soporte post-lanzamiento?",
-        "answer": "Absolutamente. Ofrezco servicios completos de mantenimiento y soporte post-lanzamiento para asegurar que tu sitio web siga funcionando de manera óptima. Esto incluye actualizaciones de seguridad, optimizaciones de rendimiento, y asistencia técnica continua."
-      }
-    ]
+    }
   }
 }

@@ -15,9 +15,6 @@ const projectEntries = (await getCollection("projects"))
 
 const projects = projectEntries.map(({ data: project }) => {
 	const image = images[`/src/assets/projects/${project.image}`]?.default
-	if (!image) {
-		throw new Error(`Project image not found: ${project.image}`)
-	}
 
 	return {
 		...project,
@@ -31,7 +28,10 @@ const projects = projectEntries.map(({ data: project }) => {
 		projects.map((project) => (
 			<ProjectItem
 				title={project.title}
+				visibility={project.visibility}
+				role={project.role}
 				description={project.description}
+				impact={project.impact}
 				link={project.link}
 				descriptionImage={project.descriptionImage}
 				image={project.image}

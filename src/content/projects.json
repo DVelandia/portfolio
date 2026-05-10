@@ -1,0 +1,90 @@
+{
+  "en": [
+    {
+      "title": "Credicorp Capital",
+      "visibility": "private",
+      "role": "FullStack",
+      "description": "Enterprise onboarding platform for sales teams and client enrollment workflows.",
+      "impact": "I integrated identity, e-signature, and document back-office services to digitize the process and streamline operations.",
+      "descriptionImage": "Credicorp Capital project",
+      "image": "credicorp.webp",
+      "tags": [{ "icon": "Angular" }, { "icon": "Express" }, { "icon": "GCP" }]
+    },
+    {
+      "title": "Colserauto",
+      "visibility": "public",
+      "role": "FullStack",
+      "description": "I developed the public e-commerce for mechanical appraisals and supported features in the private OMS.",
+      "impact": "I delivered a SAP-connected flow ready for deployment and online purchases.",
+      "link": "https://www.colserauto.com/",
+      "descriptionImage": "Colserauto project",
+      "image": "colserauto.webp",
+      "tags": [
+        { "icon": "Drupal" },
+        { "icon": "Angular" },
+        { "icon": "Express" },
+        { "icon": "GCP" }
+      ]
+    },
+    {
+      "title": "Brinsa",
+      "visibility": "public",
+      "role": "FrontEnd",
+      "description": "Corporate Drupal website delivered from design to code, including layout, UI, and theme customization.",
+      "impact": "The result was a more modern, manageable platform with stronger content flow and navigation.",
+      "link": "https://brinsa.com.co/",
+      "descriptionImage": "Project of Brinsa",
+      "image": "brinsa.webp",
+      "tags": [
+        { "icon": "Drupal" },
+        { "icon": "Bootstrap" },
+        { "icon": "JQuery" },
+        { "icon": "Figma" }
+      ]
+    }
+  ],
+  "es": [
+    {
+      "title": "Credicorp Capital",
+      "visibility": "private",
+      "role": "FullStack",
+      "description": "Aplicativo enterprise para salas de ventas y vinculación de clientes.",
+      "impact": "Integré identidad, firma electrónica y backoffice documental para digitalizar el proceso y hacerlo más ágil para la operación.",
+      "descriptionImage": "Proyecto de Credicorp Capital",
+      "image": "credicorp.webp",
+      "tags": [{ "icon": "Angular" }, { "icon": "Express" }, { "icon": "GCP" }]
+    },
+    {
+      "title": "Colserauto",
+      "visibility": "public",
+      "role": "FullStack",
+      "description": "Desarrollé el e-commerce público para avalúos mecánicos y apoyé funcionalidades del OMS privado.",
+      "impact": "Entregué un flujo integrado con SAP, listo para despliegue y compras en línea.",
+      "link": "https://www.colserauto.com/",
+      "descriptionImage": "Proyecto de Colserauto",
+      "image": "colserauto.webp",
+      "tags": [
+        { "icon": "Drupal" },
+        { "icon": "Angular" },
+        { "icon": "Express" },
+        { "icon": "GCP" }
+      ]
+    },
+    {
+      "title": "Brinsa",
+      "visibility": "public",
+      "role": "FrontEnd",
+      "description": "Llevé el sitio corporativo de diseño a código, con maquetación, UI y customización del theme.",
+      "impact": "Entregué una plataforma más moderna, administrable y consistente para contenidos y navegación.",
+      "link": "https://brinsa.com.co/",
+      "descriptionImage": "Proyecto de Brinsa",
+      "image": "brinsa.webp",
+      "tags": [
+        { "icon": "Drupal" },
+        { "icon": "Bootstrap" },
+        { "icon": "JQuery" },
+        { "icon": "Figma" }
+      ]
+    }
+  ]
+}
