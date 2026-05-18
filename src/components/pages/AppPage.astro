@@ -5,7 +5,7 @@ import Layout from "@/layouts/Layout.astro"
 import AboutMe from "@/components/about/AboutMe.astro"
 import Experience from "@/components/experiences/Experience.astro"
 import Projects from "@/components/projects/Projects.astro"
-import Stack from "@/components/stack/stack.astro"
+import Stack from "@/components/stack/Stack.astro"
 
 import StackIcon from "@/icons/Code.astro"
 import ExperienceIcon from "@/icons/Portfolio.astro"
@@ -40,10 +40,10 @@ const sections = [
 ---
 
 <Layout title={title} description={description}>
-	<main class="px-4">
+	<main id="main-content" class="px-4">
 		<SectionContainer
 			id={i18n.about.id}
-			class="relative pt-44 lg:flex lg:h-screen lg:flex-col lg:justify-center lg:pt-0"
+			class="hero-height relative pt-28 sm:pt-40 lg:flex lg:flex-col lg:justify-center lg:pt-0"
 		>
 			<AboutMe />
 		</SectionContainer>

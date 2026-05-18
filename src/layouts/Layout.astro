@@ -3,10 +3,12 @@ import { ClientRouter } from "astro:transitions"
 import Footer from "@/components/Footer.astro"
 import Header from "@/components/Header.astro"
 import SEO from "@/components/seo/SEO.astro"
+import { getI18N } from "@/i18n"
 import themeInitScript from "@/scripts/theme-init.js?raw"
+import scrollRevealUrl from "@/scripts/scroll-reveal.js?url"
 import type { Preload } from "@/types/Preload"
 
-import "@fontsource-variable/onest"
+import fontOnestUrl from "@fontsource-variable/onest/files/onest-latin-wght-normal.woff2?url"
 import "../styles/global.css"
 
 interface Props {
@@ -33,6 +35,7 @@ const {
 	showAlternateLinks = true,
 } = Astro.props
 const { currentLocale, url } = Astro
+const i18n = getI18N({ currentLocale })
 
 const normalizedPath =
 	currentLocale === "en" ? url.pathname.replace(/^\/en/, "") || "/" : url.pathname || "/"
@@ -46,6 +49,14 @@ const alternateLinks = [
 <!doctype html>
 <html lang={currentLocale}>
 	<head>
+		<meta charset="UTF-8" />
+		<link
+			rel="preload"
+			as="font"
+			type="font/woff2"
+			href={fontOnestUrl as string}
+			crossorigin="anonymous"
+		/>
 		<script is:inline set:html={themeInitScript} />
 		<ClientRouter fallback="animate" />
 		<SEO
@@ -67,6 +78,13 @@ const alternateLinks = [
 	</head>
 
 	<body class="bg-dark-50 dark:bg-dark-950 relative text-black dark:text-white">
+		<a
+			href="#main-content"
+			class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-black focus:shadow-lg focus:outline-2 focus:outline-offset-2 dark:focus:bg-gray-900 dark:focus:text-white"
+		>
+			{i18n.skipToContent}
+		</a>
+		<div id="scroll-progress" aria-hidden="true" role="presentation"></div>
 		<div
 			class="bg-dark-50 dark:bg-dark-950 absolute top-0 z-[-2] h-screen w-full bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(0,153,255,0.25),rgba(255,255,255,0))]"
 		>
@@ -74,82 +92,33 @@ const alternateLinks = [
 		<Header />
 		<slot />
 		<Footer />
-		<style is:global>
-			:root {
-				color-scheme: light;
-			}
-
-			html.dark {
-				color-scheme: dark;
-			}
-
-			html {
-				font-family: "Onest Variable", system-ui, sans-serif;
-				scroll-behavior: smooth;
-			}
-
-			body {
-				display: flex;
-				flex-direction: column;
-				min-height: 100vh;
-				overscroll-behavior: none;
-			}
-
-			@media (prefers-reduced-motion: no-preference) {
-				html[data-theme-transition="running"]::view-transition-group(root) {
-					animation-duration: 450ms;
+		<script is:inline src={scrollRevealUrl}></script>
+		<script>
+			function initScrollProgress() {
+				const bar = document.getElementById("scroll-progress")
+				if (!bar) return
+				let ticking = false
+				const update = () => {
+					const scrollTop = window.scrollY
+					const docHeight = document.documentElement.scrollHeight - window.innerHeight
+					const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0
+					bar.style.width = `${Math.min(100, pct)}%`
+					ticking = false
 				}
-
-				html[data-theme-transition="running"]::view-transition-old(root) {
-					animation: none;
-					mix-blend-mode: normal;
-				}
-
-				html[data-theme-transition="running"]::view-transition-new(root) {
-					animation: none;
-					mix-blend-mode: normal;
-				}
+				window.addEventListener(
+					"scroll",
+					() => {
+						if (!ticking) {
+							window.requestAnimationFrame(update)
+							ticking = true
+						}
+					},
+					{ passive: true }
+				)
+				update()
 			}
-
-			@media (prefers-reduced-motion: reduce) {
-				html {
-					scroll-behavior: auto;
-				}
-			}
-
-			@supports selector(::-webkit-scrollbar) {
-				@media (hover: hover) {
-					::-webkit-scrollbar {
-						width: 10px;
-						height: 10px;
-					}
-
-					::-webkit-scrollbar-track {
-						background: #232121;
-					}
-
-					::-webkit-scrollbar-thumb {
-						background: #008fd4;
-						border-radius: 10px;
-					}
-
-					::-webkit-scrollbar-thumb:hover {
-						background: #0890b294;
-					}
-				}
-			}
-
-			@supports not selector(::-webkit-scrollbar) {
-				* {
-					scrollbar-color: var(--color-primary-400) transparent;
-					scrollbar-width: thin;
-				}
-			}
-
-			*::selection {
-				background-color: #008fd4;
-				color: white;
-			}
-		</style>
+			initScrollProgress()
+			document.addEventListener("astro:page-load", initScrollProgress)
+		</script>
 	</body>
 </html>
