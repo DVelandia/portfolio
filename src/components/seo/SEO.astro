@@ -40,8 +40,9 @@ const imageURL = new URL(image, siteURL)
 
 <title>{title}</title>
 
-<meta charset="UTF-8" />
 <meta name="description" content={description} />
+<meta name="author" content={publicProfile.fullName} />
+<meta name="keywords" content={t.seo.keywords} />
 
 {
 	preload?.map(({ href, as, type, rel = "preload", crossorigin }) => (
@@ -50,20 +51,18 @@ const imageURL = new URL(image, siteURL)
 }
 
 <link rel="canonical" href={canonicalURL} />
-<meta name="generator" content={Astro.generator} />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="theme-color" content="#2CC9FF" />
 
-<meta name="keywords" content={t.seo.keywords} />
+{/* theme-color: matches design tokens — light=#f8fafc (dark-50), dark=#020617 (dark-950) */}
+<meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#020617" media="(prefers-color-scheme: dark)" />
 
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:site" content={publicProfile.twitterHandle} />
-<meta name="twitter:creator" content={publicProfile.twitterHandle} />
-<meta name="twitter:title" content={title} />
-<meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={imageURL} />
-
+{/* Open Graph */}
 <meta property="og:image" content={imageURL} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:alt" content={title} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonicalURL} />
@@ -72,9 +71,20 @@ const imageURL = new URL(image, siteURL)
 <meta property="og:locale" content={t.seo.og_locale} />
 <meta property="og:locale:alternate" content={alternateOgLocales[currentLocale]} />
 
+{/* Twitter / X Card */}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content={publicProfile.twitterHandle} />
+<meta name="twitter:creator" content={publicProfile.twitterHandle} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageURL} />
+<meta name="twitter:image:alt" content={title} />
+
+{/* Indexing directives */}
 <meta name="robots" content={robots} />
 <meta name="googlebot" content={googlebot} />
 
+{/* Icons */}
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png" />
 

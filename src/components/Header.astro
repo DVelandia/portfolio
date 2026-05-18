@@ -10,6 +10,7 @@ const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
 
 const spanMenu = i18n.spanMenu
+const navLabels = i18n.nav
 const currentYear = new Date().getFullYear()
 
 const pages = ["about", "experience", "projects", "technologies"].map((key) => ({
@@ -25,60 +26,70 @@ const pages = ["about", "experience", "projects", "technologies"].map((key) => (
 	>
 		<nav
 			id="mobile-menu"
-			class="fixed inset-0 z-10 hidden h-dvh w-full flex-col items-center gap-2 bg-gray-200 text-center text-2xl transition-transform dark:bg-gray-900"
-			aria-label="Mobile Navigation"
+			class="fixed inset-0 z-10 flex hidden h-dvh w-full flex-col bg-white dark:bg-gray-900"
+			aria-label={navLabels.mobileLabel}
 			aria-hidden="true"
 			tabindex="-1"
 		>
-			<div class="flex min-h-16 w-full items-center justify-between px-6 pt-4">
+			{/* ── Top bar ─────────────────────────────── */}
+			<div class="flex min-h-[72px] shrink-0 items-center justify-between px-6">
+				<span
+					id="mobile-menu-title"
+					class="text-xl font-bold tracking-widest text-gray-900 uppercase dark:text-gray-100"
+				>
+					{spanMenu}
+				</span>
+				{/* Spacer for the X button (z-50, rendered outside this nav) */}
+				<div class="h-10 w-10" aria-hidden="true"></div>
+			</div>
+			<hr class="h-[2px] shrink-0 border-t-0" />
+
+			{/* ── Logo — fixed size, centered ─────────── */}
+			<div class="flex shrink-0 justify-center px-8 py-6">
 				<a href={currentLocale === "en" ? "/en/" : "/"} class="inline-flex items-center">
 					<img
 						src="/logo.webp"
 						title={`${publicProfile.fullName} logo`}
 						alt={`${publicProfile.fullName} logo`}
-						class="accent-drop-shadow max-w-24 drop-shadow-lg"
+						class="accent-drop-shadow w-48 max-w-full drop-shadow-xl"
 						width={495}
 						height={339}
 						loading="eager"
 						decoding="async"
 					/>
 				</a>
-				<span
-					id="mobile-menu-title"
-					class="text-primary-600 dark:text-primary-400 text-xl font-semibold uppercase"
-				>
-					{spanMenu}
-				</span>
 			</div>
-			<hr class="h-[2px] w-full border-t-0" />
+			<hr class="h-[2px] shrink-0 border-t-0" />
+
+			{/* ── Nav links + footer — centered in remaining space ── */}
 			<div
-				class="content-mobile fixed inset-0 z-20 flex h-dvh w-full flex-col items-center justify-center gap-6 px-6 pt-16 text-center text-2xl"
+				class="content-mobile flex flex-1 flex-col items-center justify-center gap-5 px-6 pt-4 pb-6 text-center"
 			>
-				<ul class="flex w-full max-w-xs flex-col items-center gap-3">
+				<ul class="flex w-full max-w-xs flex-col items-center gap-1">
 					{
 						pages.map((link) => (
 							<li class="w-full">
 								<a
 									href={link.url}
-									class="menu-item text-dark-800 dark:text-dark-100 hover:text-primary-600 hover:dark:text-primary-400 block rounded px-3 py-2 text-xl transition"
+									class="menu-item text-dark-800 dark:text-dark-100 hover:text-primary-600 hover:dark:text-primary-400 focus-visible:text-primary-600 dark:focus-visible:text-primary-400 block rounded px-3 py-2 text-xl transition focus:outline-none"
 									data-nav-target={link.id}
 								>
 									{link.label}
 								</a>
-								<hr class="mt-3 h-[2px] w-full border-t-0" />
+								<hr class="mt-1 h-[2px] w-full border-t-0" />
 							</li>
 						))
 					}
 				</ul>
-				<span class="text-dark-900 dark:text-dark-200 text-center text-xl">
+				<span class="text-dark-900 dark:text-dark-200 text-center text-xs opacity-70">
 					©️ {currentYear}
-					{publicProfile.fullName}. {i18n.rightsReserved}
+					{publicProfile.fullName}
 				</span>
 			</div>
 		</nav>
 		<nav
 			class="hidden w-full items-center justify-between py-4 pr-4 sm:flex"
-			aria-label="Desktop Navigation"
+			aria-label={navLabels.desktopLabel}
 		>
 			<ul class="flex w-full items-center justify-between gap-4">
 				{
@@ -109,7 +120,7 @@ const pages = ["about", "experience", "projects", "technologies"].map((key) => (
 			left: 0;
 			height: 2px;
 			width: 0;
-			background-color: #4299e1;
+			background-color: var(--color-primary-400);
 			backdrop-filter: blur(8px);
 			border-radius: 0.5rem;
 			z-index: -10;
@@ -118,6 +129,24 @@ const pages = ["about", "experience", "projects", "technologies"].map((key) => (
 
 		.nav-link:hover::before {
 			width: 100%;
+		}
+
+		/* Header depth on scroll */
+		header {
+			transition:
+				box-shadow 0.3s ease,
+				border-color 0.3s ease;
+			border-bottom: 1px solid transparent;
+		}
+
+		header.scrolled {
+			box-shadow: 0 1px 0 0 rgb(0 0 0 / 0.08);
+			border-bottom-color: rgb(0 0 0 / 0.07);
+		}
+
+		html.dark header.scrolled {
+			box-shadow: 0 1px 0 0 rgb(255 255 255 / 0.06);
+			border-bottom-color: rgb(255 255 255 / 0.06);
 		}
 
 		@keyframes fadeIn {
@@ -162,8 +191,7 @@ const pages = ["about", "experience", "projects", "technologies"].map((key) => (
 		}
 
 		.content-mobile {
-			animation: growIn 0.25s ease forwards;
-			opacity: 0;
+			animation: growIn 0.3s ease forwards;
 		}
 
 		html.dark hr {

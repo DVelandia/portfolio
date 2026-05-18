@@ -5,45 +5,83 @@ import Link from "@/icons/Link.astro"
 interface Props {
 	icon: string
 	title: string
-	link: string
+	link?: string
 	company: string
 	date: string
-	description: string
+	bullets?: string[]
+	tags?: { icon: string }[]
+	revealDelay?: number
 }
 
-const { icon, title, link, company, date, description } = Astro.props
+const { icon, title, link, company, date, bullets, tags, revealDelay = 0 } = Astro.props
 ---
 
+{/* Icon stays anchored to the timeline — NOT animated */}
 <span
 	class="border-dark-400 dark:border-dark-700 absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full border bg-white"
 >
-	<Icon name={icon} class="h-4 w-4" aria-label={`Icono de ${icon}`} />
+	<Icon name={icon} class="h-4 w-4" aria-label={icon} />
 </span>
 
-<h3
-	class="group text-primary-700 dark:text-primary-400 mb-1 flex items-center gap-2 text-lg font-semibold"
->
-	{title}
-	<span class="text-dark-900 font-normal dark:text-white">-</span>
+{/* Only text content slides in from left */}
+<div data-reveal="left" data-reveal-delay={String(revealDelay)}>
+	<h3
+		class="group text-primary-700 dark:text-primary-400 mb-1 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-lg leading-snug font-semibold"
+	>
+		{title}
+		<span class="text-dark-900 font-normal dark:text-white">-</span>
+		{
+			link ? (
+				<a
+					href={link}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="text-crusta-700 dark:text-crusta-300 text-sm"
+				>
+					{company}
+					<Link class="inline-block h-4 w-4 shrink-0 translate-y-px transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:scale-125 motion-reduce:transition-none" />
+				</a>
+			) : (
+				<span class="text-crusta-700 dark:text-crusta-300 text-sm">{company}</span>
+			)
+		}
+	</h3>
+	<span
+		class="text-primary-950 dark:text-primary-200/90 mb-2 block text-sm leading-none font-normal"
+	>
+		{date}
+	</span>
+
 	{
-		link ? (
-			<a
-				href={link}
-				target="_blank"
-				rel="noopener noreferrer"
-				class="text-crusta-700 dark:text-crusta-300 text-sm"
-			>
-				{company}
-				<Link class="inline-block h-4 w-4 shrink-0 translate-y-px transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:scale-125 motion-reduce:transition-none" />
-			</a>
-		) : (
-			<span class="text-crusta-700 dark:text-crusta-300 text-sm">{company}</span>
+		bullets && bullets.length > 0 && (
+			<ul class="text-dark-700 dark:text-dark-300 mb-3 space-y-1.5 text-sm font-normal">
+				{bullets.map((bullet) => (
+					<li class="flex items-start gap-2">
+						<span
+							class="text-primary-500 dark:text-primary-400 mt-[1px] shrink-0 text-sm leading-none font-bold select-none"
+							aria-hidden="true"
+						>
+							›
+						</span>
+						<span set:html={bullet} />
+					</li>
+				))}
+			</ul>
 		)
 	}
-</h3>
-<span class="text-primary-950 dark:text-primary-200/90 mb-2 block text-sm leading-none font-normal">
-	{date}
-</span>
-<p class="text-dark-700 dark:text-dark-300 mb-4 text-base font-normal text-pretty">
-	{description}
-</p>
+
+	{
+		tags && tags.length > 0 && (
+			<ul class="flex flex-wrap gap-2">
+				{tags.map((tag) => (
+					<li>
+						<span class="border-dark-200 dark:border-dark-700 text-dark-600 dark:text-dark-300 inline-flex items-center gap-1.5 rounded-full border bg-white/60 px-2.5 py-1 text-xs backdrop-blur-sm dark:bg-white/5">
+							<Icon name={tag.icon} class="h-3.5 w-3.5" aria-hidden="true" />
+							{tag.icon}
+						</span>
+					</li>
+				))}
+			</ul>
+		)
+	}
+</div>

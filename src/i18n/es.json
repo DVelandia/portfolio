@@ -14,6 +14,11 @@
     "technologies": "Tecnologías"
   },
   "rightsReserved": "Todos los derechos reservados.",
+  "skipToContent": "Saltar al contenido principal",
+  "nav": {
+    "mobileLabel": "Navegación móvil",
+    "desktopLabel": "Navegación de escritorio"
+  },
   "about": {
     "id": "about",
     "descriptionImage": "Foto de perfil de Daniel Velandia",
@@ -35,11 +40,18 @@
   },
   "projects": {
     "id": "projects",
-    "title": "Proyectos"
+    "title": "Proyectos",
+    "newTab": "(abre en una nueva pestaña)",
+    "visibility": {
+      "private": "Privado",
+      "public": "Público",
+      "privateLabel": "Repositorio privado — no disponible públicamente",
+      "impact": "Impacto"
+    }
   },
   "technologies": {
     "id": "technologies",
-    "title": "Tecnologias",
+    "title": "Tecnologías",
     "intro": {
       "journey": "En mi trayectoria en el",
       "webDevWorld": "mundo del desarrollo web,",
@@ -101,6 +113,10 @@
         {
           "name": "Mejor Proyecto Integrador",
           "description": "Reconocimiento al proyecto más innovador, escalable y con mejor arquitectura - UNISANGIL 2024"
+        },
+        {
+          "name": "Reconocimiento Académico de Excelencia",
+          "description": "Promedio académico más alto al graduarse del bachillerato en la Escuela Normal Superior de Chiquinquirá"
         }
       ],
       "potentialAction": [

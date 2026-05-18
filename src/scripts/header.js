@@ -103,7 +103,8 @@ function initHeader() {
 				setCurrentSection(activeSection.target.id)
 			},
 			{
-				threshold: 0.6,
+				rootMargin: "-40% 0px -40% 0px",
+				threshold: 0,
 			}
 		)
 
@@ -162,6 +163,25 @@ function initHeader() {
 	})
 
 	syncDesktopObserver()
+
+	// Header scroll state — adds visual depth when content scrolls behind the header
+	const headerEl = document.querySelector("header")
+	let headerScrollTicking = false
+	const updateHeaderState = () => {
+		headerEl?.classList.toggle("scrolled", window.scrollY > 10)
+		headerScrollTicking = false
+	}
+	window.addEventListener(
+		"scroll",
+		() => {
+			if (!headerScrollTicking) {
+				window.requestAnimationFrame(updateHeaderState)
+				headerScrollTicking = true
+			}
+		},
+		{ passive: true }
+	)
+	updateHeaderState()
 }
 
 initHeader()

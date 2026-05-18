@@ -1,9 +1,10 @@
 ---
 import { getCollection } from "astro:content"
 import ExperienceItem from "@/components/experiences/ExperienceItem.astro"
+import { getLocale } from "@/i18n"
 
 const { currentLocale } = Astro
-const locale = currentLocale === "en" ? "en" : "es"
+const locale = getLocale(currentLocale)
 const experiences = (await getCollection("experience"))
 	.filter((entry) => entry.data.locale === locale)
 	.sort((left, right) => left.data.order - right.data.order)
@@ -12,15 +13,17 @@ const experiences = (await getCollection("experience"))
 <article class="container mt-10 px-3.5">
 	<ol class="border-dark-400 dark:border-dark-700 relative border-l">
 		{
-			experiences.map(({ data: experience }) => (
+			experiences.map(({ data: experience }, index) => (
 				<li class="mb-8 ml-6 md:mb-6">
 					<ExperienceItem
 						icon={experience.icon}
 						title={experience.title}
-						link={experience.link || ""}
+						link={experience.link}
 						company={experience.company}
 						date={experience.date}
-						description={experience.description}
+						bullets={experience.bullets}
+						tags={experience.tags}
+						revealDelay={index * 80}
 					/>
 				</li>
 			))

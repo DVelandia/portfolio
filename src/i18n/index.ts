@@ -17,3 +17,7 @@ export const getI18N = ({
 }: {
 	currentLocale?: string
 }): I18NDictionary => translations[currentLocale as Locale] ?? translations[DEFAULT_LOCALE]
+
+/** Normalizes Astro's `currentLocale` to a type-safe locale string. */
+export const getLocale = (currentLocale?: string): Locale =>
+	(currentLocale as Locale) in translations ? (currentLocale as Locale) : DEFAULT_LOCALE

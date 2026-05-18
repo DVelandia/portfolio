@@ -30,12 +30,13 @@ const { journey, webDevWorld, cultivated, skillsGained, techVariety, stackIntro 
 
 <section class="grid gap-12 lg:grid-cols-2 lg:place-content-center">
 	{
-		stackSections.map(({ id, data: section }) => (
+		stackSections.map(({ id, data: section }, index) => (
 			<SectionItem
 				key={id}
 				gradient={section.gradient}
 				title={i18n.technologies.categories[id as keyof typeof i18n.technologies.categories]}
 				icons={section.icons}
+				revealDelay={index * 100}
 			/>
 		))
 	}

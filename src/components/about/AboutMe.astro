@@ -60,28 +60,33 @@ const socialLinks = [
 			src={imageProfile}
 			alt={descriptionImage}
 			title={descriptionImage}
-			width={1500}
-			height={1500}
-			layout="constrained"
+			widths={[96, 112, 148, 192, 224, 296]}
 			sizes="(min-width: 1024px) 148px, (min-width: 640px) 112px, 96px"
+			width={296}
+			height={296}
+			quality={80}
 			loading="eager"
+			fetchpriority="high"
+			decoding="async"
 			class="hover:shadow-primary-700/20 dark:shadow-dark-800 w-full rounded-full object-contain shadow-lg transition-shadow duration-300 hover:shadow-xl hover:dark:shadow-white/2"
 		/>
 	</div>
 
 	<header class="lg:w-4/5">
-		<h1 class="text-dark-900 text-3xl font-bold lg:text-5xl dark:text-white">
+		<h1 class="text-dark-900 text-3xl font-bold sm:text-4xl lg:text-5xl dark:text-white">
 			{hello}
 			<span class="text-primary-600 dark:text-primary-400">
 				{name}
 			</span>
 		</h1>
 		<span
-			class="animated-text inline-flex bg-[linear-gradient(110deg,#5f7286,45%,#0f2233,55%,#5f7286)] bg-[length:250%_100%] bg-clip-text text-xl font-semibold text-transparent dark:bg-[linear-gradient(110deg,#d8f1f6,45%,#4aa3d1,55%,#d8f1f6)]"
+			class="animated-text inline-flex bg-[linear-gradient(110deg,#5f7286,45%,#0f2233,55%,#5f7286)] bg-[length:250%_100%] bg-clip-text text-xl font-semibold text-transparent lg:text-2xl dark:bg-[linear-gradient(110deg,#d8f1f6,45%,#4aa3d1,55%,#d8f1f6)]"
 		>
 			{role}
 		</span>
-		<h2 class="text-dark-700 dark:text-dark-300 mt-6 text-pretty md:mt-10 lg:text-2xl">
+		<h2
+			class="text-dark-700 dark:text-dark-300 mt-6 text-lg text-pretty md:mt-10 md:text-xl lg:text-2xl"
+		>
 			{years}
 			<span class="text-crusta-800 dark:text-crusta-300">
 				{title}

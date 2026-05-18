@@ -39,9 +39,9 @@ const localizedPath = LOCALIZED_PATHS.has(currentPath) ? currentPath : "/"
 	<summary
 		class="text-dark-800 dark:text-dark-100 inline-flex list-none items-center justify-start gap-x-2 rounded border-2 border-black/10 px-3 py-2 text-sm font-semibold transition-all hover:border-black/20 hover:bg-black/5 dark:border-white/10 dark:hover:border-white/30 dark:hover:bg-white/5"
 	>
-		<currentLocaleData.flag class="size-4" />
+		<currentLocaleData.flag class="size-4" aria-hidden="true" />
 		{currentLocaleData.name}
-		<ChevronIcon class="-mr-1 size-4" />
+		<ChevronIcon class="-mr-1 size-4" aria-hidden="true" />
 	</summary>
 	<ul
 		class="language-menu text-dark-700 dark:text-dark-100 absolute top-[calc(100%+0.5rem)] right-0 z-20 min-w-full rounded-md border border-black/10 bg-white/95 p-1 shadow-lg backdrop-blur-md dark:border-white/10 dark:bg-gray-900/95"
@@ -55,7 +55,7 @@ const localizedPath = LOCALIZED_PATHS.has(currentPath) ? currentPath : "/"
 						lang={locale.code}
 						hreflang={locale.code}
 					>
-						<locale.flag class="size-4" />
+						<locale.flag class="size-4" aria-hidden="true" />
 						{locale.name}
 					</a>
 				</li>

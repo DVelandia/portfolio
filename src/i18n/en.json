@@ -1,8 +1,8 @@
 {
   "seo": {
     "title": "Daniel Velandia Portfolio - Software Engineer",
-    "description": "I build and optimize web products focused on CMS platforms, frontend systems, and performance using Angular, Node.js, Drupal, WordPress, and GCP.",
-    "keywords": "web developer, frontend, Drupal, WordPress, JavaScript, Astro, Node.js, Daniel Velandia, portfolio",
+    "description": "Software Engineer building enterprise web platforms — integrations, GCP, and applied AI. 4+ years delivering scalable systems for financial and corporate sectors.",
+    "keywords": "software engineer, enterprise web platforms, GCP, integrations, applied AI, angular, node.js, typescript, daniel velandia, portfolio",
     "og_site_name": "Daniel Velandia Portfolio",
     "og_locale": "en_US"
   },
@@ -14,6 +14,12 @@
     "technologies": "Technologies"
   },
   "rightsReserved": "All rights reserved.",
+  "skipToContent": "Skip to main content",
+  "nav": {
+    "mobileLabel": "Mobile navigation",
+    "desktopLabel": "Desktop navigation",
+    "menuLabel": "Main menu"
+  },
   "about": {
     "id": "about",
     "descriptionImage": "Profile picture of Daniel Velandia",
@@ -25,8 +31,8 @@
     },
     "experience": {
       "years": "4+ years of experience.",
-      "title": "I build fast, maintainable, scalable websites.",
-      "specialization": "Using Angular, Node.js, Drupal, WordPress, and GCP."
+      "title": "I build enterprise web platforms.",
+      "specialization": "Integrations, GCP, and applied AI."
     }
   },
   "experience": {
@@ -35,7 +41,14 @@
   },
   "projects": {
     "id": "projects",
-    "title": "Projects"
+    "title": "Projects",
+    "newTab": "(opens in new tab)",
+    "visibility": {
+      "private": "Private",
+      "public": "Public",
+      "privateLabel": "Private repository — not publicly available",
+      "impact": "Impact"
+    }
   },
   "technologies": {
     "id": "technologies",
@@ -43,7 +56,7 @@
     "intro": {
       "journey": "Throughout my journey in",
       "webDevWorld": "web development,",
-      "cultivated": "I have built",
+      "cultivated": "I have gained",
       "skillsGained": "hands-on experience and solid skills",
       "techVariety": "across different technologies.",
       "stackIntro": "My technology stack includes:"
@@ -74,8 +87,8 @@
   },
   "richResults": {
     "personSchema": {
-      "jobTitle": "Frontend Web Developer",
-      "description": "Software Engineer focused on building, optimizing, and maintaining web products across frontend, CMS, and cloud-based platforms.",
+      "jobTitle": "Software Engineer",
+      "description": "Software Engineer building enterprise web platforms — integrations, GCP, and applied AI. Focused on financial sector and scalable cloud-based systems.",
       "gender": "Male",
       "nationality": "Colombian",
       "alumniOf": [
@@ -86,7 +99,7 @@
           "description": "Online learning platform where I keep my web technology skills up to date"
         },
         {
-          "description": "High school where I completed my secondary education"
+          "description": "Google Cloud training platform where I completed official cloud certifications"
         }
       ],
       "knowsLanguage": ["Native Spanish", "Basic English"],
@@ -109,7 +122,7 @@
       ],
       "potentialAction": [
         {
-          "name": "Request a free consultation"
+          "name": "Connect on LinkedIn"
         },
         {
           "name": "Explore featured projects"

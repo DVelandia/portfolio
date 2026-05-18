@@ -1,14 +1,16 @@
 ---
 import StackItem from "@/components/stack/StackItem.astro"
 
-const { gradient, title, icons } = Astro.props
+const { gradient, title, icons, revealDelay = 0 } = Astro.props
 ---
 
 <article
 	class="dark:border-dark-900 dark:from-dark-950 relative overflow-hidden rounded-2xl bg-gradient-to-r p-6 shadow-2xl dark:border dark:to-black"
+	data-reveal
+	data-reveal-delay={String(revealDelay)}
 >
 	<h3
-		class="mb-8 bg-gradient-to-t from-[var(--from-color)] to-[var(--to-color)] bg-clip-text text-center text-xl font-bold text-transparent lg:text-4xl lg:break-words dark:from-[var(--from-color-dark)] dark:to-[var(--to-color-dark)]"
+		class="mb-8 bg-gradient-to-t from-[var(--from-color)] to-[var(--to-color)] bg-clip-text text-center text-2xl font-bold text-transparent sm:text-3xl lg:text-4xl lg:break-words dark:from-[var(--from-color-dark)] dark:to-[var(--to-color-dark)]"
 		style={{
 			"--from-color": gradient.light[0],
 			"--to-color": gradient.light[1],

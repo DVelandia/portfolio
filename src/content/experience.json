@@ -6,14 +6,55 @@
       "link": "https://davinci.tech/",
       "company": "Davinci Technologies LATAM",
       "date": "May 2024 - Present",
-      "description": "Develop end-to-end web solutions for enterprise environments using JavaScript/TypeScript, Angular, Node.js (NestJS/Express), and CMS platforms such as Drupal and WordPress. Design and operate solutions on Google Cloud Platform (GCP), build integrations with DocuSign, Firebase, SharePoint, Apigee/proxies, and Azure components, and contribute to performance, technical SEO, security hardening, CI/CD, and Docker-based delivery."
+      "bullets": [
+        "Lead an <strong>enterprise onboarding platform for the financial sector</strong> (e-signature, digital identity, document back-office) as the client's sole technical point of contact",
+        "<strong>Connect enterprise platforms</strong> with e-signature, document management, and cloud service ecosystems, enabling operational workflows across financial and real estate sectors",
+        "Improve web quality across platforms: <strong>PageSpeed 20–30 → 80–95+</strong>, organic traffic <strong>+3,900%</strong>, and security posture <strong>D → A+</strong> with 98% of SOC findings resolved in ≤ 30 days",
+        "Drive AI adoption within the team: <strong>4 workflows deployed</strong>, ~40% time savings, 20+ people trained"
+      ],
+      "tags": [
+        { "icon": "TypeScript" },
+        { "icon": "Angular" },
+        { "icon": "NestJS" },
+        { "icon": "MongoDB" },
+        { "icon": "GCP" },
+        { "icon": "Azure" },
+        { "icon": "Docker" },
+        { "icon": "Playwright" },
+        { "icon": "Vitest" },
+        { "icon": "Firebase" },
+        { "icon": "DocuSign" },
+        { "icon": "Gemini" },
+        { "icon": "OpenAI" },
+        { "icon": "Anthropic" }
+      ]
     },
     {
       "icon": "Drupal",
       "title": "Frontend Developer",
       "company": "Freelance",
       "date": "October 2023 - February 2024",
-      "description": "Delivered freelance web projects in Drupal and WordPress, taking interfaces from design to code, customizing themes, implementing UI with SASS, Bootstrap, and jQuery, completing pending development in an unfinished Drupal build, adding a functional shopping cart, and optimizing plugins, SEO, and server updates for smoother production launches."
+      "bullets": [
+        "Resumed and launched <strong>3 web projects</strong> (each 60–70% complete) to production, covering design, features, and server configuration",
+        "Customized themes and translated designs to code, ensuring <strong>visual consistency through launch</strong> on every project",
+        "Built shopping cart and interactive features, completing <strong>critical pending functionality</strong> before each delivery"
+      ],
+      "tags": [
+        { "icon": "Sass" },
+        { "icon": "Bootstrap" },
+        { "icon": "JavaScript" },
+        { "icon": "JQuery" },
+        { "icon": "PHP" },
+        { "icon": "Drupal" },
+        { "icon": "WordPress" },
+        { "icon": "NodeJS" },
+        { "icon": "MySQL" },
+        { "icon": "Docker" },
+        { "icon": "Pantheon" },
+        { "icon": "Git" },
+        { "icon": "Pnpm" },
+        { "icon": "AdobeXD" }
+      ]
     }
   ],
   "es": [
@@ -23,14 +64,55 @@
       "link": "https://davinci.tech/",
       "company": "Davinci Technologies LATAM",
       "date": "Mayo 2024 - Presente",
-      "description": "Desarrollo soluciones web end-to-end para entornos enterprise usando JavaScript/TypeScript, Angular, Node.js (NestJS/Express) y plataformas CMS como Drupal y WordPress. Diseño y opero soluciones sobre Google Cloud Platform (GCP), construyo integraciones con DocuSign, Firebase, SharePoint, Apigee/proxies y componentes en Azure, y aporto en performance, SEO técnico, hardening de seguridad, CI/CD y entregas con Docker."
+      "bullets": [
+        "Lidero una <strong>plataforma de onboarding enterprise para el sector financiero</strong> (firma electrónica, identidad digital, backoffice documental) como único referente técnico del cliente",
+        "<strong>Conecto plataformas enterprise</strong> con ecosistemas de firma electrónica, documentación y servicios cloud, habilitando flujos operativos para sectores financiero e inmobiliario",
+        "Mejoro calidad web transversalmente: <strong>PageSpeed 20–30 → 80–95+</strong>, tráfico orgánico <strong>+3.900%</strong> y seguridad <strong>D → A+</strong> con 98% de hallazgos SOC resueltos en ≤ 30 días",
+        "Impulso la adopción de IA generativa en el equipo: <strong>4 workflows adoptados</strong>, ~40% ahorro de tiempo, 20+ personas capacitadas"
+      ],
+      "tags": [
+        { "icon": "TypeScript" },
+        { "icon": "Angular" },
+        { "icon": "NestJS" },
+        { "icon": "MongoDB" },
+        { "icon": "GCP" },
+        { "icon": "Azure" },
+        { "icon": "Docker" },
+        { "icon": "Playwright" },
+        { "icon": "Vitest" },
+        { "icon": "Firebase" },
+        { "icon": "DocuSign" },
+        { "icon": "Gemini" },
+        { "icon": "OpenAI" },
+        { "icon": "Anthropic" }
+      ]
     },
     {
       "icon": "Drupal",
       "title": "Desarrollador Frontend",
       "company": "Freelance",
       "date": "Octubre 2023 - Febrero 2024",
-      "description": "Entregué proyectos freelance en Drupal y WordPress llevando interfaces de diseño a código, customizando themes, desarrollando UI con SASS, Bootstrap y jQuery, completando un desarrollo pendiente en Drupal, implementando un carrito funcional y optimizando plugins, SEO y ajustes de servidor para salidas a producción más estables."
+      "bullets": [
+        "Retomé y lancé a producción <strong>3 proyectos web</strong> (60–70% de avance en cada uno), cubriendo diseño, funcionalidades y configuración de servidor",
+        "Personalicé themes y traduje diseños a código, asegurando <strong>coherencia visual hasta el lanzamiento</strong> en cada proyecto",
+        "Implementé carrito de compras e interactividad, completando la <strong>funcionalidad crítica pendiente</strong> antes de cada entrega"
+      ],
+      "tags": [
+        { "icon": "Sass" },
+        { "icon": "Bootstrap" },
+        { "icon": "JavaScript" },
+        { "icon": "JQuery" },
+        { "icon": "PHP" },
+        { "icon": "Drupal" },
+        { "icon": "WordPress" },
+        { "icon": "NodeJS" },
+        { "icon": "MySQL" },
+        { "icon": "Docker" },
+        { "icon": "Pantheon" },
+        { "icon": "Git" },
+        { "icon": "Pnpm" },
+        { "icon": "AdobeXD" }
+      ]
     }
   ]
 }
