@@ -1,9 +1,11 @@
 ---
 import { getCollection } from "astro:content"
 import ProjectItem from "@/components/projects/ProjectItem.astro"
+import { getLocale } from "@/i18n"
+import blurPlaceholders from "@/data/blur-placeholders.json"
 
 const { currentLocale } = Astro
-const locale = currentLocale === "en" ? "en" : "es"
+const locale = getLocale(currentLocale)
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/projects/*", {
 	eager: true,
@@ -14,29 +16,35 @@ const projectEntries = (await getCollection("projects"))
 	.sort((left, right) => left.data.order - right.data.order)
 
 const projects = projectEntries.map(({ data: project }) => {
-	const image = images[`/src/assets/projects/${project.image}`]?.default
+	const resolvedImage = images[`/src/assets/projects/${project.image}`]?.default
+	const blurDataURL = project.image
+		? (blurPlaceholders as Record<string, string>)[project.image]
+		: undefined
 
 	return {
 		...project,
-		image,
+		image: resolvedImage,
+		blurDataURL,
 	}
 })
 ---
 
 <div class="flex flex-col gap-y-16">
 	{
-		projects.map((project) => (
-			<ProjectItem
-				title={project.title}
-				visibility={project.visibility}
-				role={project.role}
-				description={project.description}
-				impact={project.impact}
-				link={project.link}
-				descriptionImage={project.descriptionImage}
-				image={project.image}
-				tags={project.tags}
-			/>
+		projects.map((project, index) => (
+			<div data-reveal data-reveal-delay={String(index * 120)}>
+				<ProjectItem
+					title={project.title}
+					visibility={project.visibility}
+					role={project.role}
+					description={project.description}
+					link={project.link}
+					descriptionImage={project.descriptionImage}
+					image={project.image}
+					blurDataURL={project.blurDataURL}
+					tags={project.tags}
+				/>
+			</div>
 		))
 	}
 </div>
