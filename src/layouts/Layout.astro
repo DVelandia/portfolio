@@ -5,7 +5,7 @@ import Header from "@/components/Header.astro"
 import SEO from "@/components/seo/SEO.astro"
 import { getI18N } from "@/i18n"
 import themeInitScript from "@/scripts/theme-init.js?raw"
-import scrollRevealUrl from "@/scripts/scroll-reveal.js?url"
+import scrollRevealScript from "@/scripts/scroll-reveal.js?raw"
 import type { Preload } from "@/types/Preload"
 
 import fontOnestUrl from "@fontsource-variable/onest/files/onest-latin-wght-normal.woff2?url"
@@ -92,7 +92,7 @@ const alternateLinks = [
 		<Header />
 		<slot />
 		<Footer />
-		<script is:inline src={scrollRevealUrl}></script>
+		<script is:inline set:html={scrollRevealScript} />
 		<script>
 			function initScrollProgress() {
 				const bar = document.getElementById("scroll-progress")
