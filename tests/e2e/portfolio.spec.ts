@@ -62,7 +62,8 @@ test("mobile menu opens, closes, and links to sections", async ({ page }) => {
 	await expect(menuButton).toHaveAttribute("aria-expanded", "true")
 	await expect(page.locator("#mobile-menu")).toHaveAttribute("aria-hidden", "false")
 
-	await page.getByLabel("Mobile Navigation").getByRole("link", { name: "Proyectos" }).click()
+	// aria-label at '/' is Spanish: "Navegación móvil"
+	await page.getByLabel("Navegación móvil").getByRole("link", { name: "Proyectos" }).click()
 	await expect(menuButton).toHaveAttribute("aria-expanded", "false")
 	await expect(page).toHaveURL(/#projects$/)
 	expect(browserErrors).toEqual([])

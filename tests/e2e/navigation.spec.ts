@@ -22,7 +22,8 @@ test("desktop nav links navigate to section anchors", async ({ page }) => {
 
 	await page.goto("/")
 
-	const desktopNav = page.getByLabel("Desktop Navigation")
+	// aria-label at '/' is Spanish: "Navegación de escritorio"
+	const desktopNav = page.getByLabel("Navegación de escritorio")
 
 	await desktopNav.getByRole("link", { name: "Proyectos" }).click()
 	await expect(page).toHaveURL(/#projects$/)

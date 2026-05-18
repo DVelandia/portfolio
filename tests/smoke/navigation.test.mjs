@@ -183,3 +183,38 @@ test("project image assets referenced by content exist", async () => {
 		await access(resolve(rootDir, "src/assets/projects", image))
 	}
 })
+
+test("homepages include font preload link for Onest Variable", async () => {
+	for (const path of ["index.html", "en/index.html"]) {
+		const html = await readOutput(path)
+
+		assert.match(
+			html,
+			/<link rel="preload" as="font" type="font\/woff2"[^>]+onest-latin-wght-normal[^>]+>/,
+			`Expected Onest Variable font preload in ${path}`
+		)
+	}
+})
+
+test("all target=_blank links have rel=noopener noreferrer", async () => {
+	const extLinkPattern = /<a[^>]+target="_blank"[^>]*>/g
+
+	for (const htmlFile of await listHtmlOutputs()) {
+		const html = await readFile(htmlFile, "utf8")
+		const externalLinks = Array.from(html.matchAll(extLinkPattern), ([match]) => match)
+
+		for (const link of externalLinks) {
+			const relMatch = link.match(/rel="([^"]*)"/)
+			const rel = relMatch?.[1] ?? ""
+
+			assert.ok(
+				rel.includes("noopener"),
+				`Link missing noopener in ${htmlFile.replace(distDir, "dist")}: ${link.slice(0, 120)}`
+			)
+			assert.ok(
+				rel.includes("noreferrer"),
+				`Link missing noreferrer in ${htmlFile.replace(distDir, "dist")}: ${link.slice(0, 120)}`
+			)
+		}
+	}
+})
