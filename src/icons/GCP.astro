@@ -1,14 +1,10 @@
----
-const { class: className } = Astro.props
----
-
 <svg
 	xmlns="http://www.w3.org/2000/svg"
 	height="206"
-	class:list={className}
 	preserveAspectRatio="xMidYMid"
 	viewBox="0 0 256 206"
 	width="256"
+	{...Astro.props}
 	><path
 		d="m170.2517 56.8186 22.253-22.253 1.483-9.37c-40.551-36.873-105.012-32.692-141.567 8.724-10.154 11.503-17.687 25.844-21.704 40.653l7.97-1.123 44.505-7.339 3.436-3.514c19.797-21.742 53.27-24.667 76.128-6.168z"
 		fill="#ea4335"></path><path

@@ -1,6 +1,7 @@
 .astro
 .agents
 .codex-temp
+.lighthouseci
 .playwright-mcp
 playwright-report
 test-results

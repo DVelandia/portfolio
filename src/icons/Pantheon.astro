@@ -1,13 +1,9 @@
----
-const { class: className } = Astro.props
----
-
 <svg
 	id="Layer_1"
-	class:list={className}
 	data-name="Layer 1"
 	xmlns="http://www.w3.org/2000/svg"
 	viewBox="70 22 200 325"
+	{...Astro.props}
 >
 	<g>
 		<polygon

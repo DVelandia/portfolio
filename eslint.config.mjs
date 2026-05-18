@@ -30,7 +30,7 @@ export default antfu(
 			"node/prefer-global/process": "off",
 			"perfectionist/sort-imports": "off",
 			"perfectionist/sort-named-imports": "off",
-			"unused-imports/no-unused-imports": "warn",
+			"unused-imports/no-unused-imports": "error",
 		},
 	},
 	{

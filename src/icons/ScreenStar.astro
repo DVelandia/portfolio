@@ -1,9 +1,4 @@
----
-const { class: className } = Astro.props
----
-
 <svg
-	class:list={className}
 	xmlns="http://www.w3.org/2000/svg"
 	viewBox="0 0 24 24"
 	fill="none"
@@ -11,6 +6,7 @@ const { class: className } = Astro.props
 	stroke-width="2"
 	stroke-linecap="round"
 	stroke-linejoin="round"
+	{...Astro.props}
 	><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
 		d="M10 16h-6a1 1 0 0 1 -1 -1v-10a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v6.5"></path><path d="M7 20h3.5"
 	></path><path d="M9 16v4"></path><path

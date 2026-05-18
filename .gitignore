@@ -36,5 +36,8 @@ yarn.lock
 # generated Vercel output
 .vercel/
 
+# Lighthouse CI report artifacts (generated per run)
+.lighthouseci/
+
 # local assets
 local-images/*

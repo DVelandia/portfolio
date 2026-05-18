@@ -1,7 +1,7 @@
 ---
 const MOBILE_MENU_ID = "mobile-menu"
-const genericHamburgerLine =
-	"h-[2px] w-6 bg-black transition duration-300 ease-transform dark:bg-white"
+const line =
+	"h-[2px] w-6 rounded-full bg-black transition-all duration-300 ease-in-out dark:bg-white"
 ---
 
 <button
@@ -9,18 +9,12 @@ const genericHamburgerLine =
 	type="button"
 	aria-expanded="false"
 	aria-controls={MOBILE_MENU_ID}
-	class="hamburgerButton group z-50 inline-flex h-[40px] w-[40px] items-center justify-center rounded border-2 border-black/10 p-1 transition hover:scale-110 hover:border-black/20 hover:bg-black/5 md:hidden dark:border-white/10 dark:hover:border-white/30 dark:hover:bg-white/5"
+	class="hamburgerButton group z-50 inline-flex h-[40px] w-[40px] items-center justify-center rounded border-2 border-black/10 p-1 transition hover:scale-110 hover:border-black/20 hover:bg-black/5 md:hidden dark:border-white/10 dark:hover:border-white/30 dark:hover:bg-white/5 [&.open]:border-transparent [&.open]:hover:border-transparent"
 	aria-label="Abrir menú de navegación"
 >
-	<span class:list={["group-[.open]:translate-y-2 group-[.open]:rotate-45", genericHamburgerLine]}>
-	</span>
-	<span class:list={["group-[.open]:opacity-0", genericHamburgerLine]}></span>
-	<span class:list={["group-[.open]:opacity-0", genericHamburgerLine]}></span>
-	<span
-		class:list={[
-			"group-[.open]:-translate-y-[0.6rem] group-[.open]:-rotate-45",
-			genericHamburgerLine,
-		]}
-	>
+	<span class="flex flex-col gap-[5px]" aria-hidden="true">
+		<span class:list={["group-[.open]:translate-y-[7px] group-[.open]:rotate-45", line]}></span>
+		<span class:list={["group-[.open]:scale-x-0 group-[.open]:opacity-0", line]}></span>
+		<span class:list={["group-[.open]:-translate-y-[7px] group-[.open]:-rotate-45", line]}></span>
 	</span>
 </button>
