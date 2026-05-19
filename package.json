@@ -21,7 +21,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "prepare": "husky"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.2",
@@ -39,6 +40,8 @@
     "eslint": "10.3.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-astro": "1.7.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.5",
     "prettier": "3.8.3",
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-tailwindcss": "0.8.0",
@@ -58,5 +61,14 @@
       "devalue": ">=5.8.1",
       "yaml": ">=2.8.3"
     }
+  },
+  "lint-staged": {
+    "*.{js,mjs,ts,astro}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{json,css,md}": [
+      "prettier --write"
+    ]
   }
 }
