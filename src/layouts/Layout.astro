@@ -102,7 +102,7 @@ const alternateLinks = [
 					const scrollTop = window.scrollY
 					const docHeight = document.documentElement.scrollHeight - window.innerHeight
 					const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0
-					bar.style.width = `${Math.min(100, pct)}%`
+					bar.style.transform = `scaleX(${Math.min(1, pct / 100)})`
 					ticking = false
 				}
 				window.addEventListener(
