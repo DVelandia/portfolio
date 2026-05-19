@@ -81,11 +81,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build
-        # Same command Vercel auto-detected for Astro projects
-        run: pnpm build
+      - name: Build (generates .vercel/output for prebuilt deploy)
+        run: npx vercel build --prod --yes --token="${{ secrets.VERCEL_TOKEN }}"
 
-      - name: Deploy prebuilt dist/ to Vercel production
+      - name: Deploy prebuilt output to Vercel production
         run: npx vercel deploy --prebuilt --prod --yes --token="${{ secrets.VERCEL_TOKEN }}"
 
   # ── Lighthouse audit ─────────────────────────────────────────────────────
