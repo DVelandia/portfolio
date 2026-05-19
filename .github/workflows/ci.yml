@@ -51,10 +51,57 @@ jobs:
       - name: End-to-end tests
         run: pnpm test:e2e
 
-  lighthouse:
-    name: Lighthouse audit
+  # ── Production deploy ────────────────────────────────────────────────────
+  # Runs only on push to master (not on PRs) and only after quality passes.
+  # Vercel auto-deploy must be disabled: Settings → Git → Ignored Build Step → exit 1
+  deploy:
+    name: Deploy to production
     needs: quality
     runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.15.0
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Vercel environment
+        run: vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
+
+      - name: Build for Vercel
+        run: vercel build --prod --token="$VERCEL_TOKEN"
+
+      - name: Deploy to production
+        run: vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN"
+
+  # ── Lighthouse audit ─────────────────────────────────────────────────────
+  # Runs after deploy so it audits the live production URL.
+  lighthouse:
+    name: Lighthouse audit
+    needs: deploy
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
 
     steps:
       - name: Checkout
