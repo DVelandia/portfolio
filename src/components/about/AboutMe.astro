@@ -51,10 +51,10 @@ const socialLinks = [
 ---
 
 <div
-	class="flex flex-col gap-y-8 text-left md:gap-x-4 lg:flex-row-reverse lg:items-center lg:justify-center lg:gap-y-0"
+	class="flex w-full flex-col items-center gap-y-6 text-center md:gap-x-4 lg:flex-row-reverse lg:items-center lg:justify-center lg:gap-y-0 lg:text-left"
 >
 	<div
-		class="Hero-image flex w-24 justify-center self-start sm:w-28 lg:mb-0 lg:w-1/5 lg:self-center"
+		class="Hero-image flex w-28 justify-center sm:w-32 lg:mb-0 lg:w-1/5"
 	>
 		<Image
 			src={imageProfile}
@@ -97,7 +97,7 @@ const socialLinks = [
 		</h2>
 	</header>
 </div>
-<ul class="mt-10 flex flex-wrap justify-start gap-4">
+<ul class="mt-8 flex flex-wrap justify-center gap-4 lg:justify-start">
 	{
 		socialLinks.map(({ href, icon: Icon, label, rel, target, variant }) => (
 			<li>
@@ -130,7 +130,7 @@ const socialLinks = [
 		))
 	}
 </ul>
-<div class="absolute bottom-4 hidden w-full justify-center lg:flex">
+<div class="absolute bottom-4 flex w-full justify-center">
 	<a
 		href="#experience"
 		class="text-primary-500 dark:text-primary-400 flex animate-bounce gap-2 font-bold"
