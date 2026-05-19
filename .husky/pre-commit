@@ -1,1 +1,6 @@
+#!/bin/sh
+# pre-commit: runs lint-staged on staged files only (fast).
+# Automatically fixes formatting (prettier) and lint issues (eslint --fix)
+# before the commit is saved. If auto-fix is not possible, the commit is blocked.
+
 pnpm exec lint-staged

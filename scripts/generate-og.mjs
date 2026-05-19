@@ -15,9 +15,9 @@
 
 import { chromium } from "playwright"
 import sharp from "sharp"
-import { fileURLToPath } from "url"
-import path from "path"
-import fs from "fs"
+import { fileURLToPath } from "node:url"
+import path from "node:path"
+import fs from "node:fs"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, "..")

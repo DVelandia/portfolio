@@ -1,1 +1,30 @@
-pnpm check
+#!/bin/sh
+# pre-push: runs the same quality gates as CI before any push reaches the remote.
+# Blocks the push if any check fails, preventing broken commits from hitting GitHub Actions.
+#
+# Checks (in order of speed, fastest first):
+#   1. format:check  — verify prettier formatting across the whole repo
+#   2. lint          — ESLint on all files
+#   3. check         — astro check + tsc --noEmit (slowest, run last)
+
+echo "🔍 pre-push: running quality gates…"
+
+pnpm format:check || {
+  echo ""
+  echo "❌ Prettier found formatting issues. Run: pnpm format"
+  exit 1
+}
+
+pnpm lint || {
+  echo ""
+  echo "❌ ESLint found errors. Run: pnpm lint:fix"
+  exit 1
+}
+
+pnpm check || {
+  echo ""
+  echo "❌ TypeScript/Astro type errors found. Fix before pushing."
+  exit 1
+}
+
+echo "✅ All quality gates passed — push allowed."
