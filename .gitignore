@@ -41,3 +41,6 @@ yarn.lock
 
 # local assets
 local-images/*
+
+# Local resume source drafts
+/*.tex
