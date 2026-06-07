@@ -2,8 +2,8 @@
   "ci": {
     "collect": {
       "url": ["http://localhost:3000/", "http://localhost:3000/en/"],
-      "startServerCommand": "npx serve@latest dist -p 3000",
-      "startServerReadyPattern": "Serving!",
+      "startServerCommand": "pnpm exec serve dist -p 3000",
+      "startServerReadyPattern": "Accepting connections",
       "numberOfRuns": 1
     },
     "assert": {

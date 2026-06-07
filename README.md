@@ -16,19 +16,20 @@ Site estático (SSG), multilenguaje (ES/EN), con pipeline de calidad completa.
 
 ## Comandos
 
-| Comando           | Acción                                                               |
-| :---------------- | :------------------------------------------------------------------- |
-| `pnpm install`    | Instala dependencias                                                 |
-| `pnpm dev`        | Dev server en `localhost:4321`                                       |
-| `pnpm dev:clean`  | Limpia caché y reinicia dev server                                   |
-| `pnpm build`      | Build estático → `dist/`                                             |
-| `pnpm preview`    | Sirve el build generado localmente                                   |
-| `pnpm check`      | TypeScript + Astro check (0 errores)                                 |
-| `pnpm lint`       | ESLint                                                               |
-| `pnpm format`     | Prettier (--write)                                                   |
-| `pnpm test`       | Build → CSP check → 13 smoke tests                                   |
-| `pnpm test:e2e`   | 8 pruebas Playwright E2E                                             |
-| `pnpm csp:update` | Actualiza hashes CSP en `vercel.json` tras cambios en scripts inline |
+| Comando                | Acción                                                               |
+| :--------------------- | :------------------------------------------------------------------- |
+| `pnpm install`         | Instala dependencias                                                 |
+| `pnpm dev`             | Dev server en `localhost:4321`                                       |
+| `pnpm dev:clean`       | Limpia caché y reinicia dev server                                   |
+| `pnpm build`           | Build estático → `dist/`                                             |
+| `pnpm preview`         | Sirve el build generado localmente                                   |
+| `pnpm check`           | TypeScript + Astro check (0 errores)                                 |
+| `pnpm lint`            | ESLint                                                               |
+| `pnpm format`          | Prettier (--write)                                                   |
+| `pnpm test`            | Build → CSP check → 13 smoke tests                                   |
+| `pnpm test:e2e`        | 8 pruebas Playwright E2E                                             |
+| `pnpm test:lighthouse` | Auditoría Lighthouse CI local sobre `dist/`                          |
+| `pnpm csp:update`      | Actualiza hashes CSP en `vercel.json` tras cambios en scripts inline |
 
 ## Requisitos
 
@@ -45,7 +46,7 @@ src/
 ├── icons/             # SVGs como componentes .astro
 ├── layouts/           # Layout.astro — layout base
 ├── pages/             # index.astro (ES), en/index.astro (EN), 404.astro
-├── scripts/           # JS vanilla: header, scroll-reveal, theme
+├── scripts/           # TypeScript cliente: header, scroll, idioma, theme
 └── styles/            # global.css — tokens Tailwind + overrides globales
 ```
 

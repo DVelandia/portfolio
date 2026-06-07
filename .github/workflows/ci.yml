@@ -117,6 +117,4 @@ jobs:
         run: pnpm build
 
       - name: Run Lighthouse CI
-        run: |
-          npm install -g @lhci/cli
-          lhci autorun
+        run: pnpm test:lighthouse

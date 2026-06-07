@@ -23,7 +23,8 @@ pnpm format           # Prettier
 pnpm format:check     # Prettier check (no writes)
 
 pnpm test             # Full suite: build → CSP check → smoke tests
-pnpm test:e2e         # Playwright E2E tests (requires running dev or preview server)
+pnpm test:e2e         # Playwright E2E tests (starts preview server automatically)
+pnpm test:lighthouse  # Lighthouse CI audit against the built site
 pnpm test:smoke       # Node.js smoke tests (runs after build)
 
 pnpm csp:update       # Recalculate and write CSP hashes to vercel.json
@@ -32,7 +33,7 @@ pnpm csp:check        # Verify CSP hashes match current build (used in CI)
 
 > **Important:** Always run `pnpm check` before committing to catch TypeScript and Astro type errors early.
 
-> **CSP note:** Whenever inline scripts change (e.g., `theme-init.js` or any `is:inline` script in Layout.astro), run `pnpm csp:update` to regenerate SHA-256 hashes and commit the updated `vercel.json`.
+> **CSP note:** Whenever inline scripts change (e.g., `theme-init.ts` or any `is:inline` script in Layout.astro), run `pnpm csp:update` to regenerate SHA-256 hashes and commit the updated `vercel.json`.
 
 ---
 
@@ -73,11 +74,13 @@ src/
 │   ├── index.astro           # → delegates to AppPage (Spanish default, no prefix)
 │   ├── en/index.astro        # → delegates to AppPage (English, /en/ prefix)
 │   └── 404.astro             # Custom 404 page
-├── scripts/                  # Client-side JS (loaded at runtime)
-│   ├── header.js             # Mobile nav open/close + scroll behavior
-│   ├── scroll-reveal.js      # IntersectionObserver reveal animation
-│   ├── theme-init.js         # Inlined in <head> — sets theme before paint (no FOUC)
-│   └── theme-toggle.js       # Theme switcher (light/dark/system) with View Transitions
+├── scripts/                  # Client-side TypeScript (loaded at runtime)
+│   ├── header.ts             # Mobile nav open/close + active section
+│   ├── language-selector.ts  # Language menu keyboard/click/focus management
+│   ├── scroll-reveal.ts      # IntersectionObserver reveal animation
+│   ├── theme-init.ts         # Inlined in <head> — sets theme before paint (no FOUC)
+│   ├── theme-toggle.ts       # Theme switcher (light/dark/system) with View Transitions
+│   └── ui-scroll.ts          # Shared scroll progress + header state listener
 ├── styles/
 │   └── global.css            # @font-face (Onest + Adjusted Arial Fallback), Tailwind @import, CSS tokens
 ├── lib/
@@ -143,7 +146,7 @@ Add the icon name to the appropriate category array in `src/content/stack.json`.
 
 ## SEO & Rich Results
 
-- **`SEO.astro`** — generates all meta tags: `<title>`, description, author, keywords, canonical, og:_, twitter:_, theme-color, robots, icons.
+- **`SEO.astro`** — generates all meta tags: `<title>`, description, author, canonical, og:_, twitter:_, theme-color, robots, icons.
 - **`RichResults.astro`** — generates JSON-LD `Person` schema. Data comes from `publicProfile.ts` (structural) + locale-specific `richResults` keys in `en.json`/`es.json` (copy).
 - **`publicProfile.ts`** — single source of truth for personal data: name, URLs, social links, location, organizations, skills, resume path.
 - **No `meta[name="generator"]`** — intentionally removed to avoid exposing the framework.
