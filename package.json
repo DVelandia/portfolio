@@ -56,12 +56,6 @@
   "volta": {
     "node": "22.15.0"
   },
-  "pnpm": {
-    "overrides": {
-      "devalue": ">=5.8.1",
-      "yaml": ">=2.8.3"
-    }
-  },
   "lint-staged": {
     "*.{js,mjs,ts,astro}": [
       "prettier --write",
