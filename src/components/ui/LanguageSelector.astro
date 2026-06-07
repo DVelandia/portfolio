@@ -37,6 +37,8 @@ const localizedPath = LOCALIZED_PATHS.has(currentPath) ? currentPath : "/"
 
 <details class="language-selector relative">
 	<summary
+		aria-expanded="false"
+		aria-haspopup="menu"
 		class="text-dark-800 dark:text-dark-100 inline-flex list-none items-center justify-start gap-x-2 rounded border-2 border-black/10 px-3 py-2 text-sm font-semibold transition-all hover:border-black/20 hover:bg-black/5 dark:border-white/10 dark:hover:border-white/30 dark:hover:bg-white/5"
 	>
 		<currentLocaleData.flag class="size-4" aria-hidden="true" />
@@ -90,3 +92,7 @@ const localizedPath = LOCALIZED_PATHS.has(currentPath) ? currentPath : "/"
 		}
 	}
 </style>
+
+<script>
+	import "@/scripts/language-selector.ts"
+</script>

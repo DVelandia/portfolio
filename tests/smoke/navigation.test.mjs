@@ -73,7 +73,7 @@ test("build outputs the English homepage", async () => {
 test("build outputs a noindex 404 page", async () => {
 	const html = await readOutput("404.html")
 
-	assert.match(html, /<html lang="es">/)
+	assert.match(html, /<html lang="es" dir="ltr">/)
 	assert.match(html, /noindex, nofollow/)
 	assert.match(html, /href="\/"/)
 	assert.match(html, /ERROR 404/)

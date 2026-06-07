@@ -1,6 +1,16 @@
 ---
 import StackItem from "@/components/stack/StackItem.astro"
 
+interface Props {
+	gradient: {
+		light: [string, string]
+		dark: [string, string]
+	}
+	title: string
+	icons: string[]
+	revealDelay?: number
+}
+
 const { gradient, title, icons, revealDelay = 0 } = Astro.props
 ---
 

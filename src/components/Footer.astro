@@ -21,7 +21,7 @@ const pages = ["about", "experience", "projects", "technologies"].map((key) => (
 		</span>
 		<nav
 			class="text-dark-700 dark:text-dark-200 mt-3 flex flex-wrap items-center text-xs font-medium sm:mt-0"
-			aria-label="Footer Navigation"
+			aria-label={i18n.nav.footerLabel}
 		>
 			{
 				pages.map(({ title, url }) => (

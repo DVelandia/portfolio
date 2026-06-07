@@ -32,7 +32,6 @@ const { journey, webDevWorld, cultivated, skillsGained, techVariety, stackIntro 
 	{
 		stackSections.map(({ id, data: section }, index) => (
 			<SectionItem
-				key={id}
 				gradient={section.gradient}
 				title={i18n.technologies.categories[id as keyof typeof i18n.technologies.categories]}
 				icons={section.icons}
