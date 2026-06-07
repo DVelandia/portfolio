@@ -16,6 +16,7 @@
     "csp:check": "node scripts/csp-hashes.mjs --check",
     "test": "pnpm build && pnpm csp:check && pnpm test:smoke",
     "test:e2e": "playwright test",
+    "test:lighthouse": "lhci autorun",
     "test:smoke": "node --test tests/smoke/navigation.test.mjs",
     "check": "astro check && tsc --noEmit",
     "lint": "eslint .",
@@ -33,6 +34,8 @@
   "devDependencies": {
     "@antfu/eslint-config": "8.2.0",
     "@astrojs/check": "0.9.9",
+    "@axe-core/playwright": "^4.11.3",
+    "@lhci/cli": "^0.15.1",
     "@playwright/test": "^1.59.1",
     "@tailwindcss/vite": "4.3.0",
     "@typescript-eslint/parser": "8.59.2",
@@ -45,6 +48,7 @@
     "prettier": "3.8.3",
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-tailwindcss": "0.8.0",
+    "serve": "^14.2.6",
     "svgo": "^4.0.1",
     "tailwindcss": "4.3.0",
     "typescript": "6.0.3"

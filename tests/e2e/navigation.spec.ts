@@ -17,7 +17,9 @@ function failOnUnexpectedBrowserErrors(page: Page) {
 	return errors
 }
 
-test("desktop nav links navigate to section anchors", async ({ page }) => {
+test("desktop nav links navigate to section anchors", async ({ page }, testInfo) => {
+	test.skip(testInfo.project.name === "mobile-chromium", "Desktop nav is hidden on mobile.")
+
 	const browserErrors = failOnUnexpectedBrowserErrors(page)
 
 	await page.goto("/")
@@ -34,6 +36,46 @@ test("desktop nav links navigate to section anchors", async ({ page }) => {
 	await desktopNav.getByRole("link", { name: "Tecnologías" }).click()
 	await expect(page).toHaveURL(/#technologies$/)
 
+	expect(browserErrors).toEqual([])
+})
+
+test("English mobile menu uses localized labels and links to sections", async ({ page }) => {
+	const browserErrors = failOnUnexpectedBrowserErrors(page)
+
+	await page.setViewportSize({ width: 390, height: 844 })
+	await page.goto("/en/")
+
+	const menuButton = page.locator("#menu-toggle")
+	await expect(menuButton).toHaveAttribute("aria-label", "Open navigation menu")
+	await menuButton.click()
+
+	await expect(menuButton).toHaveAttribute("aria-expanded", "true")
+	await expect(menuButton).toHaveAttribute("aria-label", "Close navigation menu")
+	await expect(page.getByLabel("Mobile navigation")).toHaveAttribute("aria-hidden", "false")
+
+	await page.getByLabel("Mobile navigation").getByRole("link", { name: "Projects" }).click()
+
+	await expect(page).toHaveURL(/\/en\/#projects$/)
+	await expect(menuButton).toHaveAttribute("aria-expanded", "false")
+	await expect(menuButton).toHaveAttribute("aria-label", "Open navigation menu")
+	expect(browserErrors).toEqual([])
+})
+
+test("English theme toggle changes the document theme without browser errors", async ({ page }) => {
+	const browserErrors = failOnUnexpectedBrowserErrors(page)
+
+	await page.goto("/en/")
+	await page.getByRole("button", { name: /change theme/i }).click()
+	await page.getByText("Dark", { exact: true }).click()
+
+	await expect(page.locator("html")).toHaveClass(/dark/)
+	await expect(page.locator("html")).toHaveAttribute("data-theme", "dark")
+
+	await page.getByRole("button", { name: /change theme/i }).click()
+	await page.getByText("Light", { exact: true }).click()
+
+	await expect(page.locator("html")).not.toHaveClass(/dark/)
+	await expect(page.locator("html")).toHaveAttribute("data-theme", "light")
 	expect(browserErrors).toEqual([])
 })
 

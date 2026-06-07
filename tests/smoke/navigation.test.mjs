@@ -53,7 +53,7 @@ async function getVercelCsp() {
 test("build outputs the Spanish homepage", async () => {
 	const html = await readOutput("index.html")
 
-	assert.match(html, /<html lang="es">/)
+	assert.match(html, /<html lang="es" dir="ltr">/)
 	assert.match(html, /href="\/#about"/)
 	assert.match(html, /Daniel Velandia/)
 	assert.match(html, /hreflang="en" href="https:\/\/daniel\.velandia\.dev\/en\/"/)
@@ -63,7 +63,7 @@ test("build outputs the Spanish homepage", async () => {
 test("build outputs the English homepage", async () => {
 	const html = await readOutput("en/index.html")
 
-	assert.match(html, /<html lang="en">/)
+	assert.match(html, /<html lang="en" dir="ltr">/)
 	assert.match(html, /href="\/en\/#projects"/)
 	assert.match(html, /All rights reserved\./)
 	assert.match(html, /hreflang="es" href="https:\/\/daniel\.velandia\.dev\/"/)
@@ -108,11 +108,15 @@ test("public does not contain JavaScript or CSS application code", async () => {
 	assert.deepEqual(codeFiles, [])
 })
 
-test("interactive scripts are emitted as hashed Astro assets", async () => {
+test("interactive scripts are processed by Astro and do not leak source paths", async () => {
 	const html = await readOutput("index.html")
 
-	assert.match(html, /src="\/_astro\/theme-toggle\.[\w-]+\.js"/)
-	assert.match(html, /src="\/_astro\/header\.[\w-]+\.js"/)
+	assert.doesNotMatch(html, /src\/scripts/)
+	assert.doesNotMatch(html, /data:video/)
+	assert.match(html, /theme-toggle-btn/)
+	assert.match(html, /menu-toggle/)
+	assert.match(html, /language-selector/)
+	assert.match(html, /__portfolioScrollUiInitialized/)
 })
 
 test("homepages include core SEO metadata and valid structured data", async () => {
