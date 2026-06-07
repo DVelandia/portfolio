@@ -10,7 +10,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; base-uri 'self'; connect-src 'self'; font-src 'self' data:; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; object-src 'none'; script-src 'self' 'sha256-GzfXFSJlvjxMlkopE3WFBUSmbnTVGO6z0+6gLfd9e5E=' 'sha256-LNXn0/aLwxCrTe3oVrs/HLmLMDYzTLT2qLCHCdgHoVA=' 'sha256-QSRZ1yUT8COmwWiS6TaWT2zFiWLPNJMep6glqstNCwk=' 'sha256-Tu+4F2hVhkG/txVC00UiUZT9nUyDm4bqKMzvPAEDtro=' 'sha256-kldBprz7JlSJUviB2rh6GclwaD3g4FwyBVlfypfPVaE='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; upgrade-insecure-requests"
+          "value": "default-src 'self'; base-uri 'self'; connect-src 'self'; font-src 'self' data:; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; object-src 'none'; script-src 'self' 'sha256-AxPXfvbJcpNz5g88LEHAkyEhnk1EAq9mAs+Zi2eSihA=' 'sha256-GzfXFSJlvjxMlkopE3WFBUSmbnTVGO6z0+6gLfd9e5E=' 'sha256-LNXn0/aLwxCrTe3oVrs/HLmLMDYzTLT2qLCHCdgHoVA=' 'sha256-QSRZ1yUT8COmwWiS6TaWT2zFiWLPNJMep6glqstNCwk=' 'sha256-j35gVVZKeCFLlBi4Z+IC6VLSSvdnmtY0YMTW1FIo69c='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; upgrade-insecure-requests"
         },
         {
           "key": "Permissions-Policy",
@@ -88,7 +88,20 @@
       ]
     },
     {
-      "source": "/CVelandia.pdf",
+      "source": "/daniel-velandia-cv-es.pdf",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/daniel-velandia-cv-en.pdf",
       "headers": [
         {
           "key": "X-Robots-Tag",
