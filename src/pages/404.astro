@@ -1,8 +1,10 @@
 ---
 import SectionContainer from "@/components/SectionContainer.astro"
+import logoImage from "@/assets/logo.webp"
 import { publicProfile } from "@/data/publicProfile"
 import { getI18N } from "@/i18n/"
 import Layout from "@/layouts/Layout.astro"
+import { Image } from "astro:assets"
 
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
@@ -29,12 +31,15 @@ const homeHref = currentLocale === "en" ? "/en/" : "/"
 		<SectionContainer id={i18n.error.id} class="mt-14 flex flex-col items-center gap-y-8">
 			<div class="flex flex-col items-center justify-center md:flex-row">
 				<a href={homeHref} class="mb-8 md:mr-12 md:mb-0">
-					<img
-						src="/logo.webp"
+					<Image
+						src={logoImage}
 						alt={`${publicProfile.fullName} logo`}
 						title={`${publicProfile.fullName} logo`}
+						widths={[200, 300, 400, 495]}
+						sizes="(min-width: 768px) 300px, 200px"
 						width={495}
 						height={339}
+						quality={80}
 						class="h-auto w-[200px] md:w-[300px]"
 						loading="eager"
 						decoding="async"

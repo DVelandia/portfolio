@@ -61,6 +61,20 @@ const personSchema = {
 					: publicProfile.social.linkedin,
 	})),
 }
+
+const websiteSchema = {
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	"name": t.seo.og_site_name,
+	"url": publicProfile.siteUrl,
+	"inLanguage": ["es", "en"],
+	"author": {
+		"@type": "Person",
+		"name": publicProfile.fullName,
+		"url": publicProfile.siteUrl,
+	},
+}
 ---
 
 <script type="application/ld+json" set:html={JSON.stringify(personSchema)} is:inline />
+<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} is:inline />

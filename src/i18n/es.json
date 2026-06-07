@@ -2,9 +2,9 @@
   "seo": {
     "title": "Portfolio de Daniel Velandia - Ingeniero de Software",
     "description": "Ingeniero de Software enfocado en plataformas web enterprise sobre GCP, integraciones y automatización con IA aplicada.",
-    "keywords": "ingeniero de software, gcp, integraciones enterprise, angular, node.js, drupal, wordpress, ia aplicada, daniel velandia, portfolio",
     "og_site_name": "Portfolio de Daniel Velandia",
-    "og_locale": "es_CO"
+    "og_locale": "es_CO",
+    "og_image_alt": "Vista previa del portfolio de Daniel Velandia, Ingeniero de Software"
   },
   "spanMenu": "Menú",
   "menu": {
@@ -17,7 +17,10 @@
   "skipToContent": "Saltar al contenido principal",
   "nav": {
     "mobileLabel": "Navegación móvil",
-    "desktopLabel": "Navegación de escritorio"
+    "desktopLabel": "Navegación de escritorio",
+    "footerLabel": "Navegación del pie de página",
+    "openMenuLabel": "Abrir menú de navegación",
+    "closeMenuLabel": "Cerrar menú de navegación"
   },
   "about": {
     "id": "about",
@@ -45,8 +48,7 @@
     "visibility": {
       "private": "Privado",
       "public": "Público",
-      "privateLabel": "Repositorio privado — no disponible públicamente",
-      "impact": "Impacto"
+      "privateLabel": "Repositorio privado — no disponible públicamente"
     }
   },
   "technologies": {

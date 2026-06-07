@@ -2,9 +2,9 @@
   "seo": {
     "title": "Daniel Velandia Portfolio - Software Engineer",
     "description": "Software Engineer building enterprise web platforms — integrations, GCP, and applied AI. 4+ years delivering scalable systems for financial and corporate sectors.",
-    "keywords": "software engineer, enterprise web platforms, GCP, integrations, applied AI, angular, node.js, typescript, daniel velandia, portfolio",
     "og_site_name": "Daniel Velandia Portfolio",
-    "og_locale": "en_US"
+    "og_locale": "en_US",
+    "og_image_alt": "Preview of Daniel Velandia's portfolio, Software Engineer"
   },
   "spanMenu": "Menu",
   "menu": {
@@ -18,7 +18,9 @@
   "nav": {
     "mobileLabel": "Mobile navigation",
     "desktopLabel": "Desktop navigation",
-    "menuLabel": "Main menu"
+    "footerLabel": "Footer navigation",
+    "openMenuLabel": "Open navigation menu",
+    "closeMenuLabel": "Close navigation menu"
   },
   "about": {
     "id": "about",
@@ -46,8 +48,7 @@
     "visibility": {
       "private": "Private",
       "public": "Public",
-      "privateLabel": "Private repository — not publicly available",
-      "impact": "Impact"
+      "privateLabel": "Private repository — not publicly available"
     }
   },
   "technologies": {

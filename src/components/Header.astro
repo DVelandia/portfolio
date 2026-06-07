@@ -4,7 +4,8 @@ import LanguageSelector from "@/components/ui/LanguageSelector.astro"
 import ThemeToggle from "@/components/ui/ThemeToggle.astro"
 import { getI18N } from "@/i18n"
 import HamburgerButton from "@/icons/HamburgerButton.astro"
-import headerScriptUrl from "@/scripts/header.js?url"
+import logoImage from "@/assets/logo.webp"
+import { Image } from "astro:assets"
 
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
@@ -47,13 +48,16 @@ const pages = ["about", "experience", "projects", "technologies"].map((key) => (
 			{/* ── Logo — fixed size, centered ─────────── */}
 			<div class="flex shrink-0 justify-center px-8 py-6">
 				<a href={currentLocale === "en" ? "/en/" : "/"} class="inline-flex items-center">
-					<img
-						src="/logo.webp"
+					<Image
+						src={logoImage}
 						title={`${publicProfile.fullName} logo`}
 						alt={`${publicProfile.fullName} logo`}
 						class="accent-drop-shadow w-48 max-w-full drop-shadow-xl"
+						widths={[192, 256, 384, 495]}
+						sizes="192px"
 						width={495}
 						height={339}
+						quality={80}
 						loading="eager"
 						decoding="async"
 					/>
@@ -109,7 +113,7 @@ const pages = ["about", "experience", "projects", "technologies"].map((key) => (
 		</nav>
 		<LanguageSelector />
 		<ThemeToggle />
-		<HamburgerButton />
+		<HamburgerButton openLabel={navLabels.openMenuLabel} closeLabel={navLabels.closeMenuLabel} />
 	</div>
 
 	<style>
@@ -203,5 +207,7 @@ const pages = ["about", "experience", "projects", "technologies"].map((key) => (
 		}
 	</style>
 
-	<script is:inline src={headerScriptUrl}></script>
+	<script>
+		import "@/scripts/header.ts"
+	</script>
 </header>

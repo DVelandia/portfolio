@@ -16,6 +16,7 @@ const { descriptionImage, role, experience, greeting, seeMore } = i18n.about
 const { hello, name } = greeting
 const { years, title, specialization } = experience
 const resumePath = getResumePath(currentLocale)
+const experienceHref = `#${i18n.experience.id}`
 
 const socialLinks = [
 	{
@@ -52,9 +53,9 @@ const socialLinks = [
 ---
 
 <div
-	class="flex w-full flex-col items-center gap-y-6 text-center md:gap-x-4 lg:flex-row-reverse lg:items-center lg:justify-center lg:gap-y-0 lg:text-left"
+	class="hero-enter flex w-full flex-col items-center gap-y-6 text-center md:gap-x-4 lg:flex-row-reverse lg:items-center lg:justify-center lg:gap-y-0 lg:text-left"
 >
-	<div class="Hero-image flex w-28 justify-center sm:w-32 lg:mb-0 lg:w-1/5">
+	<div class="hero-enter__item Hero-image flex w-28 justify-center sm:w-32 lg:mb-0 lg:w-1/5">
 		<Image
 			src={imageProfile}
 			alt={descriptionImage}
@@ -71,7 +72,7 @@ const socialLinks = [
 		/>
 	</div>
 
-	<header class="lg:w-4/5">
+	<header class="hero-enter__item lg:w-4/5">
 		<h1 class="text-dark-900 text-3xl font-bold sm:text-4xl lg:text-5xl dark:text-white">
 			{hello}
 			<span class="text-primary-600 dark:text-primary-400">
@@ -96,7 +97,7 @@ const socialLinks = [
 		</h2>
 	</header>
 </div>
-<ul class="mt-8 flex flex-wrap justify-center gap-4 lg:justify-start">
+<ul class="hero-enter__item mt-8 flex flex-wrap justify-center gap-4 lg:justify-start">
 	{
 		socialLinks.map(({ href, icon: Icon, label, rel, target, variant }) => (
 			<li>
@@ -129,10 +130,10 @@ const socialLinks = [
 		))
 	}
 </ul>
-<div class="absolute bottom-4 flex w-full justify-center">
+<div class="hero-enter__item absolute bottom-4 flex w-full justify-center">
 	<a
-		href="#experience"
-		class="text-primary-500 dark:text-primary-400 flex animate-bounce gap-2 font-bold"
+		href={experienceHref}
+		class="text-primary-500 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 flex gap-2 font-bold transition-colors"
 	>
 		{seeMore}
 		<ArrowDown class="h-5 w-5" />
@@ -151,6 +152,30 @@ const socialLinks = [
 
 	.animated-text {
 		animation: background-shine 2s linear infinite;
+	}
+
+	@keyframes hero-enter {
+		from {
+			opacity: 0;
+			transform: translateY(0.75rem);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.hero-enter__item {
+		animation: hero-enter 0.55s ease both;
+	}
+
+	.hero-enter__item:nth-child(2) {
+		animation-delay: 0.08s;
+	}
+
+	.hero-enter + .hero-enter__item,
+	.hero-enter__item.absolute {
+		animation-delay: 0.16s;
 	}
 
 	@keyframes linkedin-border-spin {
@@ -187,5 +212,13 @@ const socialLinks = [
 		position: relative;
 		z-index: 1;
 		box-shadow: inset 0 0 0 1px rgb(74 163 209 / 0.12);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.animated-text,
+		.hero-enter__item,
+		.linkedin-cta::before {
+			animation: none;
+		}
 	}
 </style>

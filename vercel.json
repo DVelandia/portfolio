@@ -10,7 +10,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; base-uri 'self'; connect-src 'self'; font-src 'self' data:; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; object-src 'none'; script-src 'self' 'sha256-AxPXfvbJcpNz5g88LEHAkyEhnk1EAq9mAs+Zi2eSihA=' 'sha256-GzfXFSJlvjxMlkopE3WFBUSmbnTVGO6z0+6gLfd9e5E=' 'sha256-LNXn0/aLwxCrTe3oVrs/HLmLMDYzTLT2qLCHCdgHoVA=' 'sha256-QSRZ1yUT8COmwWiS6TaWT2zFiWLPNJMep6glqstNCwk=' 'sha256-j35gVVZKeCFLlBi4Z+IC6VLSSvdnmtY0YMTW1FIo69c='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; upgrade-insecure-requests"
+          "value": "default-src 'self'; base-uri 'self'; connect-src 'self'; font-src 'self' data:; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; object-src 'none'; script-src 'self' 'sha256-AvTWyvN0xjSnQFaT67+4dWIW2IF/Wzs9YA0Gd+NTbLI=' 'sha256-AxPXfvbJcpNz5g88LEHAkyEhnk1EAq9mAs+Zi2eSihA=' 'sha256-ERckOISyN9ulAEJuZos+s6+TdupyRjtsbTTgtHAJSiw=' 'sha256-FF57MjXh41hQ/l5ZgTU2qQWBvgTRYvMU8SUTDQkW9bg=' 'sha256-H6pMcDYtuLhtdwbSBRc4S/FVQNg0JDaLj54Oxgi5Qz0=' 'sha256-LNXn0/aLwxCrTe3oVrs/HLmLMDYzTLT2qLCHCdgHoVA=' 'sha256-j35gVVZKeCFLlBi4Z+IC6VLSSvdnmtY0YMTW1FIo69c=' 'sha256-wnPf7XC8IX/fE6AGmd4UD59isFwQ/0VOoH0uo9FJ80g=' 'sha256-xDOBZZS/LU1WRPaCPG33/8ir8ogIxLGyJdOXDGHzPqE='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; upgrade-insecure-requests"
         },
         {
           "key": "Permissions-Policy",
@@ -26,6 +26,10 @@
         },
         {
           "key": "Cross-Origin-Opener-Policy",
+          "value": "same-origin"
+        },
+        {
+          "key": "Cross-Origin-Resource-Policy",
           "value": "same-origin"
         },
         {
@@ -48,15 +52,6 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/logo.webp",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400, must-revalidate"
         }
       ]
     },
