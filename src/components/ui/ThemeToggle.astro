@@ -3,7 +3,6 @@ import { getI18N } from "@/i18n"
 import MoonIcon from "@/icons/Moon.astro"
 import SunIcon from "@/icons/Sun.astro"
 import SystemIcon from "@/icons/System.astro"
-import themeToggleScriptUrl from "@/scripts/theme-toggle.js?url"
 
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
@@ -58,4 +57,6 @@ const spanTheme = i18n.theme.spanTheme
 	</div>
 </div>
 
-<script is:inline src={themeToggleScriptUrl}></script>
+<script>
+	import "@/scripts/theme-toggle.ts"
+</script>

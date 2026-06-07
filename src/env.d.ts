@@ -3,3 +3,9 @@
 
 declare module "@fontsource/*" {}
 declare module "@fontsource-variable/*" {}
+
+interface Window {
+	__portfolioLanguageSelectorListenersInitialized?: boolean
+	__portfolioScrollUiInitialized?: boolean
+	__portfolioThemeListenersInitialized?: boolean
+}

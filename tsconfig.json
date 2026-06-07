@@ -5,5 +5,13 @@
       "@/*": ["./src/*"]
     }
   },
-  "exclude": ["public"]
+  "exclude": [
+    ".astro",
+    ".vercel",
+    "dist",
+    "node_modules",
+    "playwright-report",
+    "public",
+    "test-results"
+  ]
 }

@@ -1,21 +1,22 @@
 const THEME_STORAGE_KEY = "theme"
 const themeMatchMedia = window.matchMedia("(prefers-color-scheme: dark)")
 const reduceMotionMatchMedia = window.matchMedia("(prefers-reduced-motion: reduce)")
-const availableThemes = new Set(["light", "dark", "system"])
+type Theme = "light" | "dark" | "system"
+const availableThemes = new Set<string>(["light", "dark", "system"])
 
 function getThemeElements() {
 	return {
 		menu: document.getElementById("themes-menu"),
-		options: Array.from(document.querySelectorAll(".theme-toggle-option")),
+		options: Array.from(document.querySelectorAll<HTMLInputElement>(".theme-toggle-option")),
 		toggle: document.getElementById("theme-toggle-btn"),
 	}
 }
 
-function isTheme(value) {
+function isTheme(value: string | null): value is Theme {
 	return value !== null && availableThemes.has(value)
 }
 
-function getStoredTheme() {
+function getStoredTheme(): Theme {
 	const storedTheme = localStorage.getItem(THEME_STORAGE_KEY)
 
 	if (isTheme(storedTheme)) {
@@ -49,7 +50,7 @@ function syncThemeUi(theme = getStoredTheme()) {
 	})
 }
 
-function canAnimateThemeChange(theme) {
+function canAnimateThemeChange(theme: Theme) {
 	const isDark = document.documentElement.classList.contains("dark")
 	const nextIsDark = getResolvedTheme(theme)
 
@@ -60,7 +61,7 @@ function canAnimateThemeChange(theme) {
 	)
 }
 
-function updateTheme(theme, { animate = false } = {}) {
+function updateTheme(theme: Theme, { animate = false } = {}) {
 	if (!animate || !canAnimateThemeChange(theme)) {
 		syncThemeUi(theme)
 		return

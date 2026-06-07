@@ -4,8 +4,7 @@ import Footer from "@/components/Footer.astro"
 import Header from "@/components/Header.astro"
 import SEO from "@/components/seo/SEO.astro"
 import { getI18N } from "@/i18n"
-import themeInitScript from "@/scripts/theme-init.js?raw"
-import scrollRevealScript from "@/scripts/scroll-reveal.js?raw"
+import themeInitScript from "@/scripts/theme-init.ts?raw"
 import type { Preload } from "@/types/Preload"
 
 import fontOnestUrl from "@fontsource-variable/onest/files/onest-latin-wght-normal.woff2?url"
@@ -47,7 +46,7 @@ const alternateLinks = [
 ---
 
 <!doctype html>
-<html lang={currentLocale}>
+<html lang={currentLocale} dir="ltr">
 	<head>
 		<meta charset="UTF-8" />
 		<link
@@ -92,33 +91,9 @@ const alternateLinks = [
 		<Header />
 		<slot />
 		<Footer />
-		<script is:inline set:html={scrollRevealScript} />
 		<script>
-			function initScrollProgress() {
-				const bar = document.getElementById("scroll-progress")
-				if (!bar) return
-				let ticking = false
-				const update = () => {
-					const scrollTop = window.scrollY
-					const docHeight = document.documentElement.scrollHeight - window.innerHeight
-					const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0
-					bar.style.transform = `scaleX(${Math.min(1, pct / 100)})`
-					ticking = false
-				}
-				window.addEventListener(
-					"scroll",
-					() => {
-						if (!ticking) {
-							window.requestAnimationFrame(update)
-							ticking = true
-						}
-					},
-					{ passive: true }
-				)
-				update()
-			}
-			initScrollProgress()
-			document.addEventListener("astro:page-load", initScrollProgress)
+			import "@/scripts/scroll-reveal.ts"
+			import "@/scripts/ui-scroll.ts"
 		</script>
 	</body>
 </html>

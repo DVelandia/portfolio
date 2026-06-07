@@ -1,4 +1,4 @@
-let revealObserver = null
+let revealObserver: IntersectionObserver | null = null
 
 function initScrollReveal() {
 	revealObserver?.disconnect()
@@ -6,7 +6,7 @@ function initScrollReveal() {
 
 	document.documentElement.classList.add("js-reveal")
 
-	const elements = document.querySelectorAll("[data-reveal]:not(.revealed)")
+	const elements = document.querySelectorAll<HTMLElement>("[data-reveal]:not(.revealed)")
 	if (elements.length === 0) return
 
 	if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -19,6 +19,8 @@ function initScrollReveal() {
 			entries.forEach((entry) => {
 				if (!entry.isIntersecting) return
 				const el = entry.target
+				if (!(el instanceof HTMLElement)) return
+
 				const delay = Number(el.dataset.revealDelay ?? 0)
 				if (delay > 0) {
 					setTimeout(() => el.classList.add("revealed"), delay)
@@ -31,7 +33,7 @@ function initScrollReveal() {
 		{ rootMargin: "0px 0px -60px 0px", threshold: 0.05 }
 	)
 
-	elements.forEach((el) => revealObserver.observe(el))
+	elements.forEach((el) => revealObserver?.observe(el))
 }
 
 initScrollReveal()

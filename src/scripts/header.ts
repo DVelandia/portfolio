@@ -4,9 +4,9 @@ const focusableSelector =
 function initHeader() {
 	const menuToggle = document.getElementById("menu-toggle")
 	const mobileMenu = document.getElementById("mobile-menu")
-	const menuItems = Array.from(document.querySelectorAll(".menu-item"))
-	const navItems = Array.from(document.querySelectorAll("[data-nav-target]"))
-	const sections = Array.from(document.querySelectorAll("main > section[id]"))
+	const menuItems = Array.from(document.querySelectorAll<HTMLElement>(".menu-item"))
+	const navItems = Array.from(document.querySelectorAll<HTMLElement>("[data-nav-target]"))
+	const sections = Array.from(document.querySelectorAll<HTMLElement>("main > section[id]"))
 
 	if (!(menuToggle instanceof HTMLButtonElement) || !(mobileMenu instanceof HTMLElement)) {
 		return
@@ -19,11 +19,13 @@ function initHeader() {
 	menuToggle.dataset.initialized = "true"
 
 	const desktopMediaQuery = window.matchMedia("(min-width: 1024px)")
+	const openMenuLabel = menuToggle.dataset.openLabel ?? menuToggle.getAttribute("aria-label") ?? ""
+	const closeMenuLabel = menuToggle.dataset.closeLabel ?? openMenuLabel
 	let hideMenuTimeout = 0
-	let observer = null
+	let observer: IntersectionObserver | null = null
 
 	const getFocusableMenuElements = () =>
-		Array.from(mobileMenu.querySelectorAll(focusableSelector)).filter(
+		Array.from(mobileMenu.querySelectorAll<HTMLElement>(focusableSelector)).filter(
 			(element) =>
 				!element.hasAttribute("disabled") && element.getAttribute("aria-hidden") !== "true"
 		)
@@ -34,7 +36,7 @@ function initHeader() {
 		;(firstMenuItem ?? firstFocusable)?.focus()
 	}
 
-	const setCurrentSection = (currentSectionId) => {
+	const setCurrentSection = (currentSectionId: string | null) => {
 		navItems.forEach((item) => {
 			const isCurrent = currentSectionId !== null && item.dataset.navTarget === currentSectionId
 			item.classList.toggle("text-primary-600", isCurrent)
@@ -49,15 +51,12 @@ function initHeader() {
 		})
 	}
 
-	const setMenuState = (isOpen) => {
+	const setMenuState = (isOpen: boolean) => {
 		window.clearTimeout(hideMenuTimeout)
 		document.body.classList.toggle("overflow-hidden", isOpen)
 		menuToggle.classList.toggle("open", isOpen)
 		menuToggle.setAttribute("aria-expanded", String(isOpen))
-		menuToggle.setAttribute(
-			"aria-label",
-			isOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"
-		)
+		menuToggle.setAttribute("aria-label", isOpen ? closeMenuLabel : openMenuLabel)
 
 		if (isOpen) {
 			mobileMenu.setAttribute("aria-hidden", "false")
@@ -163,25 +162,6 @@ function initHeader() {
 	})
 
 	syncDesktopObserver()
-
-	// Header scroll state — adds visual depth when content scrolls behind the header
-	const headerEl = document.querySelector("header")
-	let headerScrollTicking = false
-	const updateHeaderState = () => {
-		headerEl?.classList.toggle("scrolled", window.scrollY > 10)
-		headerScrollTicking = false
-	}
-	window.addEventListener(
-		"scroll",
-		() => {
-			if (!headerScrollTicking) {
-				window.requestAnimationFrame(updateHeaderState)
-				headerScrollTicking = true
-			}
-		},
-		{ passive: true }
-	)
-	updateHeaderState()
 }
 
 initHeader()
