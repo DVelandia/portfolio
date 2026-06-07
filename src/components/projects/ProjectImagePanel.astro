@@ -1,0 +1,44 @@
+---
+import { Image } from "astro:assets"
+
+interface Props {
+	title: string
+	descriptionImage: string
+	image?: ImageMetadata
+	blurDataURL?: string
+}
+
+const { title, descriptionImage, image, blurDataURL } = Astro.props
+const backgroundStyle = blurDataURL
+	? `background-image: url('${blurDataURL}'); background-size: cover; background-position: center top;`
+	: undefined
+---
+
+<div class="w-full lg:w-1/2">
+	<div
+		class="relative col-span-6 row-span-5 flex transform overflow-clip rounded-xl shadow-xl transition duration-500 ease-in-out sm:rounded-xl lg:group-hover:-translate-y-1 lg:group-hover:shadow-2xl"
+		style={backgroundStyle}
+	>
+		{
+			image ? (
+				<Image
+					src={image}
+					alt={descriptionImage}
+					title={descriptionImage}
+					widths={[360, 480, 640, 800]}
+					sizes="(min-width: 1024px) 354px, (min-width: 640px) 600px, calc(100vw - 2rem)"
+					width={800}
+					height={450}
+					quality={80}
+					class="h-56 w-full object-cover object-top transition duration-500 sm:h-full lg:scale-110 lg:group-hover:scale-105"
+					loading="lazy"
+					decoding="async"
+				/>
+			) : (
+				<div class="from-primary-950 via-primary-900 to-dark-950 flex h-56 w-full items-end bg-gradient-to-br p-6 sm:h-full">
+					<strong class="text-3xl font-semibold text-white">{title}</strong>
+				</div>
+			)
+		}
+	</div>
+</div>

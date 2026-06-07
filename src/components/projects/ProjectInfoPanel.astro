@@ -1,0 +1,110 @@
+---
+import ProjectTagsList from "@/components/projects/ProjectTagsList.astro"
+import Link from "@/icons/Link.astro"
+
+interface Props {
+	title: string
+	visibility: "public" | "private"
+	role?: string
+	description: string
+	tags: { icon: string }[]
+	visibilityLabels: {
+		private: string
+		public: string
+		privateLabel: string
+	}
+	newTab: string
+	isLinked: boolean
+}
+
+interface TagClasses {
+	[key: string]: string
+}
+
+const roleBadgeClasses: TagClasses = {
+	FullStack:
+		"border-emerald-600/40 bg-emerald-500/10 text-emerald-900 dark:border-emerald-400/40 dark:bg-emerald-400/10 dark:text-emerald-300",
+	FrontEnd:
+		"border-sky-600/40 bg-sky-500/10 text-sky-900 dark:border-sky-400/40 dark:bg-sky-400/10 dark:text-sky-300",
+	BackEnd:
+		"border-violet-600/40 bg-violet-500/10 text-violet-900 dark:border-violet-400/40 dark:bg-violet-400/10 dark:text-violet-300",
+}
+
+const { title, visibility, role, description, tags, visibilityLabels, newTab, isLinked } =
+	Astro.props
+const isPrivate = visibility === "private"
+---
+
+<div class="flex w-full flex-col justify-center lg:w-1/2 lg:max-w-lg">
+	<div class="mb-1 flex flex-wrap items-center gap-2">
+		<h3
+			class:list={[
+				"text-dark-900 dark:text-primary-50 text-lg font-bold",
+				isLinked &&
+					"group-hover:text-primary-700 dark:group-hover:text-primary-400 flex items-center gap-2 transition-colors duration-300",
+			]}
+		>
+			<span>{title}</span>
+			{
+				isLinked ? (
+					<>
+						<Link
+							class="inline-block h-4 w-4 shrink-0 translate-y-px transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:scale-125 motion-reduce:transition-none"
+							aria-hidden="true"
+						/>
+						<span class="sr-only">{newTab}</span>
+					</>
+				) : null
+			}
+		</h3>
+
+		{
+			visibility === "public" ? (
+				<span class="inline-flex items-center gap-1 rounded-full border border-emerald-600/40 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-medium tracking-[0.18em] text-emerald-900 uppercase dark:border-emerald-400/40 dark:bg-emerald-400/10 dark:text-emerald-300">
+					{visibilityLabels.public}
+				</span>
+			) : null
+		}
+
+		{
+			isPrivate ? (
+				<span
+					title={visibilityLabels.privateLabel}
+					class="inline-flex items-center gap-1 rounded-full border border-slate-600/40 bg-slate-500/10 px-2 py-0.5 text-[10px] font-medium tracking-[0.18em] text-slate-700 uppercase dark:border-slate-400/40 dark:bg-slate-400/10 dark:text-slate-300"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="h-3 w-3"
+						viewBox="0 0 24 24"
+						fill="currentColor"
+						aria-hidden="true"
+					>
+						<path
+							fill-rule="evenodd"
+							d="M12 1.5a5.25 5.25 0 0 0-5.25 5.25v3a3 3 0 0 0-3 3v6.75a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-6.75a3 3 0 0 0-3-3v-3c0-2.9-2.35-5.25-5.25-5.25Zm3.75 8.25v-3a3.75 3.75 0 1 0-7.5 0v3h7.5Z"
+							clip-rule="evenodd"
+						/>
+					</svg>
+					{visibilityLabels.private}
+				</span>
+			) : null
+		}
+
+		{
+			role ? (
+				<span
+					class:list={[
+						"inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-medium tracking-[0.18em] uppercase",
+						roleBadgeClasses[role] || "border-slate-700/60 text-slate-500 dark:text-slate-300",
+					]}
+				>
+					{role}
+				</span>
+			) : null
+		}
+	</div>
+
+	<ProjectTagsList tags={tags} />
+
+	<p class="text-dark-800 dark:text-dark-300 mt-3 text-sm leading-6">{description}</p>
+</div>

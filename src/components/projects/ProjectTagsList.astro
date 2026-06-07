@@ -1,0 +1,48 @@
+---
+import Icon from "@/components/ui/Icon.astro"
+
+interface Props {
+	tags: { icon: string }[]
+}
+
+interface TagClasses {
+	[key: string]: string
+}
+
+const tagClasses: TagClasses = {
+	Azure: "bg-[#003A78]",
+	Angular: "bg-[#6D143F]",
+	Drupal: "bg-[#003A61]",
+	WordPress: "bg-[#123B4D]",
+	PHP: "bg-[#29325C]",
+	Sass: "bg-[#6F2B53]",
+	Bootstrap: "bg-[#2F1F59]",
+	Tailwind: "bg-[#0B3B55]",
+	Express: "bg-[#374151]",
+	Figma: "bg-[#4B1D7D]",
+	GCP: "bg-[#174EA6]",
+	JQuery: "bg-[#08365C]",
+	JavaScript: "bg-[#4B4300]",
+}
+
+const { tags } = Astro.props
+---
+
+<ul class="mt-4 mb-2 flex flex-row flex-wrap gap-2">
+	{
+		tags.map((tag) => (
+			<li>
+				<span
+					class:list={[
+						"flex items-center gap-x-2 rounded-full px-2 py-1 text-xs text-white dark:ring-1 dark:ring-white/25",
+						tagClasses[tag.icon] || "bg-gray-600",
+					]}
+					title={tag.icon}
+				>
+					<Icon name={tag.icon} class="h-4 w-4 brightness-0 invert" aria-hidden="true" />
+					{tag.icon}
+				</span>
+			</li>
+		))
+	}
+</ul>

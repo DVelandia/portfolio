@@ -84,7 +84,6 @@ const projects = defineCollection({
 			order: z.number().int().nonnegative(),
 			title: z.string(),
 			description: z.string(),
-			impact: z.string().optional(),
 			visibility: z.enum(["public", "private"]).default("public"),
 			role: z.enum(projectRoles).optional(),
 			link: z.string().optional(),
