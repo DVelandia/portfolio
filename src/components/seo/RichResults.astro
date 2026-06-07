@@ -1,9 +1,10 @@
 ---
-import { publicProfile, toPublicUrl } from "@/data/publicProfile"
+import { getResumePath, publicProfile, toPublicUrl } from "@/data/publicProfile"
 import { getI18N } from "@/i18n"
 
 const { currentLocale } = Astro
 const t = getI18N({ currentLocale })
+const resumePath = getResumePath(currentLocale)
 
 const { personSchema: tPersonSchema } = t.richResults
 
@@ -54,7 +55,7 @@ const personSchema = {
 		name,
 		"target":
 			index === 2
-				? toPublicUrl(publicProfile.contact.resumePath)
+				? toPublicUrl(resumePath)
 				: index === 1
 					? toPublicUrl("/#projects")
 					: publicProfile.social.linkedin,

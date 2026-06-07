@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets"
 import imageProfile from "@/assets/me.webp"
-import { publicProfile } from "@/data/publicProfile"
+import { getResumePath, publicProfile } from "@/data/publicProfile"
 import { getI18N } from "@/i18n/"
 import ArrowDown from "@/icons/ArrowDown.astro"
 import Download from "@/icons/Download.astro"
@@ -15,6 +15,7 @@ const i18n = getI18N({ currentLocale })
 const { descriptionImage, role, experience, greeting, seeMore } = i18n.about
 const { hello, name } = greeting
 const { years, title, specialization } = experience
+const resumePath = getResumePath(currentLocale)
 
 const socialLinks = [
 	{
@@ -41,7 +42,7 @@ const socialLinks = [
 		variant: "secondary",
 	},
 	{
-		href: publicProfile.contact.resumePath,
+		href: resumePath,
 		icon: Download,
 		label: "Curriculum",
 		target: "_self",

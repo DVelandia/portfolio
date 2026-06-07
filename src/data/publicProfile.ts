@@ -8,7 +8,7 @@ interface PublicProfile {
 	twitterHandle: string
 	contact: {
 		email: string
-		resumePath: string
+		resumePaths: Record<ResumeLocale, string>
 	}
 	social: {
 		linkedin: string
@@ -27,6 +27,8 @@ interface PublicProfile {
 	skills: string[]
 }
 
+type ResumeLocale = "es" | "en"
+
 export const publicProfile: PublicProfile = {
 	fullName: "Daniel Velandia",
 	givenName: "Daniel",
@@ -37,7 +39,10 @@ export const publicProfile: PublicProfile = {
 	twitterHandle: "@dvelandia",
 	contact: {
 		email: "dfvf03@gmail.com",
-		resumePath: "/CVelandia.pdf",
+		resumePaths: {
+			es: "/daniel-velandia-cv-es.pdf",
+			en: "/daniel-velandia-cv-en.pdf",
+		},
 	},
 	social: {
 		linkedin: "https://www.linkedin.com/in/dvelandia",
@@ -74,6 +79,12 @@ export const publicProfile: PublicProfile = {
 		"Technical SEO",
 		"Security hardening",
 	],
+}
+
+export function getResumePath(currentLocale?: string) {
+	const locale: ResumeLocale = currentLocale === "en" ? "en" : "es"
+
+	return publicProfile.contact.resumePaths[locale]
 }
 
 export function toPublicUrl(path: string) {
