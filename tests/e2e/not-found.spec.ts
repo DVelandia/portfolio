@@ -17,6 +17,11 @@ function failOnUnexpectedBrowserErrors(page: Page) {
 	return errors
 }
 
+/** Vercel Analytics requests /_vercel/insights which only exists on Vercel infrastructure. */
+test.beforeEach(async ({ page }) => {
+	await page.route("**/_vercel/insights/**", (route) => route.fulfill({ status: 200, body: "" }))
+})
+
 test("404 page renders with error content for unknown routes", async ({ page }) => {
 	const browserErrors = failOnUnexpectedBrowserErrors(page)
 

@@ -17,6 +17,11 @@ function failOnUnexpectedBrowserErrors(page: Page) {
 	return errors
 }
 
+/** Vercel Analytics requests /_vercel/insights which only exists on Vercel infrastructure. */
+test.beforeEach(async ({ page }) => {
+	await page.route("**/_vercel/insights/**", (route) => route.fulfill({ status: 200, body: "" }))
+})
+
 test("desktop nav links navigate to section anchors", async ({ page }, testInfo) => {
 	test.skip(testInfo.project.name === "mobile-chromium", "Desktop nav is hidden on mobile.")
 
