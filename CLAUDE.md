@@ -43,15 +43,17 @@ pnpm csp:check        # Verify CSP hashes match current build (used in CI)
 src/
 ├── assets/
 │   ├── me.webp               # Profile photo (optimized by Astro Image)
+│   ├── logo.webp               # DV brand logo (672×490, optimized by Astro Image)
 │   └── projects/             # Project screenshots (brinsa, colserauto, credicorp)
 ├── components/
 │   ├── about/                # AboutMe section
 │   ├── experiences/          # Work experience timeline
 │   ├── pages/AppPage.astro   # Main page composition (assembles all sections)
-│   ├── projects/             # ProjectItem, Projects list
+│   ├── projects/             # ProjectItem, ProjectImagePanel, ProjectInfoPanel, ProjectTagsList, Projects
 │   ├── seo/                  # SEO.astro (meta tags), RichResults.astro (JSON-LD)
-│   ├── stack/                # Tech stack grid (StackItem, Stack)
+│   ├── stack/                # Tech stack grid (StackItem, SectionItem, Stack)
 │   ├── ui/                   # Icon.astro (dynamic icon loader), ThemeToggle, LanguageSelector
+│   ├── SectionContainer.astro  # Reusable section wrapper (max-width, padding)
 │   ├── Header.astro
 │   └── Footer.astro
 ├── content/                  # JSON data files (source of truth for content)
@@ -85,8 +87,9 @@ src/
 │   └── global.css            # @font-face (Onest + Adjusted Arial Fallback), Tailwind @import, CSS tokens
 ├── lib/
 │   └── dom.ts                # Typed $ / $$ querySelector helpers (used in client scripts)
-└── types/
-    └── Preload.ts            # Type for <link rel="preload"> props
+├── types/
+│   └── Preload.ts            # Type for <link rel="preload"> props
+└── env.d.ts                  # Astro type declarations
 ```
 
 ---
@@ -98,7 +101,7 @@ src/
 - Both `pages/index.astro` and `pages/en/index.astro` import the same `AppPage.astro` component — locale is detected via `Astro.currentLocale`.
 - All components call `getI18N({ currentLocale })` from `src/i18n/index.ts` to get locale-aware strings.
 - Hreflang links are generated in `Layout.astro` and include `es`, `en`, and `x-default` (points to `/`).
-- `en.json` is used as the TypeScript type reference (`typeof spanish`) — both files must stay structurally in sync.
+- `es.json` is used as the TypeScript type reference (`typeof spanish`) — both files must stay structurally in sync.
 
 ---
 
@@ -139,7 +142,7 @@ Add the icon name to the appropriate category array in `src/content/stack.json`.
 - **Fallback font:** `Adjusted Arial Fallback` — a calibrated `@font-face` that adjusts Arial's metrics to match Onest, reducing Cumulative Layout Shift (CLS) during font load.
 - **Hero height:** Uses the `.hero-height` CSS class (`100svh` on mobile, `100vh` on desktop) — `svh` excludes the mobile browser's UI bar, preventing the hero from being clipped.
 - **Utilities:** `mask-fade-bottom` and `mask-fade-bottom-quick` — CSS `@utility` rules using `mask-image` for a soft gradient fade on content blocks.
-- **Scrollbar:** Custom styled via `::-webkit-scrollbar` with `primary-400` color and a `border` glow trick. Firefox uses `scrollbar-color`. Only applied on pointer devices (`hover: hover`).
+- **Scrollbar:** Custom styled via `::-webkit-scrollbar` with `primary-400` color and `color-mix` transparency. Firefox uses `scrollbar-color`. Only applied on pointer devices (`hover: hover`).
 - **Theme colors:** `#f8fafc` (light) / `#020617` (dark) — used in `meta[name="theme-color"]`.
 
 ---
@@ -147,7 +150,7 @@ Add the icon name to the appropriate category array in `src/content/stack.json`.
 ## SEO & Rich Results
 
 - **`SEO.astro`** — generates all meta tags: `<title>`, description, author, canonical, og:_, twitter:_, theme-color, robots, icons.
-- **`RichResults.astro`** — generates JSON-LD `Person` schema. Data comes from `publicProfile.ts` (structural) + locale-specific `richResults` keys in `en.json`/`es.json` (copy).
+- **`RichResults.astro`** — generates JSON-LD `Person` and `WebSite` schemas. Data comes from `publicProfile.ts` (structural) + locale-specific `richResults` keys in `en.json`/`es.json` (copy).
 - **`publicProfile.ts`** — single source of truth for personal data: name, URLs, social links, location, organizations, skills, resume path.
 - **No `meta[name="generator"]`** — intentionally removed to avoid exposing the framework.
 - Open Graph image: `/public/og.png` (1200×630px required).
@@ -169,12 +172,12 @@ pnpm csp:update   # Updates SHA-256 hashes in vercel.json
 
 ### Cache policies (vercel.json)
 
-| Route                                                 | Cache                                       |
-| ----------------------------------------------------- | ------------------------------------------- |
-| `/_astro/*`                                           | `immutable`, 1 year (content-hashed assets) |
-| `/og.png`                                             | 1 hour                                      |
-| `/CVelandia.pdf`                                      | 1 hour + `noindex,nofollow`                 |
-| `/favicon.ico`, `/logo.webp`, `/apple-touch-icon.png` | 1 day                                       |
+| Route                                                      | Cache                                       |
+| ---------------------------------------------------------- | ------------------------------------------- |
+| `/_astro/*`                                                | `immutable`, 1 year (content-hashed assets) |
+| `/og.png`                                                  | 1 hour                                      |
+| `/daniel-velandia-cv-es.pdf`, `/daniel-velandia-cv-en.pdf` | 1 hour + `noindex,nofollow`                 |
+| `/favicon.ico`, `/img/icons/apple-touch-icon.png`          | 1 day                                       |
 
 ---
 
@@ -183,6 +186,7 @@ pnpm csp:update   # Updates SHA-256 hashes in vercel.json
 ```
 tests/
 ├── e2e/          # Playwright tests (require server running)
+│   ├── accessibility.spec.ts
 │   ├── navigation.spec.ts
 │   ├── not-found.spec.ts
 │   └── portfolio.spec.ts
@@ -190,7 +194,7 @@ tests/
     └── navigation.test.mjs
 ```
 
-E2E tests cover: theme toggle, language switch (ES↔EN), mobile menu behavior, 404 page.
+E2E tests cover: accessibility, theme toggle, language switch (ES↔EN), mobile menu behavior, 404 page.
 
 ---
 

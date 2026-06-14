@@ -27,7 +27,7 @@ Site estático (SSG), multilenguaje (ES/EN), con pipeline de calidad completa.
 | `pnpm lint`            | ESLint                                                               |
 | `pnpm format`          | Prettier (--write)                                                   |
 | `pnpm test`            | Build → CSP check → 13 smoke tests                                   |
-| `pnpm test:e2e`        | 8 pruebas Playwright E2E                                             |
+| `pnpm test:e2e`        | 11 pruebas Playwright E2E                                            |
 | `pnpm test:lighthouse` | Auditoría Lighthouse CI local sobre `dist/`                          |
 | `pnpm csp:update`      | Actualiza hashes CSP en `vercel.json` tras cambios en scripts inline |
 

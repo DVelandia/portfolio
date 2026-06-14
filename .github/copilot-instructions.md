@@ -15,7 +15,7 @@ Always use **pnpm**. Never suggest `npm install` or `yarn`.
 - Data lives in `src/content/*.json` (Content Collections) — never hardcode content in components
 - All UI strings go in `src/i18n/es.json` AND `src/i18n/en.json`
 - Icons are SVG components in `src/icons/NombreIcono.astro`
-- Client-side JS goes in `src/scripts/` as plain `.js` files (no bundler, imported with `?url`)
+- Client-side TS goes in `src/scripts/` as `.ts` files (bundled by Astro)
 
 ## Styling
 
