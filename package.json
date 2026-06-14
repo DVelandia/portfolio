@@ -1,7 +1,7 @@
 {
   "name": "portfolio-dvelandia",
   "type": "module",
-  "version": "1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "astro dev",
@@ -9,6 +9,7 @@
     "dev:clean": "pnpm clean:dev-cache && astro dev",
     "start": "astro dev",
     "generate:blur": "node scripts/generate-blur-placeholders.mjs",
+    "generate:og": "node scripts/generate-og.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
@@ -49,7 +50,6 @@
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-tailwindcss": "0.8.0",
     "serve": "^14.2.6",
-    "svgo": "^4.0.1",
     "tailwindcss": "4.3.0",
     "typescript": "6.0.3"
   },

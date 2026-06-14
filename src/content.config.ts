@@ -6,7 +6,7 @@ import stackSource from "./content/stack.json"
 
 const locales = ["es", "en"] as const
 const projectRoles = ["FullStack", "FrontEnd"] as const
-const projectImages = ["brinsa.webp", "colserauto.webp", "credicorp.webp", "filmmia.webp"] as const
+const projectImages = ["brinsa.webp", "colserauto.webp", "credicorp.webp"] as const
 const iconNames = [
 	"AdobeXD",
 	"Angular",
