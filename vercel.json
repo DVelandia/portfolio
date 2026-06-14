@@ -10,7 +10,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; base-uri 'self'; connect-src 'self'; font-src 'self' data:; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; object-src 'none'; script-src 'self' 'sha256-AvTWyvN0xjSnQFaT67+4dWIW2IF/Wzs9YA0Gd+NTbLI=' 'sha256-AxPXfvbJcpNz5g88LEHAkyEhnk1EAq9mAs+Zi2eSihA=' 'sha256-ERckOISyN9ulAEJuZos+s6+TdupyRjtsbTTgtHAJSiw=' 'sha256-FF57MjXh41hQ/l5ZgTU2qQWBvgTRYvMU8SUTDQkW9bg=' 'sha256-H6pMcDYtuLhtdwbSBRc4S/FVQNg0JDaLj54Oxgi5Qz0=' 'sha256-LNXn0/aLwxCrTe3oVrs/HLmLMDYzTLT2qLCHCdgHoVA=' 'sha256-j35gVVZKeCFLlBi4Z+IC6VLSSvdnmtY0YMTW1FIo69c=' 'sha256-wnPf7XC8IX/fE6AGmd4UD59isFwQ/0VOoH0uo9FJ80g=' 'sha256-xDOBZZS/LU1WRPaCPG33/8ir8ogIxLGyJdOXDGHzPqE='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; upgrade-insecure-requests"
+          "value": "default-src 'self'; base-uri 'self'; connect-src 'self' https://va.vercel-scripts.com; font-src 'self' data:; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; manifest-src 'none'; media-src 'none'; object-src 'none'; script-src 'self' 'sha256-Ct3bOCjaylBF66UqHpuD4ncoqgvE0uoWbHFvgRd2QOw=' 'sha256-ERckOISyN9ulAEJuZos+s6+TdupyRjtsbTTgtHAJSiw=' 'sha256-FF57MjXh41hQ/l5ZgTU2qQWBvgTRYvMU8SUTDQkW9bg=' 'sha256-H6pMcDYtuLhtdwbSBRc4S/FVQNg0JDaLj54Oxgi5Qz0=' 'sha256-LNXn0/aLwxCrTe3oVrs/HLmLMDYzTLT2qLCHCdgHoVA=' 'sha256-eBQMcgH6RTlAeExK5e/HdDURj6/1KCQGZ5+ggo3Yd4A=' 'sha256-wbBXc8GQE5hwwMzOTN0XnPx58YrsJFbn+79ruPv0Vm4=' 'sha256-wnPf7XC8IX/fE6AGmd4UD59isFwQ/0VOoH0uo9FJ80g=' 'sha256-xBLRIEPyEi4wjnXKU0OdZPHuoVrkUo4zJHMQ/u4unzA=' 'sha256-zXCXvf6UQFTBTHIXodSNXJgAIqpXtTBNPOpCD9dCXqE='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; worker-src 'none'; upgrade-insecure-requests"
         },
         {
           "key": "Permissions-Policy",
@@ -46,7 +46,7 @@
         },
         {
           "key": "Cross-Origin-Embedder-Policy",
-          "value": "require-corp"
+          "value": "credentialless"
         }
       ]
     },

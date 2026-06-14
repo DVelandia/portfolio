@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions"
+import Analytics from "@vercel/analytics/astro"
 import Footer from "@/components/Footer.astro"
 import Header from "@/components/Header.astro"
 import SEO from "@/components/seo/SEO.astro"
@@ -17,7 +18,6 @@ interface Props {
 	canonical?: string
 	image?: string
 	robots?: string
-	googlebot?: string
 	includeRichResults?: boolean
 	showAlternateLinks?: boolean
 }
@@ -29,7 +29,6 @@ const {
 	canonical,
 	image,
 	robots,
-	googlebot,
 	includeRichResults,
 	showAlternateLinks = true,
 } = Astro.props
@@ -61,7 +60,6 @@ const alternateLinks = [
 		<SEO
 			canonical={canonical}
 			description={description}
-			googlebot={googlebot}
 			image={image}
 			includeRichResults={includeRichResults}
 			preload={preload}
@@ -95,5 +93,6 @@ const alternateLinks = [
 			import "@/scripts/scroll-reveal.ts"
 			import "@/scripts/ui-scroll.ts"
 		</script>
+		<Analytics />
 	</body>
 </html>
