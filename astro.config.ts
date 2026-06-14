@@ -5,7 +5,14 @@ import { publicProfile } from "./src/data/publicProfile"
 
 // https://astro.build/config
 export default defineConfig({
-	integrations: [sitemap()],
+	integrations: [
+		sitemap({
+			i18n: {
+				defaultLocale: "es",
+				locales: { es: "es", en: "en" },
+			},
+		}),
+	],
 	output: "static",
 	site: publicProfile.siteUrl,
 	image: {

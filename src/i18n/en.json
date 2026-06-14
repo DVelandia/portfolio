@@ -90,8 +90,6 @@
     "personSchema": {
       "jobTitle": "Software Engineer",
       "description": "Software Engineer building enterprise web platforms — integrations, GCP, and applied AI. Focused on financial sector and scalable cloud-based systems.",
-      "gender": "Male",
-      "nationality": "Colombian",
       "alumniOf": [
         {
           "description": "University where I am currently pursuing a Systems Engineering degree"
@@ -103,7 +101,6 @@
           "description": "Google Cloud training platform where I completed official cloud certifications"
         }
       ],
-      "knowsLanguage": ["Native Spanish", "Basic English"],
       "worksFor": {
         "description": "A leading LATAM company driving digital transformation and cloud-based innovation."
       },
@@ -122,9 +119,6 @@
         }
       ],
       "potentialAction": [
-        {
-          "name": "Connect on LinkedIn"
-        },
         {
           "name": "Explore featured projects"
         },

@@ -22,7 +22,6 @@ interface PublicProfile {
 	organizations: {
 		worksFor: string
 		alumniOf: string[]
-		memberOf: string[]
 	}
 	skills: string[]
 }
@@ -56,7 +55,6 @@ export const publicProfile: PublicProfile = {
 	organizations: {
 		worksFor: "Davinci Technologies LATAM",
 		alumniOf: ["UNISANGIL", "Platzi", "Google Cloud Skills Boost"],
-		memberOf: ["Davinci Technologies LATAM"],
 	},
 	skills: [
 		"Software Engineering",

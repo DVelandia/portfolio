@@ -90,8 +90,6 @@
     "personSchema": {
       "jobTitle": "Ingeniero de Software",
       "description": "Ingeniero de Software enfocado en construir y operar plataformas web enterprise sobre GCP, integraciones y automatización con IA aplicada.",
-      "gender": "Masculino",
-      "nationality": "Colombiano",
       "alumniOf": [
         {
           "description": "Universidad donde curso Ingeniería de Sistemas"
@@ -103,7 +101,6 @@
           "description": "Plataforma de aprendizaje continuo en Google Cloud"
         }
       ],
-      "knowsLanguage": ["Español nativo", "Inglés técnico"],
       "worksFor": {
         "description": "Compañía LATAM enfocada en transformación digital, cloud e integraciones enterprise."
       },
@@ -122,9 +119,6 @@
         }
       ],
       "potentialAction": [
-        {
-          "name": "Contactar por LinkedIn"
-        },
         {
           "name": "Explorar proyectos destacados"
         },
