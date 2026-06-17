@@ -1,0 +1,4 @@
+Contact: mailto:dfvf03@gmail.com
+Preferred-Languages: es, en
+Canonical: https://daniel.velandia.dev/.well-known/security.txt
+Expires: 2027-06-17T00:00:00.000Z
