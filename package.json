@@ -34,7 +34,7 @@
     "sharp": "^0.35.2"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "8.2.0",
+    "@antfu/eslint-config": "9.1.0",
     "@astrojs/check": "0.9.9",
     "@axe-core/playwright": "^4.12.1",
     "@lhci/cli": "^0.15.1",
