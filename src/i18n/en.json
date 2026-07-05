@@ -1,7 +1,7 @@
 {
   "seo": {
-    "title": "Daniel Velandia Portfolio - Software Engineer",
-    "description": "Software Engineer building enterprise web platforms — integrations, GCP, and applied AI. 4+ years delivering scalable systems for financial and corporate sectors.",
+    "title": "Daniel Velandia | Full-Stack Software Engineer",
+    "description": "Portfolio of Daniel Velandia, Full-Stack Software Engineer in Colombia specialized in Angular, Node.js, GCP, and applied AI.",
     "og_site_name": "Daniel Velandia Portfolio",
     "og_locale": "en_US",
     "og_image_alt": "Preview of Daniel Velandia's portfolio, Software Engineer"
@@ -9,6 +9,7 @@
   "spanMenu": "Menu",
   "menu": {
     "about": "Home",
+    "profile": "About Daniel Velandia",
     "experience": "Experience",
     "projects": "Projects",
     "technologies": "Technologies"
@@ -28,8 +29,8 @@
     "role": "Software Engineer",
     "seeMore": "See more",
     "greeting": {
-      "hello": "Hi,",
-      "name": "I'm Daniel"
+      "hello": "Hi, I'm",
+      "name": "Daniel Velandia"
     },
     "experience": {
       "years": "4+ years of experience.",

@@ -125,6 +125,7 @@ test("homepages include core SEO metadata and valid structured data", async () =
 		JSON.parse(content)
 	)
 	const personSchema = jsonLdScripts.find((schema) => schema["@type"] === "Person")
+	const profilePageSchema = jsonLdScripts.find((schema) => schema["@type"] === "ProfilePage")
 
 	assert.match(html, /<link rel="canonical" href="https:\/\/daniel\.velandia\.dev\/">/)
 	assert.match(html, /<meta property="og:type" content="website">/)
@@ -132,6 +133,7 @@ test("homepages include core SEO metadata and valid structured data", async () =
 	assert.match(html, /<meta property="og:locale:alternate" content="en_US">/)
 	assert.match(html, /<meta name="twitter:card" content="summary_large_image">/)
 	assert.ok(personSchema, "Expected a Person JSON-LD schema")
+	assert.ok(profilePageSchema, "Expected a ProfilePage JSON-LD schema")
 	assert.equal(personSchema.name, "Daniel Velandia")
 	assert.equal(personSchema.url, "https://daniel.velandia.dev/")
 	assert.ok(
@@ -155,6 +157,8 @@ test("sitemap exposes localized indexable pages", async () => {
 	assert.match(sitemapIndex, /https:\/\/daniel\.velandia\.dev\/sitemap-0\.xml/)
 	assert.match(sitemap, /<loc>https:\/\/daniel\.velandia\.dev\/<\/loc>/)
 	assert.match(sitemap, /<loc>https:\/\/daniel\.velandia\.dev\/en\/<\/loc>/)
+	assert.match(sitemap, /<loc>https:\/\/daniel\.velandia\.dev\/sobre-daniel-velandia\/<\/loc>/)
+	assert.match(sitemap, /<loc>https:\/\/daniel\.velandia\.dev\/en\/about-daniel-velandia\/<\/loc>/)
 	assert.doesNotMatch(sitemap, /404/)
 })
 

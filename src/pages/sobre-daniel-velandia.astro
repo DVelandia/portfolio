@@ -1,0 +1,92 @@
+---
+import Layout from "@/layouts/Layout.astro"
+import { publicProfile } from "@/data/publicProfile"
+
+const title = "Sobre Daniel Velandia | Ingeniero de Software Full-Stack en Colombia"
+const description =
+	"Conoce a Daniel Velandia, Ingeniero de Software Full-Stack en Colombia enfocado en Angular, Node.js, GCP, integraciones enterprise e IA aplicada."
+const alternateLinks = [
+	{ href: "/sobre-daniel-velandia/", hreflang: "es" },
+	{ href: "/en/about-daniel-velandia/", hreflang: "en" },
+	{ href: "/sobre-daniel-velandia/", hreflang: "x-default" },
+]
+const focusAreas = [
+	"Desarrollo frontend con Angular, TypeScript y arquitecturas escalables.",
+	"Backend con Node.js, Express y NestJS para APIs e integraciones.",
+	"Plataformas web enterprise sobre Google Cloud Platform, Docker y CI/CD.",
+	"Automatización e IA aplicada para acelerar flujos de trabajo reales.",
+]
+const links = [
+	{ href: "/", label: "Volver al portfolio" },
+	{ href: "/#projects", label: "Ver proyectos destacados" },
+	{ href: publicProfile.social.linkedin, label: "LinkedIn", external: true },
+	{ href: publicProfile.social.github, label: "GitHub", external: true },
+]
+---
+
+<Layout title={title} description={description} alternateLinks={alternateLinks}>
+	<main id="main-content" class="px-4">
+		<article class="mx-auto w-full pt-28 sm:w-[600px] lg:w-[740px]">
+			<header class="mb-10">
+				<p class="text-primary-700 dark:text-primary-300 mb-3 text-sm font-semibold uppercase">
+					Perfil profesional
+				</p>
+				<h1 class="text-dark-950 dark:text-primary-50 text-4xl font-bold text-balance sm:text-5xl">
+					Sobre Daniel Velandia
+				</h1>
+				<p class="text-dark-700 dark:text-dark-200 mt-5 text-lg leading-8">
+					Soy Daniel Velandia, Ingeniero de Software Full-Stack en Colombia. Construyo plataformas
+					web para entornos enterprise, con foco en Angular, Node.js, GCP, integraciones e IA
+					aplicada.
+				</p>
+			</header>
+
+			<section class="border-dark-200 dark:border-dark-800 border-t py-8">
+				<h2 class="text-dark-900 dark:text-primary-50 mb-4 text-2xl font-bold">Qué hago</h2>
+				<p class="text-dark-700 dark:text-dark-200 leading-8">
+					Mi trabajo combina frontend, backend, cloud y automatización. Me enfoco en crear sistemas
+					mantenibles, seguros y útiles para equipos que necesitan operar productos web reales, no
+					solo interfaces aisladas.
+				</p>
+			</section>
+
+			<section class="border-dark-200 dark:border-dark-800 border-t py-8">
+				<h2 class="text-dark-900 dark:text-primary-50 mb-4 text-2xl font-bold">Especialidades</h2>
+				<ul class="text-dark-700 dark:text-dark-200 grid gap-3 leading-7">
+					{
+						focusAreas.map((item) => (
+							<li class="border-dark-200 dark:border-dark-800 border-l-2 pl-4">{item}</li>
+						))
+					}
+				</ul>
+			</section>
+
+			<section class="border-dark-200 dark:border-dark-800 border-t py-8">
+				<h2 class="text-dark-900 dark:text-primary-50 mb-4 text-2xl font-bold">
+					Identidad profesional
+				</h2>
+				<p class="text-dark-700 dark:text-dark-200 leading-8">
+					Este sitio es el portfolio oficial de Daniel Velandia como profesional de software. Reúne
+					mi experiencia, proyectos, stack técnico, CV y perfiles públicos para que Google,
+					reclutadores y equipos técnicos puedan asociar claramente mi nombre con desarrollo
+					full-stack, plataformas cloud e ingeniería web.
+				</p>
+			</section>
+
+			<nav class="border-dark-200 dark:border-dark-800 flex flex-wrap gap-3 border-t py-8">
+				{
+					links.map(({ href, label, external }) => (
+						<a
+							class="border-dark-300 dark:border-dark-700 text-dark-800 dark:text-dark-100 hover:border-primary-500 dark:hover:border-primary-400 rounded-full border px-4 py-2 text-sm font-semibold transition-colors"
+							href={href}
+							target={external ? "_blank" : undefined}
+							rel={external ? "noopener noreferrer" : undefined}
+						>
+							{label}
+						</a>
+					))
+				}
+			</nav>
+		</article>
+	</main>
+</Layout>

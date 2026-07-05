@@ -1,7 +1,7 @@
 {
   "seo": {
-    "title": "Portfolio de Daniel Velandia - Ingeniero de Software",
-    "description": "Ingeniero de Software enfocado en plataformas web enterprise sobre GCP, integraciones y automatización con IA aplicada.",
+    "title": "Daniel Velandia | Ingeniero de Software Full-Stack",
+    "description": "Portfolio de Daniel Velandia, Ingeniero de Software Full-Stack en Colombia especializado en Angular, Node.js, GCP e IA aplicada.",
     "og_site_name": "Portfolio de Daniel Velandia",
     "og_locale": "es_CO",
     "og_image_alt": "Vista previa del portfolio de Daniel Velandia, Ingeniero de Software"
@@ -9,6 +9,7 @@
   "spanMenu": "Menú",
   "menu": {
     "about": "Inicio",
+    "profile": "Sobre Daniel Velandia",
     "experience": "Experiencia",
     "projects": "Proyectos",
     "technologies": "Tecnologías"
@@ -28,8 +29,8 @@
     "role": "Ingeniero de Software",
     "seeMore": "Ver más",
     "greeting": {
-      "hello": "Hola,",
-      "name": "soy Daniel"
+      "hello": "Hola, soy",
+      "name": "Daniel Velandia"
     },
     "experience": {
       "years": "+4 años de experiencia.",

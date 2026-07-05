@@ -10,6 +10,7 @@ const pages = ["about", "experience", "projects", "technologies"].map((key) => (
 	title: (i18n[key as keyof typeof i18n] as { id: string }).id,
 	url: `${currentLocale === "en" ? "/en/" : "/"}#${(i18n[key as keyof typeof i18n] as { id: string }).id}`,
 }))
+const profileUrl = currentLocale === "en" ? "/en/about-daniel-velandia/" : "/sobre-daniel-velandia/"
 ---
 
 <footer class="container mx-auto mt-14 mb-8 w-full px-4 sm:w-[600px] md:px-0 lg:w-[740px]">
@@ -33,6 +34,12 @@ const pages = ["about", "experience", "projects", "technologies"].map((key) => (
 					</a>
 				))
 			}
+			<a
+				class="hover:text-primary-700 dark:hover:text-primary-400 ml-3 transition-colors hover:underline"
+				href={profileUrl}
+			>
+				{i18n.menu.profile}
+			</a>
 		</nav>
 	</div>
 </footer>

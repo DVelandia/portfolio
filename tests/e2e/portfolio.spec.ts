@@ -51,7 +51,7 @@ test("language selector navigates between Spanish and English", async ({ page })
 
 	await expect(page).toHaveURL(/\/en\/$/)
 	await expect(page.locator("html")).toHaveAttribute("lang", "en")
-	await expect(page.getByRole("heading", { name: /i'm daniel/i })).toBeVisible()
+	await expect(page.getByRole("heading", { name: /i'm daniel velandia/i })).toBeVisible()
 	expect(browserErrors).toEqual([])
 })
 

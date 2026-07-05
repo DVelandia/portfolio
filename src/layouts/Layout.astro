@@ -20,6 +20,7 @@ interface Props {
 	robots?: string
 	includeRichResults?: boolean
 	showAlternateLinks?: boolean
+	alternateLinks?: Array<{ href: string; hreflang: string }>
 }
 
 const {
@@ -31,13 +32,14 @@ const {
 	robots,
 	includeRichResults,
 	showAlternateLinks = true,
+	alternateLinks: customAlternateLinks,
 } = Astro.props
 const { currentLocale, url } = Astro
 const i18n = getI18N({ currentLocale })
 
 const normalizedPath =
 	currentLocale === "en" ? url.pathname.replace(/^\/en/, "") || "/" : url.pathname || "/"
-const alternateLinks = [
+const alternateLinks = customAlternateLinks ?? [
 	{ href: normalizedPath, hreflang: "es" },
 	{ href: normalizedPath === "/" ? "/en/" : `/en${normalizedPath}`, hreflang: "en" },
 	{ href: normalizedPath, hreflang: "x-default" },
