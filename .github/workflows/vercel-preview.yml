@@ -17,6 +17,9 @@ jobs:
   deploy-preview:
     name: Deploy preview
     runs-on: ubuntu-latest
+    permissions:
+      deployments: write
+      contents: read
 
     steps:
       - name: Checkout
@@ -39,6 +42,15 @@ jobs:
       - name: Validate project
         run: pnpm test
 
+      - name: Start deployment
+        uses: bobheadxi/deployments@v1
+        id: deployment
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: preview
+          ref: ${{ github.head_ref }}
+
       - name: Install Vercel CLI
         if: env.VERCEL_TOKEN != ''
         run: npm install --global vercel@latest
@@ -52,5 +64,19 @@ jobs:
         run: vercel build --token="$VERCEL_TOKEN"
 
       - name: Deploy Vercel preview
+        id: vercel_deploy
         if: env.VERCEL_TOKEN != ''
-        run: vercel deploy --prebuilt --token="$VERCEL_TOKEN"
+        run: |
+          URL=$(vercel deploy --prebuilt --token="$VERCEL_TOKEN")
+          echo "url=$URL" >> $GITHUB_OUTPUT
+
+      - name: Update deployment status
+        uses: bobheadxi/deployments@v1
+        if: always()
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}
+          env: ${{ steps.deployment.outputs.env }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          env_url: ${{ steps.vercel_deploy.outputs.url }}
