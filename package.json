@@ -31,7 +31,7 @@
     "@fontsource-variable/onest": "^5.2.11",
     "@vercel/analytics": "^2.0.1",
     "astro": "^6.3.5",
-    "sharp": "^0.35.2"
+    "sharp": "^0.35.3"
   },
   "devDependencies": {
     "@antfu/eslint-config": "8.2.0",
@@ -39,7 +39,7 @@
     "@axe-core/playwright": "^4.12.1",
     "@lhci/cli": "^0.15.1",
     "@playwright/test": "^1.61.1",
-    "@tailwindcss/vite": "4.3.2",
+    "@tailwindcss/vite": "4.3.3",
     "@typescript-eslint/parser": "8.62.0",
     "astro-eslint-parser": "^1.4.0",
     "eslint": "10.6.0",
@@ -47,11 +47,11 @@
     "eslint-plugin-astro": "1.7.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.8",
-    "prettier": "3.9.3",
+    "prettier": "3.9.5",
     "prettier-plugin-astro": "0.14.1",
-    "prettier-plugin-tailwindcss": "0.8.0",
+    "prettier-plugin-tailwindcss": "0.8.1",
     "serve": "^14.2.6",
-    "tailwindcss": "4.3.2",
+    "tailwindcss": "4.3.3",
     "typescript": "6.0.3"
   },
   "engines": {
