@@ -1,440 +1,85 @@
 ---
 name: accessibility
-description: Audit and improve web accessibility following WCAG 2.2 guidelines. Use when asked to "improve accessibility", "a11y audit", "WCAG compliance", "screen reader support", "keyboard navigation", or "make accessible".
-license: MIT
+description: Audit and fix accessibility (WCAG 2.2 AA) of this static Astro portfolio - alt text, color contrast in light and dark themes, keyboard navigation of the header menus, focus styles, headings, landmarks, reduced motion, axe/Lighthouse violations. Use when asked to "improve accessibility", "revisa accesibilidad", "audit a11y", "a11y", "WCAG", "contraste", "contrast", "screen reader", "keyboard navigation", "focus visible", "aria", "lighthouse accessibility" or "make it accessible".
+license: MIT. Adapted from addyosmani/web-quality-skills (accessibility), author web-quality-skills.
 metadata:
-  author: web-quality-skills
-  version: "1.1"
+  author: web-quality-skills (adapted for portfolio-dvelandia)
+  version: "1.2-portfolio"
 ---
 
-# Accessibility (a11y)
+# Accessibility (static Astro site)
+
+Scope: WCAG 2.2 level AA for a static, bilingual portfolio with no forms, no auth, no media players and no
+drag interactions. Interactive surface = header nav, mobile menu, theme toggle, language selector, anchor
+links, external links and scroll-reveal animations. Read the references only when needed:
+
+- `references/WCAG.md`: success criteria table (A/AA) filtered to what applies here, and testing tools.
+- `references/A11Y-PATTERNS.md`: markup for skip link, icon buttons, menu buttons, external links, focus and
+  motion CSS, screen reader shortcuts.
+
+## What the repo already has
+
+- Skip link to `#main-content` in `Layout.astro` (Tailwind `sr-only focus:not-sr-only`); keep it and give
+  every new page a `<main id="main-content">`.
+- `prefers-reduced-motion: reduce` overrides and `scroll-margin` for the fixed header in `global.css`;
+  scroll reveal (`data-reveal`) renders content visible under reduced motion.
+- Decorative SVG icons get `aria-hidden="true"`; `Icon.astro` spreads props so callers can pass `aria-*`.
+- External links: `rel="noopener noreferrer"` + `sr-only` label from `i18n.projects.newTab`.
+- Menu buttons (`ThemeToggle.astro`, `LanguageSelector.astro`, mobile menu in `Header.astro`) use
+  `aria-expanded`, `aria-controls` / `aria-haspopup` and localized `aria-label`s from `src/i18n/*.json`.
+- Automated gates: `tests/e2e/accessibility.spec.ts` (axe-core on `/` and `/en/`, zero violations) and
+  `lighthouserc.json` (accessibility category must score >= 0.9).
+
+## Audit checklist (WCAG 2.2 AA)
+
+- Perceivable: every `<img>` has a meaningful `alt` (projects: `descriptionImage` in `projects.json`, both
+  locales); decorative SVGs are `aria-hidden`; text contrast >= 4.5:1 (3:1 for >= 24px / 19px bold) and UI
+  contrast >= 3:1 in BOTH light and dark themes; information is not conveyed by color alone (tags, active nav).
+- Operable: everything reachable and usable with Tab/Shift+Tab/Enter/Space/Escape, including opening and
+  closing the mobile menu, theme menu and language menu; visible `:focus-visible` ring on every control in both
+  themes; focused element not hidden behind the fixed header (`scroll-margin-top`); targets >= 24x24 px; no
+  animation under `prefers-reduced-motion: reduce`.
+- Understandable: `<html lang>` matches the locale; one `<h1>`, `<h2>` per section, no skipped levels; link
+  text says where it goes (no "click here" / "ver mas" alone); `aria-current="page"`/`location` on the active
+  nav item when applicable; navigation order identical in es/en.
+- Robust: native `<button>` / `<a>` instead of `role` on `<div>`; `aria-expanded` is toggled by the scripts in
+  `src/scripts/*.ts`; landmarks `<header>`, `<nav aria-label>`, `<main>`, `<footer>` exist once each (two
+  `<nav>`s need distinct labels, which `Header.astro` already does).
+
+## How to verify
 
-Comprehensive accessibility guidelines based on WCAG 2.2 and Lighthouse accessibility audits. Goal: make content usable by everyone, including people with disabilities.
-
-## WCAG Principles: POUR
-
-| Principle | Description |
-|-----------|-------------|
-| **P**erceivable | Content can be perceived through different senses |
-| **O**perable | Interface can be operated by all users |
-| **U**nderstandable | Content and interface are understandable |
-| **R**obust | Content works with assistive technologies |
-
-## Conformance levels
-
-| Level | Requirement | Target |
-|-------|-------------|--------|
-| **A** | Minimum accessibility | Must pass |
-| **AA** | Standard compliance | Should pass (legal requirement in many jurisdictions) |
-| **AAA** | Enhanced accessibility | Nice to have |
-
----
-
-## Perceivable
-
-### Text alternatives (1.1)
-
-**Images require alt text:**
-```html
-<!-- ❌ Missing alt -->
-<img src="chart.png">
-
-<!-- ✅ Descriptive alt -->
-<img src="chart.png" alt="Bar chart showing 40% increase in Q3 sales">
-
-<!-- ✅ Decorative image (empty alt) -->
-<img src="decorative-border.png" alt="" role="presentation">
-
-<!-- ✅ Complex image with longer description -->
-<figure>
-  <img src="infographic.png" alt="2024 market trends infographic" 
-       aria-describedby="infographic-desc">
-  <figcaption id="infographic-desc">
-    <!-- Detailed description -->
-  </figcaption>
-</figure>
-```
-
-**Icon buttons need accessible names:**
-```html
-<!-- ❌ No accessible name -->
-<button><svg><!-- menu icon --></svg></button>
-
-<!-- ✅ Using aria-label -->
-<button aria-label="Open menu">
-  <svg aria-hidden="true"><!-- menu icon --></svg>
-</button>
-
-<!-- ✅ Using visually hidden text -->
-<button>
-  <svg aria-hidden="true"><!-- menu icon --></svg>
-  <span class="visually-hidden">Open menu</span>
-</button>
-```
-
-**Visually hidden class:**
-```css
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-```
-
-### Color contrast (1.4.3, 1.4.6)
-
-| Text Size | AA minimum | AAA enhanced |
-|-----------|------------|--------------|
-| Normal text (< 18px / < 14px bold) | 4.5:1 | 7:1 |
-| Large text (≥ 18px / ≥ 14px bold) | 3:1 | 4.5:1 |
-| UI components & graphics | 3:1 | 3:1 |
-
-```css
-/* ❌ Low contrast (2.5:1) */
-.low-contrast {
-  color: #999;
-  background: #fff;
-}
-
-/* ✅ Sufficient contrast (7:1) */
-.high-contrast {
-  color: #333;
-  background: #fff;
-}
-
-/* ✅ Focus states need contrast too */
-:focus-visible {
-  outline: 2px solid #005fcc;
-  outline-offset: 2px;
-}
-```
-
-**Don't rely on color alone:**
-```html
-<!-- ❌ Only color indicates error -->
-<input class="error-border">
-<style>.error-border { border-color: red; }</style>
-
-<!-- ✅ Color + icon + text -->
-<div class="field-error">
-  <input aria-invalid="true" aria-describedby="email-error">
-  <span id="email-error" class="error-message">
-    <svg aria-hidden="true"><!-- error icon --></svg>
-    Please enter a valid email address
-  </span>
-</div>
-```
-
-### Media alternatives (1.2)
-
-```html
-<!-- Video with captions -->
-<video controls>
-  <source src="video.mp4" type="video/mp4">
-  <track kind="captions" src="captions.vtt" srclang="en" label="English" default>
-  <track kind="descriptions" src="descriptions.vtt" srclang="en" label="Descriptions">
-</video>
-
-<!-- Audio with transcript -->
-<audio controls>
-  <source src="podcast.mp3" type="audio/mp3">
-</audio>
-<details>
-  <summary>Transcript</summary>
-  <p>Full transcript text...</p>
-</details>
-```
-
----
-
-## Operable
-
-### Keyboard accessible (2.1)
-
-**All functionality must be keyboard accessible:**
-```javascript
-// ❌ Only handles click
-element.addEventListener('click', handleAction);
-
-// ✅ Handles both click and keyboard
-element.addEventListener('click', handleAction);
-element.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    handleAction();
-  }
-});
-```
-
-**No keyboard traps.** Users must be able to Tab into and out of every component. Use the [modal focus trap pattern](references/A11Y-PATTERNS.md#modal-focus-trap) for dialogs—the native `<dialog>` element handles this automatically.
-
-### Focus visible (2.4.7)
-
-```css
-/* ❌ Never remove focus outlines */
-*:focus { outline: none; }
-
-/* ✅ Use :focus-visible for keyboard-only focus */
-:focus {
-  outline: none;
-}
-
-:focus-visible {
-  outline: 2px solid #005fcc;
-  outline-offset: 2px;
-}
-
-/* ✅ Or custom focus styles */
-button:focus-visible {
-  box-shadow: 0 0 0 3px rgba(0, 95, 204, 0.5);
-}
-```
-
-### Focus not obscured (2.4.11) — new in 2.2
-
-When an element receives keyboard focus, it must not be entirely hidden by other author-created content such as sticky headers, footers, or overlapping panels. At Level AAA (2.4.12), no part of the focused element may be hidden.
-
-```css
-/* ✅ Account for sticky headers when scrolling to focused elements */
-:target {
-  scroll-margin-top: 80px;
-}
-
-/* ✅ Ensure focused items clear fixed/sticky bars */
-:focus {
-  scroll-margin-top: 80px;
-  scroll-margin-bottom: 60px;
-}
-```
-
-### Skip links (2.4.1)
-
-Provide a skip link so keyboard users can bypass repetitive navigation. See the [skip link pattern](references/A11Y-PATTERNS.md#skip-link) for full markup and styles.
-
-### Target size (2.5.8) — new in 2.2
-
-Interactive targets must be at least **24 × 24 CSS pixels** (AA). Exceptions: inline text links, elements where the browser controls the size, and targets where a 24px circle centered on the bounding box does not overlap another target.
-
-```css
-/* ✅ Minimum target size */
-button,
-[role="button"],
-input[type="checkbox"] + label,
-input[type="radio"] + label {
-  min-width: 24px;
-  min-height: 24px;
-}
-
-/* ✅ Comfortable target size (recommended 44×44) */
-.touch-target {
-  min-width: 44px;
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-```
-
-### Dragging movements (2.5.7) — new in 2.2
-
-Any action that requires dragging must have a single-pointer alternative (e.g., buttons, inputs). See the [dragging movements pattern](references/A11Y-PATTERNS.md#dragging-movements) for a sortable-list example.
-
-### Timing (2.2)
-
-```javascript
-// Allow users to extend time limits
-function showSessionWarning() {
-  const modal = createModal({
-    title: 'Session Expiring',
-    content: 'Your session will expire in 2 minutes.',
-    actions: [
-      { label: 'Extend session', action: extendSession },
-      { label: 'Log out', action: logout }
-    ],
-    timeout: 120000
-  });
-}
-```
-
-### Motion (2.3)
-
-```css
-/* Respect reduced motion preference */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-```
-
----
-
-## Understandable
-
-### Page language (3.1.1)
-
-```html
-<!-- ❌ No language specified -->
-<html>
-
-<!-- ✅ Language specified -->
-<html lang="en">
-
-<!-- ✅ Language changes within page -->
-<p>The French word for hello is <span lang="fr">bonjour</span>.</p>
-```
-
-### Consistent navigation (3.2.3)
-
-```html
-<!-- Navigation should be consistent across pages -->
-<nav aria-label="Main">
-  <ul>
-    <li><a href="/" aria-current="page">Home</a></li>
-    <li><a href="/products">Products</a></li>
-    <li><a href="/about">About</a></li>
-  </ul>
-</nav>
-```
-
-### Consistent help (3.2.6) — new in 2.2
-
-If a help mechanism (contact info, chat widget, FAQ link, self-help option) is repeated across multiple pages, it must appear in the **same relative order** each time. Users who rely on consistent placement shouldn't have to hunt for help on every page.
-
-### Form labels (3.3.2)
-
-Every input needs a programmatically associated label. See the [form labels pattern](references/A11Y-PATTERNS.md#form-labels) for explicit, implicit, and instructional examples.
-
-### Error handling (3.3.1, 3.3.3)
-
-Announce errors to screen readers with `role="alert"` or `aria-live`, set `aria-invalid="true"` on invalid fields, and focus the first error on submit. See the [error handling pattern](references/A11Y-PATTERNS.md#error-handling) for full markup and JS.
-
-### Redundant entry (3.3.7) — new in 2.2
-
-Don't force users to re-enter information they already provided in the same session. Auto-populate from earlier steps, or let users select from previously entered values. Exceptions: security re-confirmation and content that has expired.
-
-```html
-<!-- ✅ Auto-fill shipping address from billing -->
-<fieldset>
-  <legend>Shipping address</legend>
-  <label>
-    <input type="checkbox" id="same-as-billing" checked>
-    Same as billing address
-  </label>
-  <!-- Fields auto-populated when checked -->
-</fieldset>
-```
-
-### Accessible authentication (3.3.8) — new in 2.2
-
-Login flows must not rely on cognitive function tests (e.g., remembering a password, solving a puzzle) unless at least one of:
-- A copy-paste or autofill mechanism is available
-- An alternative method exists (e.g., passkey, SSO, email link)
-- The test uses object recognition or personal content (AA only; AAA removes this exception)
-
-```html
-<!-- ✅ Allow paste in password fields -->
-<input type="password" id="password" autocomplete="current-password">
-
-<!-- ✅ Offer passwordless alternatives -->
-<button type="button">Sign in with passkey</button>
-<button type="button">Email me a login link</button>
-```
-
----
-
-## Robust
-
-### ARIA usage (4.1.2)
-
-**Prefer native elements:**
-```html
-<!-- ❌ ARIA role on div -->
-<div role="button" tabindex="0">Click me</div>
-
-<!-- ✅ Native button -->
-<button>Click me</button>
-
-<!-- ❌ ARIA checkbox -->
-<div role="checkbox" aria-checked="false">Option</div>
-
-<!-- ✅ Native checkbox -->
-<label><input type="checkbox"> Option</label>
-```
-
-**When ARIA is needed,** use the correct roles and states. See the [ARIA tabs pattern](references/A11Y-PATTERNS.md#aria-tabs) for a complete tablist example.
-
-### Live regions (4.1.3)
-
-Use `aria-live` regions to announce dynamic content changes without moving focus. See the [live regions pattern](references/A11Y-PATTERNS.md#live-regions-and-notifications) for markup and a `showNotification()` helper.
-
----
-
-## Testing checklist
-
-### Automated testing
 ```bash
-# Lighthouse accessibility audit
-npx lighthouse https://example.com --only-categories=accessibility
-
-# axe-core
-npm install @axe-core/cli -g
-axe https://example.com
+pnpm test:e2e -- tests/e2e/accessibility.spec.ts   # axe-core; builds and previews on 127.0.0.1:4321
+pnpm build && pnpm test:lighthouse                  # Lighthouse accessibility >= 0.9 on / and /en/
 ```
 
-### Manual testing
+- Manual keyboard pass: `pnpm dev`, Tab through the page in light and dark mode, open and close each menu,
+  press Escape, follow an anchor link and confirm the heading is visible under the header.
+- Contrast: read the tokens from `@theme` in `src/styles/global.css` and check pairs with
+  https://webaim.org/resources/contrastchecker/ (or the Chrome DevTools color picker) for both themes.
+- Screen reader spot check: NVDA on Windows (headings list `H`, links list `K`, landmarks `D`).
+- Zoom to 200% and the 375px viewport (Playwright mobile project) without horizontal scroll.
 
-- [ ] **Keyboard navigation:** Tab through entire page, use Enter/Space to activate
-- [ ] **Screen reader:** Test with VoiceOver (Mac), NVDA (Windows), or TalkBack (Android)
-- [ ] **Zoom:** Content usable at 200% zoom
-- [ ] **High contrast:** Test with Windows High Contrast Mode
-- [ ] **Reduced motion:** Test with `prefers-reduced-motion: reduce`
-- [ ] **Focus order:** Logical and follows visual order
-- [ ] **Target size:** Interactive elements meet 24×24px minimum
+## How to fix (Astro + Tailwind)
 
-See the [screen reader commands reference](references/A11Y-PATTERNS.md#screen-reader-commands) for VoiceOver and NVDA shortcuts.
+- Labels and announcements: add keys to BOTH `src/i18n/es.json` and `en.json` and read them with
+  `getI18N`; never hardcode an `aria-label` string in a component.
+- Visually hidden text: Tailwind `sr-only` (`focus:not-sr-only` for the skip link). No custom class needed.
+- Icon-only buttons: `<button aria-label={t.x}>` + `<Icon name="..." aria-hidden="true" />`.
+- Focus styles: use `focus-visible:outline-2 focus-visible:outline-offset-2` with a token that passes 3:1 on
+  both backgrounds; never `outline-none` without a replacement. Global rules belong in `global.css`.
+- Contrast: adjust the palette tokens in `global.css` `@theme` (see `.claude/rules/styles.md` for the allowed
+  shades) rather than one-off hex values; keep `theme-color` metas in sync.
+- Menus and toggles: state lives in `src/scripts/*.ts` (`header.ts`, `theme-toggle.ts`,
+  `language-selector.ts`); toggle `aria-expanded`, close on Escape and on outside click, return focus to the
+  trigger. Use the typed `$` / `$$` helpers from `src/lib/dom.ts`.
+- Motion: new animations go through CSS and must be neutralized by the existing reduced-motion block; do not
+  add JS-driven animation that ignores the media query.
+- Headings: content sections render through `SectionContainer.astro` (`<h2>`); nested titles are `<h3>`.
+- After changing inline scripts (`theme-init.ts`) run `pnpm build && pnpm csp:update`.
 
----
+## Report format
 
-## Common issues by impact
-
-### Critical (fix immediately)
-1. Missing form labels
-2. Missing image alt text
-3. Insufficient color contrast
-4. Keyboard traps
-5. No focus indicators
-
-### Serious (fix before launch)
-1. Missing page language
-2. Missing heading structure
-3. Non-descriptive link text
-4. Auto-playing media
-5. Missing skip links
-
-### Moderate (fix soon)
-1. Missing ARIA labels on icons
-2. Inconsistent navigation
-3. Missing error identification
-4. Timing without controls
-5. Missing landmark regions
-
-## References
-
-- [WCAG 2.2 Quick Reference](https://www.w3.org/WAI/WCAG22/quickref/)
-- [WAI-ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/)
-- [Deque axe Rules](https://dequeuniversity.com/rules/axe/)
-- [Web Quality Audit](../web-quality-audit/SKILL.md)
-- [WCAG criteria reference](references/WCAG.md)
-- [Accessibility code patterns](references/A11Y-PATTERNS.md)
+Group findings as Critical (missing alt, contrast, keyboard trap, no focus indicator), Serious (lang, heading
+structure, link text, landmarks) and Moderate (aria on icons, target size, motion). Give file + WCAG criterion
++ fix for each, apply the fixes, then paste the axe and Lighthouse results.
