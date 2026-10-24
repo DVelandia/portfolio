@@ -6,7 +6,9 @@ export default antfu(
 		astro: true,
 		ignores: [
 			"dist",
-			".agents",
+			".claude/skills/accessibility",
+			".claude/skills/frontend-design",
+			".claude/skills/seo",
 			".astro",
 			".vercel",
 			"playwright-report",

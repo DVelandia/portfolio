@@ -1,5 +1,7 @@
 .astro
-.agents
+.claude/skills/accessibility
+.claude/skills/frontend-design
+.claude/skills/seo
 .codex-temp
 .lighthouseci
 .playwright-mcp
